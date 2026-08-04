@@ -12,7 +12,7 @@ if (-not (Test-Path -LiteralPath $src)) {
     Write-Error "Source folder not found: $src"
 }
 
-$extensions = @('.sublime-settings', '.sublime-keymap', '.sublime-syntax', '.sublime-color-scheme')
+$extensions = @('.sublime-settings', '.sublime-keymap', '.sublime-syntax', '.sublime-color-scheme', '.py')
 
 $dry = if ($DryRun) { ' [DRY RUN]' } else { '' }
 Write-Host "Syncing packages to: $target$dry"

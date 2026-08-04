@@ -61,7 +61,7 @@ Run the script after every `git pull`, or after editing files in `packages/`:
 
 The scripts mirror each folder under `packages/` into the platform's
 `Packages/` directory, copying only `*.sublime-settings`, `*.sublime-keymap`,
-`*.sublime-syntax` and `*.sublime-color-scheme`. They are non-destructive:
+`*.sublime-syntax`, `*.sublime-color-scheme` and `*.py`. They are non-destructive:
 existing packages (and local-only files in `Packages/User`) are left alone.
 
 Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
@@ -73,6 +73,14 @@ Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
 - `Default (OSX).sublime-keymap` loads on macOS only.
 - `Preferences.sublime-settings` is shared. Keep it to settings that work on
   both platforms.
+
+## Key bindings
+
+Both platform keymaps define the same prose-mode controls:
+
+- `F5` — toggle distraction-free full-screen mode
+- `F6` — toggle spell check, word/character count, and the status bar
+- `F7` — cycle between the PolyMark and ProseMode color schemes
 
 ## Notes
 

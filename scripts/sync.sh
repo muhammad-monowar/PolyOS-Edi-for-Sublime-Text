@@ -31,7 +31,8 @@ for pkg_dir in "$SRC"/*/; do
         -name '*.sublime-settings' -o \
         -name '*.sublime-keymap' -o \
         -name '*.sublime-syntax' -o \
-        -name '*.sublime-color-scheme' \
+        -name '*.sublime-color-scheme' -o \
+        -name '*.py' \
     \) -print)
 
     [[ ${#FILES[@]} -eq 0 ]] && continue
