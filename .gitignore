@@ -1,0 +1,13 @@
+# Sublime Text auto-generated / local-only files
+Session.sublime_session
+Session.sublime_session.*
+Workspace.sublime_workspace
+*.sublime-workspace
+*.sublime-project
+Package Control.last-run
+Package Control.cache
+*.cache
+
+# OS noise
+.DS_Store
+Thumbs.db
