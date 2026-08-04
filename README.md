@@ -62,6 +62,9 @@ Run the script after every `git pull`, or after editing files in `packages/`:
   `./scripts/sync.sh`
   Dry run: `./scripts/sync.sh --dry-run`
 
+  The script runs under both `bash` and `zsh`. If you get `zsh: permission
+  denied`, run `chmod +x scripts/sync.sh` once (or use `bash scripts/sync.sh`).
+
 The scripts mirror each folder under `packages/` into the platform's
 `Packages/` directory, copying only `*.sublime-settings`, `*.sublime-keymap`,
 `*.sublime-syntax`, `*.sublime-color-scheme`, `*.sublime-theme` and `*.py`.

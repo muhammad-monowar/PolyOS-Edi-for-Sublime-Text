@@ -6,7 +6,12 @@ if [[ "${1:-}" == "--dry-run" ]]; then
     DRY_RUN=true
 fi
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [ -n "${BASH_SOURCE:-}" ]; then
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+else
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+fi
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 SRC="$REPO_ROOT/packages"
 TARGET="$HOME/Library/Application Support/Sublime Text/Packages"
 
@@ -27,14 +32,17 @@ for pkg_dir in "$SRC"/*/; do
     pkg_name="$(basename "$pkg_dir")"
     pkg_target="$TARGET/$pkg_name"
 
-    mapfile -t FILES < <(find "$pkg_dir" -maxdepth 1 -type f \( \
+    FILES=()
+    while IFS= read -r file; do
+        FILES+=("$file")
+    done < <(find "$pkg_dir" -maxdepth 1 -type f \( \
         -name '*.sublime-settings' -o \
         -name '*.sublime-keymap' -o \
         -name '*.sublime-syntax' -o \
         -name '*.sublime-color-scheme' -o \
         -name '*.sublime-theme' -o \
         -name '*.py' \
-    \) -print)
+        \) -print)
 
     [[ ${#FILES[@]} -eq 0 ]] && continue
 
