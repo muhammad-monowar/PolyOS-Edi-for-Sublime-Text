@@ -1,0 +1,36 @@
+COMMERCIAL END-USER LICENSE AGREEMENT (EULA)
+Product: PolyMark
+Version: 3.0.0
+Author: Muhammad Mustafa Monowar
+
+1. GRANT OF LICENSE
+This is a per-user license.
+
+- INDIVIDUALS: A single purchase allows one natural person to use the software on an unlimited number of devices, provided those devices are for personal or non-commercial use.
+
+- ORGANIZATIONS: A license must be purchased for each individual employee who will use the software. That employee may then use the software on any device they operate for work purposes.
+
+2. OWNERSHIP & MODIFICATION
+The Author retains all intellectual property rights. 
+
+- You may modify the source code (JSON, syntax, etc.) for personal use or aesthetic preference.
+
+- You may share these modifications ONLY with other verified purchasers of the same version of the software.
+
+- Any modified version must include attribution to the original Author.
+
+3. RESTRICTIONS
+
+- You shall not redistribute, sub-license, rent, or lease the software to any third party without explicit written permission from the Author.
+
+- You are strictly prohibited from selling, reselling, or distributing the software (original or modified) for any commercial intent or financial gain.
+
+4. REFUND POLICY & TERMINATION
+
+- Due to the digital nature of this product, ALL SALES ARE FINAL. No refunds will be issued.
+
+- This license is effective until terminated. Your rights under this license terminate automatically if you fail to comply with any of its terms.
+
+5. LIMITATION OF LIABILITY
+
+The software is provided "as is," without warranty of any kind. In no event shall the Author be liable for any claim, damages, or other liability arising from the use of the software.

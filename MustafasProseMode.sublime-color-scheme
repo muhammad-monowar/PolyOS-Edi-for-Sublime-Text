@@ -1,0 +1,25 @@
+{
+  "name": "MustafasProseMode",
+  "globals": {
+    "background": "#181818",
+    "foreground": "#D4D4D4",
+    "caret": "#D4D4D4",
+    "line_highlight": "#202020",
+
+    // Low-opacity warm amber tone for subtle spell check underline
+    "misspelling": "rgba(206, 145, 120, 0.4)"
+  },
+  "rules": [
+    {
+      "name": "Muted Text Base",
+      "scope": "text",
+      "foreground": "#B5B5B5"
+    },
+    {
+      "name": "Subtle Misspelling Hue Shift",
+      "scope": "invalid.illegal, markup.italic.spell_check",
+      "foreground": "#DCDCAA",
+      "font_style": "no-italics"
+    }
+  ]
+}
