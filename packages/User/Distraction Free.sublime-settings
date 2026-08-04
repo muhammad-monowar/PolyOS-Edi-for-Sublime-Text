@@ -14,7 +14,7 @@
   "caret_style": "solid",
 
   // Custom Color Scheme Hook
-  "color_scheme": "Packages/ProseMode/MustafasProseMode.sublime-color-scheme",
+  "color_scheme": "Packages/ProseMode/ProseMode.sublime-color-scheme",
 
   // Minimal UI Clean-out
   "line_numbers": false,

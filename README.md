@@ -10,7 +10,6 @@ Syncs the Sublime Text `Packages` folder across all devices (Windows and macOS).
 │   ├── PolyMark/   <- custom package: PolyMark syntax + color scheme
 │   └── ProseMode/  <- custom package: prose writing color scheme
 ├── scripts/    <- sync.ps1 (Windows), sync.sh (macOS)
-├── docs/       <- feature tests and other docs
 └── archive/    <- old exports, not synced
 ```
 
@@ -23,6 +22,19 @@ Why this shape:
   product and keeps the shared `User` folder clean.
 - Settings reference packages by resource path, e.g.
   `Packages/PolyMark/polymark.sublime-color-scheme`.
+
+## Standalone packages
+
+`PolyMark` and `ProseMode` are standalone Sublime Text packages:
+
+- Each folder is a valid unmanaged package — drop it into any `Packages/`
+  directory and its resources work with zero other configuration.
+- They never reference `Packages/User`, the profile, or each other. The
+  coupling is one-directional: `Packages/User` (the profile) activates them,
+  but the packages are profile-agnostic. You can swap or replace the profile
+  without touching them.
+- Activation lives only in `packages/User/`; the packages do not ship
+  auto-applying preferences.
 
 ## Per-device setup (one time)
 
