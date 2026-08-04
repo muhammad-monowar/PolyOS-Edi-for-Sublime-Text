@@ -19,8 +19,8 @@
   ],
 
   "theme": "Material Vim Blackboard.sublime-theme",
-  "color_scheme": "Packages/User/polymark.sublime-color-scheme",
-  "default_syntax": "Packages/User/polymark.sublime-syntax",
+  "color_scheme": "Packages/PolyMark/polymark.sublime-color-scheme",
+  "default_syntax": "Packages/PolyMark/polymark.sublime-syntax",
 
   "ignored_packages": [
     "Vintage"

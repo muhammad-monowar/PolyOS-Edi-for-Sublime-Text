@@ -53,24 +53,24 @@ You can:
 
 
 ###	Step 2: Downloading the files
-Download the following files from the **source**:
+Download the `PolyMark` package folder from the **source**:
 
-- [ ] polymark.sublime-syntax
-- [ ] polymark.sublime-color-scheme
+- [ ] PolyMark/polymark.sublime-syntax
+- [ ] PolyMark/polymark.sublime-color-scheme
 
 * The `polymark.sublime-syntax` is the syntax rule file that determines which patterns to highlight in the editor text.
 
 * The `polymark.sublime-color-scheme` is the color-scheme file that highlights texts in sublime text editor as per the syntax file.
      
 ###	Step 3: Place the files
-Place the downloaded files to the appropriate path. You can access the root of the path by clicking the 'Browse Packages' menu item in Sublime Text.
+Place the `PolyMark` folder into the packages directory. You can access the root of the path by clicking the 'Browse Packages' menu item in Sublime Text.
 
-The default path is: `~\Sublime Text\Packages\User\`
+The default path is: `~\Sublime Text\Packages\` (or `~/Library/Application Support/Sublime Text/Packages/` on macOS)
 
-Place/Paste the following items in the path mentioned:
+Place/Paste the `PolyMark` folder so the layout is:
 
-- [ ] polymark.sublime-syntax
-- [ ] polymark.sublime-color-scheme
+- [ ] `Packages/PolyMark/polymark.sublime-syntax`
+- [ ] `Packages/PolyMark/polymark.sublime-color-scheme`
 
 
 ### Step 4. Configure Sublime Text
