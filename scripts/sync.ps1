@@ -12,7 +12,7 @@ if (-not (Test-Path -LiteralPath $src)) {
     Write-Error "Source folder not found: $src"
 }
 
-$extensions = @('.sublime-settings', '.sublime-keymap', '.sublime-syntax', '.sublime-color-scheme', '.py')
+$extensions = @('.sublime-settings', '.sublime-keymap', '.sublime-syntax', '.sublime-color-scheme', '.sublime-theme', '.py')
 
 $dry = if ($DryRun) { ' [DRY RUN]' } else { '' }
 Write-Host "Syncing packages to: $target$dry"
@@ -35,6 +35,14 @@ foreach ($pkgDir in Get-ChildItem -LiteralPath $src -Directory) {
         Write-Host "    $($file.Name)"
         if (-not $DryRun) {
             Copy-Item -LiteralPath $file.FullName -Destination $dest -Force
+        }
+    }
+
+    $assetsDir = Join-Path $pkgDir.FullName 'assets'
+    if (Test-Path -LiteralPath $assetsDir) {
+        Write-Host "    assets/"
+        if (-not $DryRun) {
+            Copy-Item -LiteralPath $assetsDir -Destination (Join-Path $pkgTarget 'assets') -Recurse -Force
         }
     }
 }

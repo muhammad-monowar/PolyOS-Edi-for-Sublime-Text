@@ -18,7 +18,7 @@
     "subpixel_antialias"
   ],
 
-  "theme": "Material Vim Blackboard.sublime-theme",
+  "theme": "PolyOS Editor Dark.sublime-theme",
   "color_scheme": "Packages/PolyMark/polymark.sublime-color-scheme",
   "default_syntax": "Packages/PolyMark/polymark.sublime-syntax",
 

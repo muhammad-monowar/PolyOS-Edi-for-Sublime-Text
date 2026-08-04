@@ -42,6 +42,17 @@
     "background": "#000101",
     "foreground": "#edecee",
     "caret": "#edecee",
+
+    // PolyOS Editor Dark compatibility hooks (kind + accent colors)
+    "accent": "#72EFA6",
+    "redish": "#F08080",
+    "orangish": "#FFB86C",
+    "yellowish": "#FBDA35",
+    "greenish": "#47FFC2",
+    "cyanish": "#75FAF8",
+    "bluish": "#47D4FF",
+    "purplish": "#9D70FF",
+    "pinkish": "#FF79C6",
     "line_highlight": "#a394f033",
     "selection": "#a394f033",
     "selection_border": "#af8aff7f",

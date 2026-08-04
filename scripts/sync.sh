@@ -32,6 +32,7 @@ for pkg_dir in "$SRC"/*/; do
         -name '*.sublime-keymap' -o \
         -name '*.sublime-syntax' -o \
         -name '*.sublime-color-scheme' -o \
+        -name '*.sublime-theme' -o \
         -name '*.py' \
     \) -print)
 
@@ -45,6 +46,13 @@ for pkg_dir in "$SRC"/*/; do
             cp -f "$file" "$pkg_target/"
         fi
     done
+
+    if [[ -d "$pkg_dir/assets" ]]; then
+        echo "    assets/"
+        if ! $DRY_RUN; then
+            cp -Rf "$pkg_dir/assets" "$pkg_target/"
+        fi
+    fi
 done
 
 if $DRY_RUN; then

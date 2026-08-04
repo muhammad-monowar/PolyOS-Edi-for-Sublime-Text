@@ -6,6 +6,17 @@
     "caret": "#D4D4D4",
     "line_highlight": "#202020",
 
+    // PolyOS Editor Dark compatibility hooks (kind + accent colors)
+    "accent": "#72EFA6",
+    "redish": "#F08080",
+    "orangish": "#D9A066",
+    "yellowish": "#D8C97A",
+    "greenish": "#72EFA6",
+    "cyanish": "#7FE3C8",
+    "bluish": "#8FB8E8",
+    "purplish": "#B09DE0",
+    "pinkish": "#E88FA0",
+
     // Low-opacity warm amber tone for subtle spell check underline
     "misspelling": "rgba(206, 145, 120, 0.4)"
   },

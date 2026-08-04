@@ -6,9 +6,10 @@ Syncs the Sublime Text `Packages` folder across all devices (Windows and macOS).
 
 ```
 ├── packages/   <- mirrors the Packages/ ROOT (this is what gets synced)
-│   ├── User/       <- personal settings + keymaps (must stay FLAT)
-│   ├── PolyMark/   <- custom package: PolyMark syntax + color scheme
-│   └── ProseMode/  <- custom package: prose writing color scheme
+│   ├── User/               <- personal settings + keymaps (must stay FLAT)
+│   ├── PolyMark/           <- custom package: PolyMark syntax + color scheme
+│   ├── ProseMode/          <- custom package: prose writing color scheme
+│   └── PolyOSEditorDark/   <- custom package: PolyOS Editor Dark UI theme
 ├── scripts/    <- sync.ps1 (Windows), sync.sh (macOS)
 └── archive/    <- old exports, not synced
 ```
@@ -25,7 +26,8 @@ Why this shape:
 
 ## Standalone packages
 
-`PolyMark` and `ProseMode` are standalone Sublime Text packages:
+`PolyMark`, `ProseMode`, and `PolyOSEditorDark` are standalone Sublime Text
+packages:
 
 - Each folder is a valid unmanaged package — drop it into any `Packages/`
   directory and its resources work with zero other configuration.
@@ -41,12 +43,13 @@ Why this shape:
 1. Install Sublime Text + Package Control.
 2. Clone this repo.
 3. Run the sync script (see below). It creates `Packages/User`,
-   `Packages/PolyMark` and `Packages/ProseMode` and fills them with the config.
+   `Packages/PolyMark`, `Packages/ProseMode` and `Packages/PolyOSEditorDark` and
+   fills them with the config.
 4. Restart Sublime Text. Package Control auto-installs the packages listed in
    `packages/User/Package Control.sublime-settings` (Materialize, LSP, Git,
    Transparency).
-5. Set the theme to `Material Vim Blackboard` and the color scheme to `polymark`
-   if they don't apply automatically.
+5. Set the theme to `PolyOS Editor Dark` and the color scheme to `polymark` if
+   they don't apply automatically.
 
 ## Syncing after changes
 
@@ -61,8 +64,10 @@ Run the script after every `git pull`, or after editing files in `packages/`:
 
 The scripts mirror each folder under `packages/` into the platform's
 `Packages/` directory, copying only `*.sublime-settings`, `*.sublime-keymap`,
-`*.sublime-syntax`, `*.sublime-color-scheme` and `*.py`. They are non-destructive:
-existing packages (and local-only files in `Packages/User`) are left alone.
+`*.sublime-syntax`, `*.sublime-color-scheme`, `*.sublime-theme` and `*.py`.
+Theme asset folders (`assets/`) are copied recursively. The scripts are
+non-destructive: existing packages (and local-only files in `Packages/User`)
+are left alone.
 
 Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
 `~/Library/Application Support/Sublime Text/Packages/` on macOS.
@@ -88,6 +93,7 @@ Both platform keymaps define the same prose-mode controls:
   `packages/User/Package Control.sublime-settings` so other devices pick up the
   change.
 - If you add a new custom theme/syntax, give it its own folder under
-  `packages/` and point settings at `Packages/<Folder>/<file>`.
+  `packages/`, add its assets under that folder's `assets/` subdirectory, and
+  point settings at `Packages/<Folder>/<file>`.
 - Local-only files (session, workspaces, caches) are excluded via `.gitignore`
   and are never synced.
