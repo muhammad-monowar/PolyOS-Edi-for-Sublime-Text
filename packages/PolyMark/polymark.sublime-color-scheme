@@ -84,7 +84,7 @@
         // Optional: General scope for the entire line (mostly handles indentation/separator)
         {
         "name": "Polymark Marker Line Meta",
-        "scope": "meta.marker-definition.polymark",
+        "scope": "meta.marker-definition.polymark"
         // "foreground": "#B0B0B0" // Muted default text color
         },
         // End of A7
@@ -222,7 +222,7 @@
         // E5. Encompassing Scope (Sets the background for the entire line)
         {
         "name": "Metadata Definition Line Background",
-        "scope": "meta.tag-definition.custom",
+        "scope": "meta.tag-definition.custom"
         // "background": "#141414" // Example: A very subtle dark background
         },
         // End of E5.
