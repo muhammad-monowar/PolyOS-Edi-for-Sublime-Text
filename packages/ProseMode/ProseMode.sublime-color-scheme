@@ -3,7 +3,7 @@
   "globals": {
     "background": "#000101",
     "foreground": "#D4D4D4",
-    "caret": "rgba(237, 236, 238, 0.2)",
+    "caret": "rgba(255, 255, 255, 0.2)",
     "line_highlight": "#202020",
 
     // PolyOS Editor Dark compatibility hooks (kind + accent colors)

@@ -41,7 +41,7 @@
         // These keys are from your polymark-theme.sublime-theme file
     "background": "#000101",
     "foreground": "#edecee",
-    "caret": "#edecee",
+    "caret": "rgba(255, 255, 255, 0.2)",
 
     // PolyOS Editor Dark compatibility hooks (kind + accent colors)
     "accent": "#72EFA6",
