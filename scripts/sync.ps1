@@ -42,7 +42,9 @@ foreach ($pkgDir in Get-ChildItem -LiteralPath $src -Directory) {
     if (Test-Path -LiteralPath $assetsDir) {
         Write-Host "    assets/"
         if (-not $DryRun) {
-            Copy-Item -LiteralPath $assetsDir -Destination (Join-Path $pkgTarget 'assets') -Recurse -Force
+            $destAssets = Join-Path $pkgTarget 'assets'
+            New-Item -ItemType Directory -Path $destAssets -Force | Out-Null
+            Get-ChildItem -LiteralPath $assetsDir | Copy-Item -Destination $destAssets -Recurse -Force
         }
     }
 }

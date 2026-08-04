@@ -46,10 +46,18 @@ packages:
    `Packages/PolyMark`, `Packages/ProseMode` and `Packages/PolyOSEditorDark` and
    fills them with the config.
 4. Restart Sublime Text. Package Control auto-installs the packages listed in
-   `packages/User/Package Control.sublime-settings` (Materialize, LSP, Git,
-   Transparency).
+   `packages/User/Package Control.sublime-settings` (LSP, Git, Transparency).
 5. Set the theme to `PolyOS Editor Dark` and the color scheme to `polymark` if
    they don't apply automatically.
+
+### macOS notes
+
+- The color scheme uses `JetBrains Mono` as its font (`font_face` in
+  `Preferences.sublime-settings`). Install JetBrains Mono on the Mac too, or
+  Sublime Text silently falls back to the platform font and the look differs.
+- The F5/F6/F7 shortcuts require holding the `fn` key unless you enable
+  "Use F1, F2, etc. keys as standard function keys" in System Settings →
+  Keyboard → Keyboard shortcuts → Function Keys.
 
 ## Syncing after changes
 

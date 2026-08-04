@@ -72,10 +72,13 @@ things:
 ```
 ├── PolyOS Editor Dark.sublime-theme    Theme definition (rules + variables)
 ├── assets/
-│   ├── vim blackboard/                 Base chrome textures (29 PNGs)
-│   └── commons/                        Shared UI textures (45 PNGs)
+│   ├── vim blackboard/                 Base chrome textures (29 PNGs + 25 @2x)
+│   └── commons/                        Shared UI textures (45 PNGs + 43 @2x)
 └── README.md
 ```
+
+`@2x` variants are used automatically on Retina displays (macOS and high-DPI
+Windows).
 
 ## License
 

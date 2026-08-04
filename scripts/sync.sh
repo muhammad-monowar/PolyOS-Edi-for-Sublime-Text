@@ -58,7 +58,8 @@ for pkg_dir in "$SRC"/*/; do
     if [[ -d "$pkg_dir/assets" ]]; then
         echo "    assets/"
         if ! $DRY_RUN; then
-            cp -Rf "$pkg_dir/assets" "$pkg_target/"
+            mkdir -p "$pkg_target/assets"
+            cp -Rf "$pkg_dir/assets/." "$pkg_target/assets/"
         fi
     fi
 done
