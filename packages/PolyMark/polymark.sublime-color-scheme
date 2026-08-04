@@ -42,6 +42,8 @@
     "background": "#000101",
     "foreground": "#edecee",
     "caret": "rgba(255, 255, 255, 0.2)",
+    "block_caret": "rgba(255, 255, 255, 0.2)",
+    "block_caret_border": "rgba(255, 255, 255, 0.2)",
 
     // PolyOS Editor Dark compatibility hooks (kind + accent colors)
     "accent": "#72EFA6",
