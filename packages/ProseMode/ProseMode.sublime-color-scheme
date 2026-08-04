@@ -1,9 +1,9 @@
 {
   "name": "ProseMode",
   "globals": {
-    "background": "#181818",
+    "background": "#000101",
     "foreground": "#D4D4D4",
-    "caret": "#D4D4D4",
+    "caret": "#edecee",
     "line_highlight": "#202020",
 
     // PolyOS Editor Dark compatibility hooks (kind + accent colors)
