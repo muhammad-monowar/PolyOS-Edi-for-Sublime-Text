@@ -1,8 +1,8 @@
 // ---
 // Author: Muhammad Mustafa Monowar
-// Updated: 2026-03-17-20-21-01
+// Updated: 2026-08-05
 // Target: Sublime-Text
-// Version: v.3.0.1
+// Version: v.3.0.2
 // ---
  
 // # PolyMark (A Syntax and Color Scheme Compatible with PolyOS)
@@ -22,6 +22,21 @@
 // ------
 // BODY
 
+// RULE INDEX (cross-reference to polymark.sublime-syntax and Feature Test.md)
+// ---------------------------------------------------------------------------
+// Each rule below styles scopes emitted by polymark.sublime-syntax. The A#/E#
+// identifiers match the sections in `Feature Test.md`. See the syntax file's
+// header for the full scope -> rule mapping table.
+//
+// Section A (core)       : A7 markers, A8 date header, A9 duration range.
+// Section E (extensions) : E1 area/project, E2 headings, E3/E4 to-do items,
+//   E5 metadata, E6 horizontal rule, E7 blockquote, E9 comments, E10 bold,
+//   E11 italic, E12 custom tags, E13 timestamp, E14 email, E15 inline status,
+//   E16 code markers, E17 task statuses, E18 filenames.
+//
+// Note: `variables.heading_punc` and `h1`-`h6` are reserved for future heading
+// coloring and are currently unused -- heading colors come from the
+// "General Markdown Heading Line" rule below.
 
 {
     "variables":

@@ -1,5 +1,7 @@
 # PolyMark
 
+> **v.3.0.2** — Updated 2026-08-05
+
 A custom syntax and color scheme for Sublime Text, compatible with PolyOS.
 
 ## Install (standalone)
@@ -20,6 +22,24 @@ No other configuration is required for the resources to work.
 
 For the full experience, install the `Materialize` theme and set the theme to
 `Material Vim Blackboard` (see `Instructions.md`).
+
+## Features & customization
+
+PolyMark recognizes the following rule families (identifiers match
+`Feature Test.md`):
+
+- **Section A (core):** date-time-stamp, area/project, bold, italic, custom
+  tags, general includes (keywords/strings), markers, date header, duration
+  range.
+- **Section E (extensions):** headings, to-do items, metadata, horizontal
+  rules, blockquotes, comments, bold/italic content, custom tagging, timestamps,
+  email addresses, status markers, code markers, task statuses, filenames.
+
+Customization knobs (file extensions, tag charset, timestamp/date/duration
+formats, email TLD length, filename extension length, marker characters) are
+documented at the top of `polymark.sublime-syntax` under **PARAMETERS**. The
+scope → color-scheme mapping lives in that same header; the color scheme lists
+every styled scope rule-by-rule.
 
 ## Files
 
