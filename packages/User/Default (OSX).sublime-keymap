@@ -14,7 +14,7 @@
 
     {
         "keys": ["f5"],
-        "command": "toggle_distraction_free"
+        "command": "toggle_distraction_free_polymark"
     },
 
     {

@@ -94,8 +94,8 @@ Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
 
 Both platform keymaps define the same prose-mode controls:
 
-- `F5` — toggle distraction-free full-screen mode
-- `F6` — toggle spell check, word/character count, and the status bar
+- `F5` — toggle distraction-free mode (hides the menu bar; restores its previous visibility on exit)
+- `F6` — toggle spell check, word/character count, the status bar, and the menu bar
 - `F7` — cycle between the PolyMark and ProseMode color schemes
 
 ## Notes

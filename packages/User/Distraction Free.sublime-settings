@@ -3,7 +3,6 @@
   "draw_centered": true,
   "word_wrap": true,
   "wrap_width": 50,
-  "typewriter_mode_scrolling": true,
 
   // Typography & Caret
   "font_face": "JetBrains Mono",
