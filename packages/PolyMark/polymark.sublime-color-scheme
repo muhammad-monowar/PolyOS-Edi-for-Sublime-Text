@@ -12,10 +12,10 @@
 // For more information visit: https://thepolymodframework.carrd.co/
 //
 // This file PAINTS the scopes emitted by `polymark.sublime-syntax`. Rules are
-// labelled A#/E# to match `Feature Test.md`, the feature-by-feature
+// labelled A#/E# to match `Examples.md`, the feature-by-feature
 // verification document.
 //
-// License: Commercial EULA (see `license.txt`).
+// License: MIT (see `LICENSE`).
 // Setup  : See `Instructions.md` and the package `README.md`.
 
 // -----
@@ -45,7 +45,7 @@
 // 2. RULE INDEX (cross-reference)
 // -----
 // Each rule below styles scopes emitted by polymark.sublime-syntax. The A#/E#
-// identifiers match the sections in `Feature Test.md`. See the syntax file's
+// identifiers match the sections in `Examples.md`. See the syntax file's
 // header for the full scope -> rule mapping table.
 //
 // Section A (core)       : A7 markers, A8 date header, A9 duration range.

@@ -17,9 +17,9 @@
 #
 # This syntax file only CLASSIFIES text into scopes; the colors come from the
 # companion `polymark.sublime-color-scheme`. Rules are labelled A#/E# to match
-# `Feature Test.md`, the feature-by-feature verification document.
+# `Examples.md`, the feature-by-feature verification document.
 #
-# License: Commercial EULA (see `license.txt`).
+# License: MIT (see `LICENSE`).
 # Setup  : See `Instructions.md` and the package `README.md`.
 
 # -----
@@ -249,7 +249,7 @@ contexts:
   # End of A9
 
   # ---------------------------------------------------------------------------
-  # Section E rules (extensions, labelled to match Feature Test.md)
+  # Section E rules (extensions, labelled to match Examples.md)
   # ---------------------------------------------------------------------------
 
   # E1. Area/Project [Rule] (@Area/@Project)

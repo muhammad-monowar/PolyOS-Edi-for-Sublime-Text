@@ -1,8 +1,8 @@
 ---
 Author: Muhammad Mustafa Monowar
-Updated: 2025-12-17-09-57-30
+Updated: 2026-08-05
 Target: Sublime-Text
-Version: v.3.0.0
+Version: v.3.0.2
 ---
 
 # PolyMark (A Syntax and Color Scheme Compatible with PolyOS)
@@ -14,13 +14,12 @@ PolyMark is a Color Scheme and Syntax Highlight Rule, a part of the PolyOS ecosy
 For more information visit: https://thepolymodframework.carrd.co/
 
 License:
-    
-PolyMark v.3.0.0 by Muhammad Mustafa Monowar
-Copyright (c) 2025 All Rights Reserved.
-This software is licensed under the Commercial EULA included in this package.
-Unauthorized redistribution or resale is strictly prohibited.
 
-For more information see `license.txt`.
+PolyMark v.3.0.2 by Muhammad Mustafa Monowar
+Copyright (c) 2026 Muhammad Mustafa Monowar
+Licensed under the MIT License.
+
+For more information see `LICENSE`.
 
 ## Setting Up
 PolyMark builds on Markdown. The files using PolyMark should have a '.md' extension. The files mentioned in this document work with .md files opened with Sublime Text on both Windows and Mac. 

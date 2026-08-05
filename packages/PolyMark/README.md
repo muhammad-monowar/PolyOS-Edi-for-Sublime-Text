@@ -26,7 +26,7 @@ For the full experience, install the `Materialize` theme and set the theme to
 ## Features & customization
 
 PolyMark recognizes the following rule families (identifiers match
-`Feature Test.md`):
+`Examples.md`):
 
 - **Section A (core):** date-time-stamp, area/project, bold, italic, custom
   tags, general includes (keywords/strings), markers, date header, duration
@@ -46,11 +46,11 @@ every styled scope rule-by-rule.
 ```
 ├── polymark.sublime-syntax            Syntax rules
 ├── polymark.sublime-color-scheme      Color scheme
-├── Feature Test.md                    Feature-by-feature test document
-├── Instructions.md                    Detailed setup guide
-└── license.txt                        Commercial EULA
+├── Examples.md                     Feature-by-feature test document
+├── Instructions.md                 Detailed setup guide
+└── LICENSE                         MIT License
 ```
 
 ## License
 
-Commercial EULA. See `license.txt` for redistribution terms.
+MIT License. See `LICENSE` for the full text.
