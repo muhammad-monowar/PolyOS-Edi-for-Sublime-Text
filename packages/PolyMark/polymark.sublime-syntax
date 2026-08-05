@@ -52,8 +52,9 @@
 # -----
 # 2. SCOPE -> COLOR SCHEME MAPPING
 # -----
-# "Rule" = an entry in `polymark.sublime-color-scheme`. Scopes without a rule
-# fall back to the scheme's global foreground; that is intentional.
+# "Rule" = an entry in `polymark.sublime-color-scheme`. Every scope emitted by
+# this file has a rule entry; entries marked "UNASSIGNED" carry empty color
+# values and fall back to the scheme's global foreground until assigned.
 #
 # Syntax             Scope                                     Color-scheme rule
 # ------------------- ----------------------------------------- ---------------------------------
@@ -102,11 +103,12 @@
 #                    markup.status.abandoned.content.polymark   "Status Marker [-] Abandoned Content"
 # E18 Filename       entity.name.filename.polymark              "Filename"
 #                    entity.name.extension.polymark             "File Extension"
-# A2a Arrow          keyword.operator.arrow.polymark            (no rule -- default)
+# A2a Arrow          keyword.operator.arrow.polymark            "Arrow Ligature (A2a)" (unassigned)
 #
-# Scopes intentionally without a rule (they inherit the global foreground):
-#   A2a arrow, E2 heading separators/content, E3/E4 list separators/whitespace,
-#   E7 blockquote internals, E8 strings, E10/E11 bold/italic punctuation.
+# Every scope emitted by this file now has a rule entry in the color scheme.
+# Entries marked "UNASSIGNED" keep empty foreground/background/font_style as
+# placeholders -- fill in a hex color to style the scope. The dynamic heading
+# scope is covered by "Heading Text per Depth (E2)" via a `*` wildcard.
 
 # -----
 # BODY
@@ -502,7 +504,8 @@ contexts:
   #   keywords:
   #     - match: '\b(TODO|FIXME|NOTE)\b'
   #       scope: keyword.other.polymark
-  # Styled by: (no color-scheme rule yet -- add one for your new scope).
+  # Styled by: "Keyword Extension Point (A6a)" in polymark.sublime-color-scheme
+  # (unassigned placeholder -- fill in a color to style new keyword scopes).
   keywords: []
 
   # End of Script

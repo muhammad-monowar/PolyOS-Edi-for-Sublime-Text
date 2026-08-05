@@ -33,6 +33,10 @@
 //   feature, find its A#/E# label in the RULE INDEX below and edit that rule's
 //   `foreground`, `background` or `font_style`.
 //
+// Unassigned placeholders   : every scope emitted by the syntax has a rule
+//   entry. Rules marked "UNASSIGNED" carry empty `foreground`/`background`/
+//   `font_style` values -- fill in a hex color to style them.
+//
 // Reserved variables (variables) : `heading_punc` and `h1`-`h6` are declared
 //   for future per-depth heading coloring and are currently unused. Heading
 //   colors come from the "General Markdown Heading Line" rule.
@@ -53,6 +57,10 @@
 // Note: `variables.heading_punc` and `h1`-`h6` are reserved for future heading
 // coloring and are currently unused -- heading colors come from the
 // "General Markdown Heading Line" rule below.
+//
+// Coverage: every scope emitted by the syntax has a rule entry. Entries marked
+// "UNASSIGNED" keep their color fields empty on purpose so the fields are
+// present for you to fill in (see PARAMETERS above).
 
 {
     "variables":
@@ -110,6 +118,15 @@
         // ---------------------------------------------------------------------
         // Section A (core)
         // ---------------------------------------------------------------------
+
+        // A2a. Arrow ligature [Rule] (->) -- UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Arrow Ligature (A2a)",
+            "scope": "keyword.operator.arrow.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
 
         // A7. Markers [Rule] (+, -) followed by text.
         // Capture 2 -- the leading '-' or '+'.
@@ -209,6 +226,15 @@
         },
         // End of E1
 
+        // E1. Whole-match meta scope -- UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Area/Project Hierarchy Meta (E1)",
+            "scope": "meta.area-project-hierarchy.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
         // E2. Markdown-style headings [Rule] (H1 through H6).
         // Encompassing scope for the whole heading line.
         {
@@ -227,6 +253,26 @@
             "font_style": "bold"
         },
         // End of E2
+
+        // E2. Capture 2 -- the space after the hashes. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Heading Separator (E2)",
+            "scope": "meta.separator.heading.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E2. Capture 3 -- the heading text, scoped per depth (the syntax emits
+        // entity.name.section.heading.N.markdown; the `*` wildcard matches any
+        // depth). UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Heading Text per Depth (E2)",
+            "scope": "entity.name.section.heading.*.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
 
         // E3. Incomplete to-do list items [Rule] (e.g., "- [ ] Task")
         // E3. Capture 2 -- the hyphen/bullet.
@@ -254,6 +300,35 @@
             "font_style": "bold"
         },
         // End of E4
+
+        // E3/E4. Capture 1 -- leading indentation. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "To-do Leading Whitespace (E3/E4)",
+            "scope": "punctuation.whitespace.leading.list.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E3/E4. Captures 3 and 5 -- the spaces around the "[ ]"/"[x]" box.
+        // (Also used by E17 task statuses.) UNASSIGNED: set `foreground` to style.
+        {
+            "name": "To-do List Separator (E3/E4/E17)",
+            "scope": "meta.separator.list.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E3/E4. Whole-line scope for to-do and task-status items.
+        // (Also used by E17.) UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Task List Item Meta (E3/E4/E17)",
+            "scope": "markup.list.unnumbered.task.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
 
         // E5. Metadata Definition [Rule] ([InnerString]:)
         // E5. Capture 2 -- InnerString (the key).
@@ -298,6 +373,71 @@
         },
         // End of E7
 
+        // E7. Capture 1 -- the '>' symbol. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Blockquote Punctuation (E7)",
+            "scope": "punctuation.definition.blockquote.begin.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E7. Capture 2 -- the space after '>'. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Blockquote Separator (E7)",
+            "scope": "meta.separator.blockquote.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E7. Capture 3 -- the quoted content. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Blockquote Content (E7)",
+            "scope": "markup.quote.content.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E8. Strings [Rule] ("text")
+        // E8. The opening '"'. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "String Begin Punctuation (E8)",
+            "scope": "punctuation.definition.string.begin.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E8. The closing '"'. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "String End Punctuation (E8)",
+            "scope": "punctuation.definition.string.end.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E8. The quoted text (meta scope). UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Quoted String Content (E8)",
+            "scope": "string.quoted.double.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E8. Backslash escape sequences. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "String Escape Character (E8)",
+            "scope": "constant.character.escape.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+        // End of E8
+
         // E9. Comments [Rule] (/// Comment)
         {
             "name": "Polymark Comment Punctuation (//)",
@@ -313,6 +453,15 @@
         },
         // End of E9
 
+        // E9. Whole-line meta scope for the comment. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Comment Line Meta (E9)",
+            "scope": "comment.line.double-slash.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
         // E10. Bold [Rule] (**Bold Item**)
         {
             "name": "Polymark Bold Content",
@@ -322,6 +471,33 @@
         },
         // End of E10
 
+        // E10. Opening '**' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Bold Begin Punctuation (E10)",
+            "scope": "punctuation.definition.bold.begin.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E10. Closing '**' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Bold End Punctuation (E10)",
+            "scope": "punctuation.definition.bold.end.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E10. Whole-block meta scope for bold content. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Bold Content Meta (E10)",
+            "scope": "markup.bold.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
         // E11. Italics [Rule] (*Italicized Item*)
         {
             "name": "Polymark Italic Content",
@@ -330,6 +506,33 @@
             "foreground": "#98FB98"
         },
         // End of E11
+
+        // E11. Opening '*' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Italic Begin Punctuation (E11)",
+            "scope": "punctuation.definition.italic.begin.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E11. Closing '*' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Italic End Punctuation (E11)",
+            "scope": "punctuation.definition.italic.end.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
+        // E11. Whole-block meta scope for italic content. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Italic Content Meta (E11)",
+            "scope": "markup.italic.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
 
         // E12. Custom Tagging [Rule] (<tag> Content </tag>)
         // E12. Capture 1 -- the '<' / '>' / '</' punctuation.
@@ -396,6 +599,15 @@
         },
         // End of E14
 
+        // E14. Whole-match meta scope for the email. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Email Meta (E14)",
+            "scope": "string.quoted.email.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+
         // E15. Inline Status Markers [Rule] ([?], [!])
         // E15a. [?] - Question/Uncertainty.
         {
@@ -440,6 +652,15 @@
             "font_style": ""
         },
         // End of E16
+
+        // E16. Whole-line meta scope for the code marker. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Code Marker Line Meta (E16)",
+            "scope": "meta.dollar-line.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
 
         // E17. Project-management task statuses [Rule] (- [/], - [!], - [?], - [-])
         // E17a. [/] - In-Progress.
@@ -498,8 +719,27 @@
             "scope": "entity.name.extension.polymark",
             "foreground": "#94B3AE", // Color: Ash gray
             "font_style": "normal"
-        }
+        },
+
+        // E18. Whole-match meta scope for the filename. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Filename Meta (E18)",
+            "scope": "meta.filename.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
         // End of E18
+
+        // A6a. Keywords extension point -- styles the scope used by the syntax's
+        // `keywords` context example. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Keyword Extension Point (A6a)",
+            "scope": "keyword.other.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        }
 
     ]
 
