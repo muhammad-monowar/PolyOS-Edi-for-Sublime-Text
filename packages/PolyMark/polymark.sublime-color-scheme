@@ -24,10 +24,10 @@
 // Every color used by PolyMark lives in this file. The most likely candidates
 // for customization:
 //
-// accent + kind hooks (globals) : the "PolyOS Editor Dark compatibility" set
-//   (`accent`, `redish`, `orangish`, `yellowish`, `greenish`, `cyanish`,
-//   `bluish`, `purplish`, `pinkish`). These are read by the theme so the
-//   syntax palette and the UI agree. Change them to re-tint the whole system.
+// accent + kind hooks (globals) : the `accent` color plus eight kind colors
+//   (`redish`, `orangish`, `yellowish`, `greenish`, `cyanish`,
+//   `bluish`, `purplish`, `pinkish`). These are read by themes that hook into
+//   the color scheme. Change them to re-tint the whole system.
 //
 // Per-rule colors (rules array) : one rule per syntax feature. To restyle a
 //   feature, find its A#/E# label in the RULE INDEX below and edit that rule's
@@ -75,14 +75,14 @@
     },
     "globals":
     {
-        // These keys mirror the theme (see the "PolyOS Editor Dark" package).
+        // These keys are read by themes that hook into the color scheme.
         "background": "#000101",
         "foreground": "#edecee",
         "caret": "rgba(255, 255, 255, 0.2)",
         "block_caret": "rgba(255, 255, 255, 0.2)",
         "block_caret_border": "rgba(255, 255, 255, 0.2)",
 
-        // PolyOS Editor Dark compatibility hooks (kind + accent colors)
+        // Accent + kind hooks (consumed by themes that read these keys)
         "accent": "#72EFA6",
         "redish": "#F08080",
         "orangish": "#FFB86C",

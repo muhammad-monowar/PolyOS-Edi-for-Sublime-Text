@@ -1,5 +1,7 @@
 # PolyMark Feature Reference
 
+> **v.3.0.2** — Updated 2026-08-05
+
 > Every construct below is live — open this file in Sublime Text with the
 > PolyMark syntax and color scheme active, and each sample renders in its
 > assigned color.

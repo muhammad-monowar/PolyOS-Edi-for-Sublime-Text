@@ -3,8 +3,8 @@
 > **v.3.0.2** — Updated 2026-08-05
 
 A custom syntax and color scheme for Sublime Text, compatible with PolyOS.
-Highlight dates, to-dos, tags, statuses, filenames and more in plain `.md`
-files.
+Highlight dates, to-dos, tags, statuses, filenames and more in plain `.md`,
+`.txt` and `.pm` files.
 
 ## Quick install
 
@@ -17,12 +17,14 @@ Access it via `Preferences > Browse Packages...`.
 
 ## Quick start
 
-1. Open a `.md` or `.pm` file — PolyMark selects itself as the syntax.
+1. Open a `.md`, `.txt` or `.pm` file — PolyMark selects itself as the syntax.
 2. `Ctrl+Shift+P` / `Cmd+Shift+P` → `UI: Select Color Scheme > PolyMark`.
-3. Optional: copy the `PolyOSEditorDark` theme into Packages and set
-   `"theme": "PolyOS Editor Dark.sublime-theme"` for the matching look.
 
 No other configuration is required for the resources to work.
+
+> **Note:** because PolyMark auto-selects for `.txt`, it becomes the default
+> syntax for every plain-text file. If you don't want that, delete the `txt`
+> entry from `file_extensions:` at the top of `polymark.sublime-syntax`.
 
 ## What you can write
 
@@ -79,6 +81,15 @@ extension point — are documented in the **PARAMETERS** sections at the top of
 ├── Instructions.md                    Setup & customization guide
 └── LICENSE                            MIT License
 ```
+
+## Support
+
+PolyMark is free and open source (MIT). If it saves you time, you can support
+future development at any of these:
+
+- Gumroad — https://gumroad.com/YOUR_HANDLE
+- Lemon Squeezy — https://lemonsqueezy.com/YOUR_HANDLE
+- Payoneer — https://payoneer.com/YOUR_LINK
 
 ## License
 

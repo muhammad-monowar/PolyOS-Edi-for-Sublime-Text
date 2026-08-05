@@ -11,3 +11,7 @@ Package Control.cache
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Standalone release scaffold (separate repo: INTxK/PolyMark-for-Sublime-Text)
+standalone/
+

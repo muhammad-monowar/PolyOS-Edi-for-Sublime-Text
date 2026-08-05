@@ -28,8 +28,9 @@
 # The regexes below are the parts most likely to need customizing. Every change
 # is local to this file.
 #
-# file_extensions : extensions that auto-select PolyMark (.md, .pm). Add or
-#                   remove entries to control auto-detection.
+# file_extensions : extensions that auto-select PolyMark (.md, .txt, .pm).
+#                   Remove the "txt" line if you do not want PolyMark to be
+#                   the default syntax for plain-text files.
 #
 # Custom tag E12  : the tag-name charset is `[a-z]+`. To allow digits/uppercase,
 #                   update BOTH E12 rules ('<[a-z]+>' and '(</)([a-z]+)(>)').
@@ -116,7 +117,8 @@
 
 # Beginning of File Extensions
 file_extensions:
-  - md  # .md or .pm enables PolyMark
+  - md  # .md, .txt or .pm enables PolyMark
+  - txt
   - pm
 scope: text.polymark
 

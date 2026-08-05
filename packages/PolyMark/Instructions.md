@@ -30,14 +30,10 @@ This guide covers setup, activation and customization.
 ## Requirements
 
 - Sublime Text 4.
-- Files opened with the `.md` or `.pm` extension. PolyMark selects itself for
-  both (see *Customizing file extensions*).
-- Optional, for the full look:
-  - The `PolyOS Editor Dark` theme (a sibling package in this repository — the
-    theme reads PolyMark's accent colors so the UI and the syntax palette
-    agree).
-  - The `JetBrains Mono` font. Its `dlig` ligatures turn `->` into a true
-    arrow.
+- Files opened with the `.md`, `.txt` or `.pm` extension. PolyMark selects
+  itself for all three (see *Customizing the syntax* → *File extensions*).
+- Optional, for the full look: the `JetBrains Mono` font. Its `dlig` ligatures
+  turn `->` into a true arrow.
 
 ## Install
 
@@ -53,10 +49,9 @@ No other configuration is required for the syntax and color scheme to work.
 ## Activate
 
 1. **Syntax** — `Set Syntax: PolyMark` from the command palette
-   (`Ctrl+Shift+P` / `Cmd+Shift+P`), or simply open a `.md` / `.pm` file.
+   (`Ctrl+Shift+P` / `Cmd+Shift+P`), or simply open a `.md` / `.txt` / `.pm`
+   file.
 2. **Color scheme** — `UI: Select Color Scheme > PolyMark`.
-3. **Optional theme** — copy the `PolyOSEditorDark` folder into Packages and
-   set `"theme": "PolyOS Editor Dark.sublime-theme"` in your preferences.
 
 ### Recommended preferences
 
@@ -67,7 +62,6 @@ To reproduce the reference setup, set the following in your user preferences:
   "font_size": 14,
   "font_face": "JetBrains Mono",
   "font_options": ["dlig", "calt", "directwrite", "subpixel_antialias"],
-  "theme": "PolyOS Editor Dark.sublime-theme",
   "color_scheme": "Packages/PolyMark/polymark.sublime-color-scheme",
   "default_syntax": "Packages/PolyMark/polymark.sublime-syntax"
 }
@@ -124,8 +118,8 @@ rule carries its A#/E# label.
   `variables` block are reserved for future per-depth heading coloring. Heading
   colors currently come from the "General Markdown Heading Line" rule.
 - **Theme hooks** — the `globals` block defines `accent` plus eight kind colors
-  (`redish`, `orangish`, `yellowish`, …). The PolyOS Editor Dark theme reads
-  these so the UI chrome follows the syntax palette.
+  (`redish`, `orangish`, `yellowish`, …). Themes that read these keys follow
+  the syntax palette, so the UI chrome matches your highlight colors.
 
 ## Customizing the syntax
 
@@ -134,7 +128,7 @@ every regex that is likely to need tweaking. Each change is local to that file.
 
 | Knob | Rule(s) | What to change |
 | ---- | ------- | -------------- |
-| File extensions | `file_extensions:` | Extensions that auto-select PolyMark (`.md`, `.pm`) |
+| File extensions | `file_extensions:` | Extensions that auto-select PolyMark (`.md`, `.txt`, `.pm`) |
 | Custom tag names | E12 (both rules) | The `[a-z]+` charset — allow digits/uppercase |
 | Timestamp format | E13 | The `\d{4}-\d{2}-…` pattern |
 | Date header format | A8 | The `\d{4}-\d{2}-\d{2}` pattern |
@@ -161,12 +155,21 @@ rule in the color scheme.
 
 | Symptom | Cause / fix |
 | ------- | ----------- |
-| Nothing is highlighted | The syntax isn't PolyMark: run `Set Syntax: PolyMark`, or check the file has a `.md`/`.pm` extension (or edit `file_extensions`). |
+| Nothing is highlighted | The syntax isn't PolyMark: run `Set Syntax: PolyMark`, or check the file has a `.md`/`.txt`/`.pm` extension (or edit `file_extensions`). |
 | Highlighted, but colors look off | The PolyMark color scheme isn't selected: `UI: Select Color Scheme > PolyMark`. |
 | A construct renders in the default color | Its rule is an unassigned placeholder (see *Customizing colors*) — fill in a color. |
 | A filename on a line that starts with a marker is not colored | Line-start marker rules (A7/E17) take priority over filenames — put filenames in running text or after a metadata key. |
 | `->` isn't a ligature | Enable `"dlig"` in `font_options` and use a ligature font (e.g. JetBrains Mono). |
-| The theme doesn't look right | Set `"theme": "PolyOS Editor Dark.sublime-theme"` and confirm PolyMark is the active color scheme. |
+| Every `.txt` file is highlighted now | PolyMark includes `txt` in `file_extensions:`. Remove that line from `polymark.sublime-syntax` to opt out. |
+
+## Support
+
+PolyMark is free and open source (MIT). If it saves you time, you can support
+future development at any of these:
+
+- Gumroad — https://gumroad.com/YOUR_HANDLE
+- Lemon Squeezy — https://lemonsqueezy.com/YOUR_HANDLE
+- Payoneer — https://payoneer.com/YOUR_LINK
 
 ## License
 
