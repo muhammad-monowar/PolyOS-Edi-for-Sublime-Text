@@ -8,7 +8,7 @@
 //   --polyos-background-raised #16201A  hover / raised surfaces
 //   --polyos-foreground        #E8EAE6  primary UI text
 //   --polyos-secondary         #6A7B70  muted green-gray
-//   --polyos-accent            #72EFA6  phosphor mint highlight
+//   --polyos-accent            #FFFFFF  white highlight
 //   --polyos-border            #16201A  separators / grid lines
 //
 // var(--accent) follows the active color scheme's globals.accent so that
@@ -21,9 +21,9 @@
     "--polyos-background-raised": "#16201A",
     "--polyos-foreground": "#E8EAE6",
     "--polyos-secondary": "#6A7B70",
-    "--polyos-accent": "#72EFA6",
+    "--polyos-accent": "#FFFFFF",
     "--polyos-border": "#16201A",
-    "--accent": "#72EFA6"
+    "--accent": "#FFFFFF"
 },
   "rules": [
     // Title bar
@@ -408,9 +408,9 @@
       ],
       "layer1.opacity": 0.0,
       "layer2.tint": [
-        114,
-        239,
-        166,
+        255,
+        255,
+        255,
         20
       ],
       "layer2.inner_margin": [
@@ -1367,9 +1367,9 @@
     {
       "class": "puck_control",
       "layer0.tint": [
-        114,
-        239,
-        166,
+        255,
+        255,
+        255,
         255
       ],
       "layer0.opacity": 1.0,
@@ -1547,9 +1547,9 @@
         "always_show_minimap_viewport"
       ],
       "viewport_color": [
-        114,
-        239,
-        166,
+        255,
+        255,
+        255,
         80
       ],
       "viewport_opacity": 0.4
@@ -1561,9 +1561,9 @@
         "!always_show_minimap_viewport"
       ],
       "viewport_color": [
-        114,
-        239,
-        166,
+        255,
+        255,
+        255,
         80
       ],
       "viewport_opacity": {

@@ -15,7 +15,7 @@ not require Materialize to be installed.
 | Raised    | `#16201A` | Hover / raised surfaces     |
 | Foreground| `#E8EAE6` | Primary UI text             |
 | Secondary | `#6A7B70` | Muted green-gray            |
-| Accent    | `#72EFA6` | Phosphor mint highlight     |
+| Accent    | `#FFFFFF` | White highlight (fallback)  |
 
 ## Install (standalone)
 
@@ -46,16 +46,17 @@ re-tint that surface everywhere it is used:
     "--polyos-background-raised": "#16201A",
     "--polyos-foreground":        "#E8EAE6",
     "--polyos-secondary":         "#6A7B70",
-    "--polyos-accent":            "#72EFA6",
+    "--polyos-accent":            "#FFFFFF",
     "--polyos-border":            "#16201A"
 }
 ```
 
 **Accent follows the color scheme** — rules use `var(--accent)`, which resolves
-to the active color scheme's `globals.accent`. Both `PolyMark` and `ProseMode`
-define `"accent": "#72EFA6"` (plus the eight kind colors), so toggling between
-them keeps the UI chrome in sync. If a scheme does not define an accent, the
-theme's own `--accent` variable is used.
+to the active color scheme's `globals.accent`. `PolyMark` defines
+`"accent": "#72EFA6"` and `ProseMode` defines a monochrome `"accent": "#FFFFFF"`
+(plus the eight kind colors), so toggling between them re-tints the UI chrome
+accordingly. If a scheme does not define an accent, the theme's own `--accent`
+variable (white) is used.
 
 **UI toggles** — the original Material settings still work and control the same
 things:
