@@ -2,11 +2,11 @@
   // Layout & Focus
   "draw_centered": true,
   "word_wrap": true,
-  "wrap_width": 50,
+  "wrap_width": 65,
 
   // Typography & Caret
   "font_face": "JetBrains Mono",
-  "font_size": 15,
+  "font_size": 12,
   "line_padding_top": 4,
   "line_padding_bottom": 4,
   "block_caret": true,
