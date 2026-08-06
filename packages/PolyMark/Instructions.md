@@ -2,7 +2,7 @@
 Author: Muhammad Mustafa Monowar
 Updated: 2026-08-06
 Target: Sublime-Text
-Version: v.3.0.2
+Version: v.3.1.0
 ---
 
 # PolyMark — Setup & Customization Guide
@@ -135,6 +135,8 @@ every regex that is likely to need tweaking. Each change is local to that file.
 | Duration range | A9 | The `\d{2}-\d{2}-\d{2} -> …` pattern |
 | Email address | E14 | TLD length `\w{2,}` and the local/domain charset |
 | Filename extensions | E18 | Extension length `[a-zA-Z]{2,5}` |
+| Inline code | E19 | The backtick delimiter `` ` ``; inline code must close on the same line |
+| Fenced code blocks | E20 | The ``` fence + language-token charset `[A-Za-z0-9_\-]*` in the `fenced-raw` rule |
 | List markers | A7 | Leading characters `[\-+]` |
 
 ### Extension point (A6a)
@@ -151,6 +153,59 @@ keywords:
 Then style `keyword.other.polymark` via the "Keyword Extension Point (A6a)"
 rule in the color scheme.
 
+### Extension point (E20): language companions
+
+Fenced code blocks (E20) are language-agnostic in PolyMark. Language-specific
+colors inside a block come from **companion packages** that ship a hidden
+syntax whose scope is `source.embedded.polymark.<lang>` and that embeds
+Sublime Text's built-in highlighting for the language.
+
+Shipped companions:
+
+- `PolyMark-Language-Pack-Shell` — activates `bash`, `sh`, `shell`, `zsh`,
+  `console` fences (embeds `source.shell`).
+- `PolyMark-Language-Pack-JavaScript` — activates `js`, `javascript`, `node`
+  fences (embeds `source.js`).
+
+Each is a normal package folder next to `PolyMark`; install and restart.
+PolyMark already references their scopes in the `fenced-language-extensions`
+context, so nothing else needs editing.
+
+**Adding your own language.** Create a folder e.g. `PolyMark-Language-Pack-Python`
+containing a hidden syntax file:
+
+```
+%YAML 1.2
+---
+name: PolyMark Fenced Python
+scope: source.embedded.polymark.python
+hidden: true
+contexts:
+  main:
+    - match: '^([ \t]*)(```)[ \t]*(python|py)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+        3: constant.other.language-name.polymark
+      embed: scope:source.python
+      embed_scope: markup.raw.block.polymark
+      escape: '^([ \t]*)(```)[ \t]*$'
+      escape_captures:
+        2: punctuation.definition.raw.code-fence.end.polymark
+```
+
+Then register the scope in `polymark.sublime-syntax`:
+
+```
+fenced-language-extensions:
+  - include: "scope:source.embedded.polymark.bash"
+  - include: "scope:source.embedded.polymark.js"
+  - include: "scope:source.embedded.polymark.python"   # added
+```
+
+Finally, style the language's scopes (e.g. `keyword.control.python`) by adding
+rules to `polymark.sublime-color-scheme`, mirroring the "PolyMark Shell /"
+"PolyMark JavaScript" entries.
+
 ## Troubleshooting
 
 | Symptom | Cause / fix |
@@ -161,6 +216,8 @@ rule in the color scheme.
 | A filename on a line that starts with a marker is not colored | Line-start marker rules (A7/E17) take priority over filenames — put filenames in running text or after a metadata key. |
 | `->` isn't a ligature | Enable `"dlig"` in `font_options` and use a ligature font (e.g. JetBrains Mono). |
 | Every `.txt` file is highlighted now | PolyMark includes `txt` in `file_extensions:`. Remove that line from `polymark.sublime-syntax` to opt out. |
+| A fenced code block renders but the language isn't colored | The matching companion package isn't installed (e.g. `PolyMark-Language-Pack-Shell` for bash), or the language token isn't one it maps. A correctly typed block still renders in plain code-block styling. |
+| A fence line with extra text after the language token isn't highlighted | Correct — a fence is three backticks plus (optionally) a language token and nothing else on the line. That is the "correctly typed only" rule (E20). |
 
 ## Support
 

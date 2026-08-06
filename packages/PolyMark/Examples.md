@@ -1,6 +1,6 @@
 # PolyMark Feature Reference
 
-> **v.3.0.2** — Updated 2026-08-06
+> **v.3.1.0** — Updated 2026-08-06
 
 > Every construct below is live — open this file in Sublime Text with the
 > PolyMark syntax and color scheme active, and each sample renders in its
@@ -224,6 +224,39 @@ best in running text.
 
 [File]: 2025_report.pdf
 The file titled draft_2.docx was moved.
+
+### E19. Inline code (`code`)
+
+Text wrapped in a single backtick pair on one line is light orange on a dark
+orange pill. An unclosed backtick does not highlight.
+
+Run `polymark --setup` to install the syntax.
+
+### E20. Fenced code block (```lang ... ```)
+
+Three backticks at the start of a line, an optional language token, then a
+closing line of three backticks alone. The block base is rich black; the fence
+and language token are orange. PolyMark rules (tags, dates, markers, ...) do
+not apply inside the block, and the block's content does not leak out.
+
+```bash
+echo "hello world"
+ls -la
+```
+
+```js
+const greet = (name) => `Hello, ${name}!`;
+console.log(greet("world"));
+```
+
+```unknownlang
+anything -- no companion installed: rendered as a plain code block
+```
+
+Language-specific colors inside ``` ```bash ``` ``` and ``` ```js ``` ``` come
+from the companion packages `PolyMark-Language-Pack-Shell` and
+`PolyMark-Language-Pack-JavaScript` (see `Instructions.md`). Without a
+companion, a correctly typed block still renders, just without language colors.
 
 ### A6a. Keywords — extension point (off by default)
 

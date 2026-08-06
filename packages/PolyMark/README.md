@@ -1,6 +1,6 @@
 # PolyMark
 
-> **v.3.0.2** — Updated 2026-08-06
+> **v.3.1.0** — Updated 2026-08-06
 
 A custom syntax and color scheme for Sublime Text, compatible with PolyOS.
 Highlight dates, to-dos, tags, statuses, filenames and more in plain `.md`,
@@ -52,7 +52,13 @@ No other configuration is required for the resources to work.
 | E16  | Single-line code marker | `$ command` |
 | E17  | Task statuses | `- [/] text`, `- [-] text` |
 | E18  | Filename with extension | `draft_2.docx` |
+| E19  | Inline code | `` `code` `` |
+| E20  | Fenced code block | ```` ```js … ``` ```` |
 | A6a  | Keywords (extension point) | off by default |
+
+Fenced blocks get language colors from the standalone companion packages
+`PolyMark-Language-Pack-Shell` (bash/sh) and `PolyMark-Language-Pack-JavaScript`
+(js) — install them next to `PolyMark` to activate. See `Instructions.md`.
 
 Every rule is rendered live in `Examples.md` — open it in Sublime Text with
 PolyMark active to see the full reference.

@@ -4,7 +4,7 @@
 // Author : Muhammad Mustafa Monowar
 // Updated: 2026-08-06
 // Target : Sublime-Text
-// Version: v.3.0.2
+// Version: v.3.1.0
 // -----------------------------------------------------------------------------
 //
 // PolyMark is a Color Scheme and Syntax Highlighting rule set for Sublime Text,
@@ -52,7 +52,9 @@
 // Section E (extensions) : E1 area/project, E2 headings, E3/E4 to-do items,
 //   E5 metadata, E6 horizontal rule, E7 blockquote, E9 comments, E10 bold,
 //   E11 italic, E12 custom tags, E13 timestamp, E14 email, E15 inline status,
-//   E16 code markers, E17 task statuses, E18 filenames.
+//   E16 code markers, E17 task statuses, E18 filenames, E19 inline code,
+//   E20 fenced code blocks (incl. the per-language palette for the scopes
+//   emitted inside embedded shell/JavaScript blocks).
 //
 // Note: `variables.heading_punc` and `h1`-`h6` are reserved for future heading
 // coloring and are currently unused -- heading colors come from the
@@ -730,6 +732,168 @@
             "font_style": ""
         },
         // End of E18
+
+        // E19. Inline Code [Rule] (`code`)
+        // E19a. The backtick delimiters. Same dark-orange background as the
+        // content so the whole `...` span reads as one pill.
+        {
+            "name": "Inline Code Backtick (E19)",
+            "scope": "punctuation.definition.raw.begin.polymark, punctuation.definition.raw.end.polymark",
+            "foreground": "#FFB86C", // Color: Light orange
+            "background": "#3A2A12", // Color: Dark orange
+            "font_style": ""
+        },
+
+        // E19b. Inline code content -- dark orange background, light orange text.
+        {
+            "name": "Inline Code Content (E19)",
+            "scope": "markup.raw.inline.polymark",
+            "foreground": "#FFB86C", // Color: Light orange
+            "background": "#3A2A12", // Color: Dark orange
+            "font_style": ""
+        },
+
+        // E19c. Character-level content scope (same look as the meta scope).
+        {
+            "name": "Inline Code Content Char (E19)",
+            "scope": "markup.raw.inline.content.polymark",
+            "foreground": "#FFB86C", // Color: Light orange
+            "background": "#3A2A12", // Color: Dark orange
+            "font_style": ""
+        },
+        // End of E19
+
+        // E20. Fenced Code Block [Rule] (```lang ... ```)
+        // E20a. The fence backticks (opening and closing).
+        {
+            "name": "Code Block Fence (E20)",
+            "scope": "punctuation.definition.raw.code-fence.begin.polymark, punctuation.definition.raw.code-fence.end.polymark",
+            "foreground": "#FFB86C", // Color: Light orange
+            "font_style": ""
+        },
+
+        // E20b. The language token on the opening fence.
+        {
+            "name": "Code Block Language Token (E20)",
+            "scope": "constant.other.language-name.polymark",
+            "foreground": "#FFB86C", // Color: Light orange
+            "font_style": ""
+        },
+
+        // E20c. Code block base -- neutral rich-black background so language
+        // scopes stacked on top carry their own colors.
+        {
+            "name": "Code Block Base (E20)",
+            "scope": "markup.raw.block.polymark",
+            "foreground": "",
+            "background": "#021012", // Color: Rich black (neutral)
+            "font_style": ""
+        },
+
+        // E20d. Raw fallback content (no companion installed / unknown language).
+        {
+            "name": "Code Block Content (E20)",
+            "scope": "markup.raw.block.content.polymark",
+            "foreground": "#FFB86C", // Color: Light orange
+            "background": "#021012", // Color: Rich black (neutral)
+            "font_style": ""
+        },
+
+        // E20. Language palette -- colors for the scopes emitted inside
+        // embedded blocks by the companion packages (PolyMark-Language-Pack-Shell
+        // and PolyMark-Language-Pack-JavaScript). Only active inside fenced
+        // blocks; PolyMark's own scopes are unaffected.
+        {
+            "name": "PolyMark Shell Comment",
+            "scope": "comment.line.number-sign.shell",
+            "foreground": "#94B3AE", // Color: Ash gray
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark Shell Keyword",
+            "scope": "keyword.control.shell",
+            "foreground": "#47FFC2", // Color: Greenish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark Shell String",
+            "scope": "string.quoted.double.shell, string.quoted.single.shell",
+            "foreground": "#FBDA35", // Color: Yellowish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark Shell Variable",
+            "scope": "variable.other.shell, punctuation.definition.variable.shell",
+            "foreground": "#75FAF8", // Color: Cyanish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark Shell Constant",
+            "scope": "constant.numeric.shell, constant.other.shell",
+            "foreground": "#47D4FF", // Color: Bluish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark Shell Function",
+            "scope": "entity.name.function.shell, support.function.builtin.shell",
+            "foreground": "#FF79C6", // Color: Pinkish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark Shell Operator",
+            "scope": "keyword.operator.assignment.shell, keyword.operator.shell",
+            "foreground": "#FFB86C", // Color: Orangish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Comment",
+            "scope": "comment.line.js, comment.block.js",
+            "foreground": "#94B3AE", // Color: Ash gray
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Keyword",
+            "scope": "keyword.control.js",
+            "foreground": "#FF79C6", // Color: Pinkish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Storage",
+            "scope": "storage.type.js, storage.type.function.js, storage.modifier.js",
+            "foreground": "#9D70FF", // Color: Purplish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript String",
+            "scope": "string.quoted.single.js, string.quoted.double.js, string.quoted.template.js, string.template.js",
+            "foreground": "#FBDA35", // Color: Yellowish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Number and Constant",
+            "scope": "constant.numeric.js, constant.language.js, constant.other.js",
+            "foreground": "#75FAF8", // Color: Cyanish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Function",
+            "scope": "entity.name.function.js, variable.function.js, support.function.js",
+            "foreground": "#47D4FF", // Color: Bluish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Variable",
+            "scope": "variable.other.js, variable.other.constant.js, variable.other.property.js",
+            "foreground": "#47FFC2", // Color: Greenish
+            "font_style": ""
+        },
+        {
+            "name": "PolyMark JavaScript Type",
+            "scope": "entity.name.type.js, support.class.js",
+            "foreground": "#FFB86C", // Color: Orangish
+            "font_style": ""
+        },
+        // End of E20
 
         // A6a. Keywords extension point -- styles the scope used by the syntax's
         // `keywords` context example. UNASSIGNED: set `foreground` to style.

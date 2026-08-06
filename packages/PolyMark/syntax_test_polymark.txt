@@ -1,0 +1,43 @@
+| SYNTAX TEST "Packages/PolyMark/polymark.sublime-syntax"
+
+`code`
+| <- punctuation.definition.raw.begin.polymark
+ | <- markup.raw.inline.polymark markup.raw.inline.content.polymark
+   | <- markup.raw.inline.polymark
+     | <- punctuation.definition.raw.end.polymark
+
+run `npm i` now
+    | <- punctuation.definition.raw.begin.polymark
+     | <- markup.raw.inline.polymark
+       | <- markup.raw.inline.polymark
+          | <- punctuation.definition.raw.end.polymark
+
+`unclosed
+| <- punctuation.definition.raw.begin.polymark
+next line is plain text
+| <- - markup.raw.inline.polymark
+
+```
+| <- punctuation.definition.raw.code-fence.begin.polymark
+raw content without a companion
+| <- markup.raw.block.polymark markup.raw.block.content.polymark
+```
+| <- punctuation.definition.raw.code-fence.end.polymark
+after the fence is plain text
+| <- - markup.raw.block.polymark
+
+```kotlin
+| <- punctuation.definition.raw.code-fence.begin.polymark
+   | <- constant.other.language-name.polymark
+val x = 1
+| <- markup.raw.block.polymark - entity.name.section.header.date
+```
+| <- punctuation.definition.raw.code-fence.end.polymark
+
+```bash
+| <- punctuation.definition.raw.code-fence.begin.polymark
+   | <- constant.other.language-name.polymark
+2026-08-05
+| <- markup.raw.block.polymark - entity.name.section.header.date
+```
+| <- punctuation.definition.raw.code-fence.end.polymark

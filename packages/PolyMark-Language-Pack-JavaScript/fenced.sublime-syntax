@@ -1,0 +1,35 @@
+%YAML 1.2
+---
+# -----------------------------------------------------------------------------
+# PolyMark-Language-Pack-JavaScript -- Fenced JavaScript highlighting for PolyMark
+# -----------------------------------------------------------------------------
+# This hidden syntax is not meant to be selected manually. PolyMark's
+# `fenced-language-extensions` context includes it by scope, so any fenced code
+# block tagged `js`, `javascript` or `node` is embedded as `source.js` (Sublime
+# Text's built-in JavaScript highlighting).
+#
+# Scopes emitted here are styled by polymark.sublime-color-scheme
+# (E20 + "PolyMark JavaScript ..." rules). No PolyMark rules seep into the
+# block and the block's rules do not seep back out.
+#
+# License: MIT (see `LICENSE`).
+# Setup  : See `Instructions.md` in the PolyMark package.
+
+name: PolyMark Fenced JavaScript
+scope: source.embedded.polymark.js
+hidden: true
+
+contexts:
+  main:
+    # A correctly typed opening fence: three backticks, a JavaScript language
+    # token and nothing else on the line. The closing fence (three backticks
+    # alone) ends the embed no matter how nested the JS content is.
+    - match: '^([ \t]*)(```)[ \t]*(js|javascript|node)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+        3: constant.other.language-name.polymark
+      embed: scope:source.js
+      embed_scope: markup.raw.block.polymark
+      escape: '^([ \t]*)(```)[ \t]*$'
+      escape_captures:
+        2: punctuation.definition.raw.code-fence.end.polymark

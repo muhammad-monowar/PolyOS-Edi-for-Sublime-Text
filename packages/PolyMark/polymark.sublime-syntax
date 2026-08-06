@@ -8,7 +8,7 @@
 # Author : Muhammad Mustafa Monowar
 # Updated: 2026-08-06
 # Target : Sublime-Text
-# Version: v.3.0.2
+# Version: v.3.1.0
 # -----------------------------------------------------------------------------
 #
 # PolyMark is a Color Scheme and Syntax Highlighting rule set for Sublime Text,
@@ -48,6 +48,17 @@
 #                   range to change which `.ext` suffixes are detected.
 #
 # Markers A7      : leading list characters `[\-+]` (hyphen and plus).
+#
+# Inline code E19 : delimiter is a single backtick `` ` ``; it must close on
+#                   the same line (an unclosed backtick pops at the newline).
+#
+# Fenced block E20: opening fence is three backticks `` ``` `` + an optional
+#                   language token `[A-Za-z0-9_\-]*` + nothing else on the line.
+#                   Closing fence is three backticks alone. Language-specific
+#                   coloring is NOT in this file: it is supplied by companion
+#                   packages (e.g. PolyMark-Language-Pack-Shell) whose hidden
+#                   syntaxes declare `source.embedded.polymark.<lang>` scopes,
+#                   wired in via the `fenced-language-extensions` context.
 #
 # Colors          : this file emits scopes only. All colors live in
 #                   `polymark.sublime-color-scheme` (mapping below).
@@ -106,6 +117,15 @@
 #                    markup.status.abandoned.content.polymark   "Status Marker [-] Abandoned Content"
 # E18 Filename       entity.name.filename.polymark              "Filename"
 #                    entity.name.extension.polymark             "File Extension"
+# E19 Inline code    punctuation.definition.raw.begin.polymark  "Inline Code Backtick (E19)"
+#                    markup.raw.inline.polymark                 "Inline Code Content (E19)"
+#                    punctuation.definition.raw.end.polymark    "Inline Code Backtick (E19)"
+# E20 Fenced block   punctuation.definition.raw.code-fence.begin.polymark,
+#                    punctuation.definition.raw.code-fence.end.polymark
+#                                                               "Code Block Fence (E20)"
+#                    constant.other.language-name.polymark      "Code Block Language Token (E20)"
+#                    markup.raw.block.polymark                  "Code Block Base (E20)"
+#                    markup.raw.block.content.polymark          "Code Block Content (E20)"
 # A2a Arrow          keyword.operator.arrow.polymark            "Arrow Ligature (A2a)" (unassigned)
 #
 # Every scope emitted by this file now has a rule entry in the color scheme.
@@ -197,6 +217,14 @@ contexts:
 
     # E12. Custom Tagging (<tag> content </tag>)
     - include: custom-tag
+
+    # E20. Fenced Code Blocks (```lang ... ```)
+    # MUST precede Inline Code (E19): a fence line begins with a backtick and
+    # the block rule must own the whole opening line.
+    - include: fenced-code-block
+
+    # E19. Inline Code (`code`)
+    - include: inline-code
 
     # A6a. General Includes (KEYWORDS, STRINGS, etc.)
     - include: keywords
@@ -501,6 +529,81 @@ contexts:
         2: entity.name.extension.polymark
       scope: meta.filename.polymark
   # End of E18
+
+  # E19. Inline Code [Rule] (`code`)
+  # A single backtick pair. Inline code cannot span lines: an unclosed backtick
+  # pops at the newline, so only a correctly typed `...` pair gets highlighted.
+  inline-code:
+    - match: '`'
+      scope: punctuation.definition.raw.begin.polymark
+      push: inline-code-content
+
+  inline-code-content:
+    # E19.1. Disable the prototype so PolyMark rules (comments, etc.) do not
+    # seep into inline code.
+    - meta_include_prototype: false
+    - meta_scope: markup.raw.inline.polymark
+
+    # E19.2. Closing backtick (checked first).
+    - match: '`'
+      scope: punctuation.definition.raw.end.polymark
+      pop: true
+
+    # E19.3. Inline code ends at the line boundary (not "correctly typed").
+    - match: '\n'
+      pop: true
+
+    # E19.4. Match everything else character-by-character.
+    - match: .
+      scope: markup.raw.inline.content.polymark
+  # End of E19
+
+  # E20. Fenced Code Block [Rule] (```lang ... ```)
+  # The block only activates when the fence is correctly typed: an opening line
+  # of three backticks plus an optional language token and nothing else, closed
+  # by a line of three backticks alone. Language-specific highlighting is
+  # provided by companion packages through fenced-language-extensions; anything
+  # else falls through to the raw fallback (still a valid code block).
+  fenced-code-block:
+    - include: fenced-language-extensions
+    - include: fenced-raw
+
+  # E20. Extension point -- companion language packages.
+  # Each line references the hidden syntax of a companion package by its scope
+  # (`source.embedded.polymark.<lang>`). Uninstalled companions are ignored, so
+  # these lines are safe to keep wired. To add a language, install a companion
+  # package and add its scope here.
+  fenced-language-extensions:
+    - include: "scope:source.embedded.polymark.bash"
+    - include: "scope:source.embedded.polymark.js"
+    # - include: "scope:source.embedded.polymark.python"
+    # - include: "scope:source.embedded.polymark.rust"
+
+  # E20. Raw fallback -- a correctly typed fence with no companion installed
+  # (or an unknown language token) still renders as a code block, in plain
+  # text. PolyMark rules never apply inside: prototype is disabled and the
+  # block content is scoped markup.raw.block.* only.
+  fenced-raw:
+    - match: '^([ \t]*)(```)([A-Za-z0-9_\-]*)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+        3: constant.other.language-name.polymark
+      push: fenced-raw-content
+
+  fenced-raw-content:
+    - meta_include_prototype: false
+    - meta_scope: markup.raw.block.polymark
+
+    # E20.1. Closing fence (checked first).
+    - match: '^([ \t]*)(```)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.end.polymark
+      pop: true
+
+    # E20.2. Content lines (no language highlighting).
+    - match: '.+'
+      scope: markup.raw.block.content.polymark
+  # End of E20
 
   # A6a. Keywords (reserved extension point)
   # Referenced by main but intentionally empty. Add keyword rules here to
