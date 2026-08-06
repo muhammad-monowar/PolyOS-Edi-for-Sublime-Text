@@ -165,12 +165,18 @@ unassigned placeholders.
 
 ### E12. Custom tagging (<tag> content </tag>)
 
-A lowercase tag name (`<note>` … `</note>`) is soft purple on rich black. Other
-rules keep working inside the content.
+A tag name starting with a letter (any case) and containing letters, digits,
+`-` or `_` (`<note>` … `</note>`, `<note-1>` … `</note-1>`,
+`<Tag_2>` … `</Tag_2>`) is soft purple on rich black. Other rules keep working
+inside the content.
 
 <note>
 Any text can live here, including dates like 2026-08-05.
 </note>
+
+<note-1> Mixed-case and hyphenated tags work too. </note-1>
+
+<Tag_2> So do underscores and digits. </Tag_2>
 
 ### E13. Date-time-stamp (YYYY-MM-DD-HH-MM-SS)
 

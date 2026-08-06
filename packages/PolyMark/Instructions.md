@@ -129,7 +129,7 @@ every regex that is likely to need tweaking. Each change is local to that file.
 | Knob | Rule(s) | What to change |
 | ---- | ------- | -------------- |
 | File extensions | `file_extensions:` | Extensions that auto-select PolyMark (`.md`, `.txt`, `.pm`) |
-| Custom tag names | E12 (both rules) | The `[a-z]+` charset — allow digits/uppercase |
+| Custom tag names | E12 (both rules) | The `[A-Za-z][A-Za-z0-9_\-]*` charset — letters, digits, `-`, `_` |
 | Timestamp format | E13 | The `\d{4}-\d{2}-…` pattern |
 | Date header format | A8 | The `\d{4}-\d{2}-\d{2}` pattern |
 | Duration range | A9 | The `\d{2}-\d{2}-\d{2} -> …` pattern |

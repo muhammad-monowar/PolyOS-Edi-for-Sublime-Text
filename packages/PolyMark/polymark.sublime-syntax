@@ -32,8 +32,10 @@
 #                   Remove the "txt" line if you do not want PolyMark to be
 #                   the default syntax for plain-text files.
 #
-# Custom tag E12  : the tag-name charset is `[a-z]+`. To allow digits/uppercase,
-#                   update BOTH E12 rules ('<[a-z]+>' and '(</)([a-z]+)(>)').
+# Custom tag E12  : the tag-name charset is `[A-Za-z][A-Za-z0-9_\-]*` (starts
+#                   with a letter; digits, '-' and '_' allowed after). To
+#                   change it, update BOTH E12 rules ('<[A-Za-z][A-Za-z0-9_\-]*>'
+#                   and '(</)([A-Za-z][A-Za-z0-9_\-]*)(>)').
 #
 # Date/numbering  : E13 timestamp   `\b\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}\b`
 #                   A8 date header  `\b\d{4}-\d{2}-\d{2}\b`
@@ -402,7 +404,7 @@ contexts:
 
   # E12. Custom Tagging [Rule] (<tag> Content </tag>)
   custom-tag:
-    - match: '<[a-z]+>'
+    - match: '<[A-Za-z][A-Za-z0-9_\-]*>'
       scope: entity.name.tag.polymark
       push: custom-tag-content
 
@@ -412,7 +414,7 @@ contexts:
 
     # E12.1. Closing Tag (crucial for exiting the context)
     # Must come first to take precedence over the included rules.
-    - match: '(</)([a-z]+)(>)'
+    - match: '(</)([A-Za-z][A-Za-z0-9_\-]*)(>)'
       captures:
         1: punctuation.definition.tag.end.polymark  # </ uses 'end' punctuation
         2: entity.name.tag.polymark
