@@ -53,8 +53,8 @@
 //   E5 metadata, E6 horizontal rule, E7 blockquote, E9 comments, E10 bold,
 //   E11 italic, E12 custom tags, E13 timestamp, E14 email, E15 inline status,
 //   E16 code markers, E17 task statuses, E18 filenames, E19 inline code,
-//   E20 fenced code blocks (incl. the per-language palette for the scopes
-//   emitted inside embedded shell/JavaScript blocks).
+//   E20 fenced code blocks (incl. the shared code-block palette that styles
+//   the standard scope families of any embedded language).
 //
 // Note: `variables.heading_punc` and `h1`-`h6` are reserved for future heading
 // coloring and are currently unused -- heading colors come from the
@@ -799,97 +799,69 @@
             "font_style": ""
         },
 
-        // E20. Language palette -- colors for the scopes emitted inside
-        // embedded blocks by the companion packages (PolyMark-Language-Pack-Shell
-        // and PolyMark-Language-Pack-JavaScript). Only active inside fenced
-        // blocks; PolyMark's own scopes are unaffected.
+        // E20. Shared code-block palette -- colors for the standard scope
+        // families emitted by any embedded language (shell, JavaScript, and any
+        // future companion). Every rule is ancestry-gated on
+        // `markup.raw.block.polymark`, so these colors apply ONLY inside fenced
+        // code blocks; PolyMark's own prose scopes are never affected. Adding a
+        // new language companion needs no color work here.
         {
-            "name": "PolyMark Shell Comment",
-            "scope": "comment.line.number-sign.shell",
+            "name": "Code Block Comment",
+            "scope": "markup.raw.block.polymark comment",
             "foreground": "#94B3AE", // Color: Ash gray
             "font_style": ""
         },
         {
-            "name": "PolyMark Shell Keyword",
-            "scope": "keyword.control.shell",
-            "foreground": "#47FFC2", // Color: Greenish
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark Shell String",
-            "scope": "string.quoted.double.shell, string.quoted.single.shell",
+            "name": "Code Block String",
+            "scope": "markup.raw.block.polymark string",
             "foreground": "#FBDA35", // Color: Yellowish
             "font_style": ""
         },
         {
-            "name": "PolyMark Shell Variable",
-            "scope": "variable.other.shell, punctuation.definition.variable.shell",
-            "foreground": "#75FAF8", // Color: Cyanish
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark Shell Constant",
-            "scope": "constant.numeric.shell, constant.other.shell",
-            "foreground": "#47D4FF", // Color: Bluish
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark Shell Function",
-            "scope": "entity.name.function.shell, support.function.builtin.shell",
+            "name": "Code Block Keyword",
+            "scope": "markup.raw.block.polymark keyword",
             "foreground": "#FF79C6", // Color: Pinkish
             "font_style": ""
         },
         {
-            "name": "PolyMark Shell Operator",
-            "scope": "keyword.operator.assignment.shell, keyword.operator.shell",
+            "name": "Code Block Operator",
+            "scope": "markup.raw.block.polymark keyword.operator",
             "foreground": "#FFB86C", // Color: Orangish
             "font_style": ""
         },
         {
-            "name": "PolyMark JavaScript Comment",
-            "scope": "comment.line.js, comment.block.js",
-            "foreground": "#94B3AE", // Color: Ash gray
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark JavaScript Keyword",
-            "scope": "keyword.control.js",
-            "foreground": "#FF79C6", // Color: Pinkish
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark JavaScript Storage",
-            "scope": "storage.type.js, storage.type.function.js, storage.modifier.js",
+            "name": "Code Block Storage",
+            "scope": "markup.raw.block.polymark storage",
             "foreground": "#9D70FF", // Color: Purplish
             "font_style": ""
         },
         {
-            "name": "PolyMark JavaScript String",
-            "scope": "string.quoted.single.js, string.quoted.double.js, string.quoted.template.js, string.template.js",
-            "foreground": "#FBDA35", // Color: Yellowish
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark JavaScript Number and Constant",
-            "scope": "constant.numeric.js, constant.language.js, constant.other.js",
-            "foreground": "#75FAF8", // Color: Cyanish
-            "font_style": ""
-        },
-        {
-            "name": "PolyMark JavaScript Function",
-            "scope": "entity.name.function.js, variable.function.js, support.function.js",
+            "name": "Code Block Constant",
+            "scope": "markup.raw.block.polymark constant",
             "foreground": "#47D4FF", // Color: Bluish
             "font_style": ""
         },
         {
-            "name": "PolyMark JavaScript Variable",
-            "scope": "variable.other.js, variable.other.constant.js, variable.other.property.js",
+            "name": "Code Block Number",
+            "scope": "markup.raw.block.polymark constant.numeric",
+            "foreground": "#75FAF8", // Color: Cyanish
+            "font_style": ""
+        },
+        {
+            "name": "Code Block Variable",
+            "scope": "markup.raw.block.polymark variable",
             "foreground": "#47FFC2", // Color: Greenish
             "font_style": ""
         },
         {
-            "name": "PolyMark JavaScript Type",
-            "scope": "entity.name.type.js, support.class.js",
+            "name": "Code Block Function",
+            "scope": "markup.raw.block.polymark entity.name.function, markup.raw.block.polymark support.function",
+            "foreground": "#47D4FF", // Color: Bluish
+            "font_style": ""
+        },
+        {
+            "name": "Code Block Type",
+            "scope": "markup.raw.block.polymark entity.name.type, markup.raw.block.polymark support.class, markup.raw.block.polymark entity.other.attribute-name",
             "foreground": "#FFB86C", // Color: Orangish
             "font_style": ""
         },

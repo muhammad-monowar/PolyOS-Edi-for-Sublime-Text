@@ -202,9 +202,12 @@ fenced-language-extensions:
   - include: "scope:source.embedded.polymark.python"   # added
 ```
 
-Finally, style the language's scopes (e.g. `keyword.control.python`) by adding
-rules to `polymark.sublime-color-scheme`, mirroring the "PolyMark Shell /"
-"PolyMark JavaScript" entries.
+No color work is needed: the color scheme's shared code-block palette styles
+the standard scope families (`comment`, `string`, `keyword`, `constant`,
+`variable`, `entity.name.function`, `entity.name.type`, ...) inside every
+fenced block, for any language. If you want to customize one scope for your
+language, add an optional rule to `polymark.sublime-color-scheme` scoped like
+`markup.raw.block.polymark keyword.control.python`.
 
 ## Troubleshooting
 
@@ -216,7 +219,7 @@ rules to `polymark.sublime-color-scheme`, mirroring the "PolyMark Shell /"
 | A filename on a line that starts with a marker is not colored | Line-start marker rules (A7/E17) take priority over filenames — put filenames in running text or after a metadata key. |
 | `->` isn't a ligature | Enable `"dlig"` in `font_options` and use a ligature font (e.g. JetBrains Mono). |
 | Every `.txt` file is highlighted now | PolyMark includes `txt` in `file_extensions:`. Remove that line from `polymark.sublime-syntax` to opt out. |
-| A fenced code block renders but the language isn't colored | The matching companion package isn't installed (e.g. `PolyMark-Language-Pack-Shell` for bash), or the language token isn't one it maps. A correctly typed block still renders in plain code-block styling. |
+| A fenced code block renders but the language isn't colored | The matching companion package isn't installed (e.g. `PolyMark-Language-Pack-Shell` for bash), or the language token isn't one it maps. A correctly typed block still renders in plain code-block styling. Colors for installed languages come automatically from the shared code-block palette. |
 | A fence line with extra text after the language token isn't highlighted | Correct — a fence is three backticks plus (optionally) a language token and nothing else on the line. That is the "correctly typed only" rule (E20). |
 
 ## Support
