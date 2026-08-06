@@ -77,7 +77,7 @@ the same ones used in the comments of both resource files.
 | Rule | Feature | Type this | You'll see |
 | ---- | ------- | --------- | ---------- |
 | A2a | Arrow ligature | `->` | default foreground (unassigned) |
-| A7 | List markers | `- item`, `+ item` | bold coral marker |
+| A7 | List markers | `- item`, `+ item` | bold coral `-` marker, bold cyanish `+` marker |
 | A8 | Date header | `2026-08-05` | school-bus yellow |
 | A9 | Duration range | `16-18-07 -> 16-18-12` | electric cyan |
 | E1 | Area/project | `@Inbox/@Work` | electric blue on rich black |

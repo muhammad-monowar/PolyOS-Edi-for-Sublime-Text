@@ -139,6 +139,14 @@
             "font_style": "bold"
         },
 
+        // A7. The '+' marker only (kept separate so it can differ from '-').
+        {
+            "name": "Polymark Plus Marker",
+            "scope": "punctuation.definition.marker.plus.polymark",
+            "foreground": "#75FAF8", // Color: Cyanish
+            "font_style": "bold"
+        },
+
         // A7. Capture 4 -- the text after the marker.
         {
             "name": "Polymark Marker Content",

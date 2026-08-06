@@ -59,7 +59,8 @@ Next: ship the build -> deploy to prod
 
 ### A7. List markers (+, -)
 
-Lines starting with `-` or `+`. The marker is a bold coral, the text follows.
+Lines starting with `-` or `+`. The `-` marker is bold coral, the `+` marker is
+bold cyanish (`#75FAF8`), the text follows.
 
 - plain bullet item
 + plain bullet item

@@ -73,6 +73,7 @@
 # Syntax             Scope                                     Color-scheme rule
 # ------------------- ----------------------------------------- ---------------------------------
 # A7 Markers         punctuation.definition.marker.polymark     "Polymark List/Marker Punctuation"
+#                    punctuation.definition.marker.plus.polymark "Polymark Plus Marker"
 #                    string.unquoted.marker-content.polymark    "Polymark Marker Content"
 #                    meta.marker-definition.polymark            "Polymark Marker Line Meta"
 # A8 Date header     entity.name.section.header.date            "Date Header"
@@ -259,11 +260,17 @@ contexts:
   # End of A2a
 
   # A7. Markers [Rule] (+, -) followed by text
-  # Generic line-start list markers. Deliberately late in the pipeline.
+  # Generic line-start list markers. Deliberately late in the pipeline. The '-'
+  # and '+' markers carry separate scopes so they can be colored differently.
   markers:
-    - match: '^([\t ]*)([\-+])(\s*)(.+)$'
+    - match: '^([\t ]*)(\-)(\s*)(.+)$'
       captures:
         2: punctuation.definition.marker.polymark
+        4: string.unquoted.marker-content.polymark
+      scope: meta.marker-definition.polymark
+    - match: '^([\t ]*)(\+)(\s*)(.+)$'
+      captures:
+        2: punctuation.definition.marker.plus.polymark
         4: string.unquoted.marker-content.polymark
       scope: meta.marker-definition.polymark
   # End of A7

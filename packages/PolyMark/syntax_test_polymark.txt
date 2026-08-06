@@ -49,3 +49,10 @@ val x = 1
 | <- markup.raw.block.polymark - entity.name.section.header.date
 ```
 | <- punctuation.definition.raw.code-fence.end.polymark
+
++ item
+| <- punctuation.definition.marker.plus.polymark
+- item
+| <- punctuation.definition.marker.polymark
+	+ tabbed item
+ | <- punctuation.definition.marker.plus.polymark
