@@ -127,6 +127,12 @@
 #                    constant.other.language-name.polymark      "Code Block Language Token (E20)"
 #                    markup.raw.block.polymark                  "Code Block Base (E20)"
 #                    markup.raw.block.content.polymark          "Code Block Content (E20)"
+# E21 Markdown table punctuation.definition.table.cell.polymark "Table Cell Pipe (E21)"
+#                    markup.table.header.polymark               "Table Header Row (E21)"
+#                    markup.table.separator.polymark            "Table Separator Row (E21)"
+#                    markup.table.row.polymark                  "Table Row Base (E21)"
+#                    markup.table.row.content.polymark          "Table Row Content (E21)"
+#                    markup.table.indent.polymark               "Table Indent (E21)"
 # A2a Arrow          keyword.operator.arrow.polymark            "Arrow Ligature (A2a)" (unassigned)
 #
 # Every scope emitted by this file now has a rule entry in the color scheme.
@@ -202,6 +208,14 @@ contexts:
 
     # E7. Blockquote (> String)
     - include: blockquote
+
+    # E21. Markdown tables (| a | b |) -- leading-pipe only.
+    # table-header first so a header row followed by a separator row is
+    # recognized; table-separator before table-row so separator rows are not
+    # swallowed by the generic row rule.
+    - include: table-header
+    - include: table-separator
+    - include: table-row
 
     # E16. Single-line code markers ($ String)
     - include: code-marker
@@ -365,6 +379,41 @@ contexts:
         3: markup.quote.content.markdown                    # The quoted content
       scope: markup.quote.markdown
   # End of E7
+
+  # E21. Markdown Table [Rule] (| a | b |) -- leading-pipe only. A table row
+  # must begin with a pipe on the same line; content between the outer pipes
+  # is matched as a single block, so inline rules (bold, email, ...) do not
+  # fire inside cells (same behavior as blockquotes).
+  table-header:
+    - match: '^([ \t]*)(\|)([^\n]*)(\|)[ \t]*$(?=\n[ \t]*\|[ \t]*:?-+:?[ \t]*(?:\|[ \t]*:?-+:?[ \t]*)*\|?[ \t]*$)'
+      captures:
+        1: markup.table.indent.polymark              # Leading indentation
+        2: punctuation.definition.table.cell.polymark # Leading pipe
+        3: markup.table.header.polymark               # Header cell text
+        4: punctuation.definition.table.cell.polymark # Trailing pipe
+      scope: markup.table.header.polymark
+  # End of E21 header
+
+  # E21. Separator row (| --- | :---: | --- |). Also covers a separator that
+  # follows no header (invalid but "correctly typed").
+  table-separator:
+    - match: '^([ \t]*)(\|)[ \t]*:?-+:?[ \t]*(?:\|[ \t]*:?-+:?[ \t]*)*\|?[ \t]*$'
+      captures:
+        1: markup.table.indent.polymark              # Leading indentation
+        2: punctuation.definition.table.cell.polymark # Leading pipe
+      scope: markup.table.separator.polymark
+  # End of E21 separator
+
+  # E21. Data row (| a | b |) -- any other well-formed leading-pipe row.
+  table-row:
+    - match: '^([ \t]*)(\|)([^\n]*)(\|)[ \t]*$'
+      captures:
+        1: markup.table.indent.polymark              # Leading indentation
+        2: punctuation.definition.table.cell.polymark # Leading pipe
+        3: markup.table.row.content.polymark          # Cell text
+        4: punctuation.definition.table.cell.polymark # Trailing pipe
+      scope: markup.table.row.polymark
+  # End of E21 row
 
   # E8. Strings [Rule]
   strings:

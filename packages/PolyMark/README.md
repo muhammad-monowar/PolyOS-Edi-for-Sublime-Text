@@ -54,6 +54,7 @@ No other configuration is required for the resources to work.
 | E18  | Filename with extension | `draft_2.docx` |
 | E19  | Inline code | `` `code` `` |
 | E20  | Fenced code block | ```` ```js … ``` ```` |
+| E21  | Markdown table | `| a | b |` + separator row |
 | A6a  | Keywords (extension point) | off by default |
 
 Fenced blocks get language colors from the standalone companion packages

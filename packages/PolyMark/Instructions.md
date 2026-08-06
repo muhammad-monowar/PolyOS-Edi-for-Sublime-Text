@@ -98,6 +98,7 @@ the same ones used in the comments of both resource files.
 | E16 | Code marker | `$ command` | electric cyan chip |
 | E17 | Task status | `- [/]`, `- [!]`, `- [?]`, `- [-]` | gray / red / yellow / dark gray |
 | E18 | Filename | `draft_2.docx` | ash gray |
+| E21 | Markdown table | `| a | b |` + separator row | sky-blue header, ash-gray separator, tropical-indigo pipes |
 | A6a | Keywords (extension point) | — | off by default |
 
 ## Customizing colors
@@ -112,8 +113,8 @@ rule carries its A#/E# label.
   entry. Entries marked `UNASSIGNED` have empty color values on purpose; fill
   in a hex color to style them. Currently unassigned: the A2a arrow, heading
   text and separators, to-do whitespace, blockquote internals, all string
-  parts, comment/email/code/filename meta scopes, and the bold/italic
-  delimiters.
+  parts, comment/email/code/filename meta scopes, the bold/italic
+  delimiters, and the table row base/content/indent scopes.
 - **Reserved heading variables** — `heading_punc` and `h1`–`h6` in the
   `variables` block are reserved for future per-depth heading coloring. Heading
   colors currently come from the "General Markdown Heading Line" rule.
@@ -137,6 +138,7 @@ every regex that is likely to need tweaking. Each change is local to that file.
 | Filename extensions | E18 | Extension length `[a-zA-Z]{2,5}` |
 | Inline code | E19 | The backtick delimiter `` ` ``; inline code must close on the same line |
 | Fenced code blocks | E20 | The ``` fence + language-token charset `[A-Za-z0-9_\-]*` in the `fenced-raw` rule |
+| Markdown tables | E21 | The `^([ \t]*)(\|)…` row patterns; a row must start and end with a pipe, and a header is a row followed by a separator row of `---` |
 | List markers | A7 | Leading characters `[\-+]` |
 
 ### Extension point (A6a)

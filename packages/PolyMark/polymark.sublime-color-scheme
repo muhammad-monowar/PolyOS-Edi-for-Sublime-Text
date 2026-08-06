@@ -54,7 +54,8 @@
 //   E11 italic, E12 custom tags, E13 timestamp, E14 email, E15 inline status,
 //   E16 code markers, E17 task statuses, E18 filenames, E19 inline code,
 //   E20 fenced code blocks (incl. the shared code-block palette that styles
-//   the standard scope families of any embedded language).
+//   the standard scope families of any embedded language), E21 markdown
+//   tables (leading-pipe only; header + separator rows).
 //
 // Note: `variables.heading_punc` and `h1`-`h6` are reserved for future heading
 // coloring and are currently unused -- heading colors come from the
@@ -892,6 +893,48 @@
             "font_style": "italic"
         },
         // End of E20
+
+        // E21. Markdown tables [Rule] (| a | b |) -- leading-pipe only.
+        {
+            "name": "Table Cell Pipe (E21)",
+            "scope": "punctuation.definition.table.cell.polymark",
+            "foreground": "#9d70ff", // Color: Tropical Indigo (echoes E6)
+            "font_style": ""
+        },
+        {
+            "name": "Table Header Row (E21)",
+            "scope": "markup.table.header.polymark",
+            "foreground": "#47D4FF", // Color: Vivid sky blue (echoes E2 headings)
+            "font_style": ""
+        },
+        {
+            "name": "Table Separator Row (E21)",
+            "scope": "markup.table.separator.polymark",
+            "foreground": "#94B3AE", // Color: Ash gray (echoes E9/E18)
+            "font_style": ""
+        },
+        {
+            "name": "Table Row Base (E21)",
+            "scope": "markup.table.row.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+        {
+            "name": "Table Row Content (E21)",
+            "scope": "markup.table.row.content.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+        {
+            "name": "Table Indent (E21)",
+            "scope": "markup.table.indent.polymark",
+            "foreground": "",
+            "background": "",
+            "font_style": ""
+        },
+        // End of E21
 
         // A6a. Keywords extension point -- styles the scope used by the syntax's
         // `keywords` context example. UNASSIGNED: set `foreground` to style.

@@ -44,6 +44,7 @@
 | E16  | Single-line code marker | `$ command` |
 | E17  | Task statuses | `- [/] text`, `- [-] text` |
 | E18  | Filename with extension | `draft_2.docx` |
+| E21  | Markdown table | `| a | b |` + separator row |
 | A6a  | Keywords (extension point) | off by default |
 
 /// A Series
@@ -273,6 +274,19 @@ packages `PolyMark-Language-Pack-Shell`, `PolyMark-Language-Pack-JavaScript`,
 `PolyMark-Language-Pack-Mermaid` (requires the community Mermaid package) and
 `PolyMark-Language-Pack-Argdown` (see `Instructions.md`). Without a companion,
 a correctly typed block still renders, just without language colors.
+
+### E21. Markdown table (| a | b |)
+
+Rows that start with a pipe and end with a pipe are table rows. A header row
+(the one directly above a separator row) is vivid sky blue, separator rows of
+`---` are ash gray, and the edge pipes of every row are tropical indigo.
+Tables must be "correctly typed": leading pipe, a cell or two, and a closing
+pipe — a line without a leading pipe is plain text.
+
+| Rule | Feature |
+| ---- | ------- |
+| A7   | List markers |
+| E21  | This table |
 
 ### A6a. Keywords — extension point (off by default)
 

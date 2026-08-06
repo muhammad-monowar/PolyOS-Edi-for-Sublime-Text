@@ -56,3 +56,24 @@ val x = 1
 | <- punctuation.definition.marker.polymark
 	+ tabbed item
  | <- punctuation.definition.marker.plus.polymark
+
+| Rule | Feature |
+| <- markup.table.header.polymark punctuation.definition.table.cell.polymark
+  | <- markup.table.header.polymark
+       | <- markup.table.header.polymark - punctuation.definition.table.cell.polymark
+                 | <- punctuation.definition.table.cell.polymark
+| ---- | ------- |
+| <- markup.table.separator.polymark punctuation.definition.table.cell.polymark
+       | <- markup.table.separator.polymark - punctuation.definition.table.cell.polymark
+| A7   | markers |
+| <- markup.table.row.polymark punctuation.definition.table.cell.polymark
+  | <- markup.table.row.content.polymark
+       | <- markup.table.row.content.polymark - punctuation.definition.table.cell.polymark
+                 | <- punctuation.definition.table.cell.polymark
+	| indent | row |
+| <- markup.table.row.polymark markup.table.indent.polymark
+ | <- punctuation.definition.table.cell.polymark
+plain text | not a table
+| <- - markup.table.row.polymark
+| just a row |
+| <- markup.table.row.polymark - markup.table.header.polymark
