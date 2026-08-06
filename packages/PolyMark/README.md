@@ -1,6 +1,6 @@
 # PolyMark
 
-> **v.3.0.2** — Updated 2026-08-05
+> **v.3.0.2** — Updated 2026-08-06
 
 A custom syntax and color scheme for Sublime Text, compatible with PolyOS.
 Highlight dates, to-dos, tags, statuses, filenames and more in plain `.md`,

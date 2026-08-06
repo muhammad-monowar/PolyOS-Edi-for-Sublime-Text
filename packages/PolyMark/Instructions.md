@@ -1,6 +1,6 @@
 ---
 Author: Muhammad Mustafa Monowar
-Updated: 2026-08-05
+Updated: 2026-08-06
 Target: Sublime-Text
 Version: v.3.0.2
 ---
