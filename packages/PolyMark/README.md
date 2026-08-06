@@ -57,8 +57,10 @@ No other configuration is required for the resources to work.
 | A6a  | Keywords (extension point) | off by default |
 
 Fenced blocks get language colors from the standalone companion packages
-`PolyMark-Language-Pack-Shell` (bash/sh) and `PolyMark-Language-Pack-JavaScript`
-(js) — install them next to `PolyMark` to activate. See `Instructions.md`.
+`PolyMark-Language-Pack-Shell` (bash/sh), `PolyMark-Language-Pack-JavaScript`
+(js), `PolyMark-Language-Pack-Mermaid` (mermaid — needs the community Mermaid
+package), and `PolyMark-Language-Pack-Argdown` (argdown) — install them next to
+`PolyMark` to activate. See `Instructions.md`.
 
 Every rule is rendered live in `Examples.md` — open it in Sublime Text with
 PolyMark active to see the full reference.

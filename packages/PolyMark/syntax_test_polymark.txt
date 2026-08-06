@@ -41,3 +41,11 @@ val x = 1
 | <- markup.raw.block.polymark - entity.name.section.header.date
 ```
 | <- punctuation.definition.raw.code-fence.end.polymark
+
+```argdown
+| <- punctuation.definition.raw.code-fence.begin.polymark
+   | <- constant.other.language-name.polymark
+[S]: a statement
+| <- markup.raw.block.polymark - entity.name.section.header.date
+```
+| <- punctuation.definition.raw.code-fence.end.polymark

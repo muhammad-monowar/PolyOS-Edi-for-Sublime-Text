@@ -158,14 +158,20 @@ rule in the color scheme.
 Fenced code blocks (E20) are language-agnostic in PolyMark. Language-specific
 colors inside a block come from **companion packages** that ship a hidden
 syntax whose scope is `source.embedded.polymark.<lang>` and that embeds
-Sublime Text's built-in highlighting for the language.
+Sublime Text highlighting for the language (built-in, community, or bundled).
 
 Shipped companions:
 
 - `PolyMark-Language-Pack-Shell` — activates `bash`, `sh`, `shell`, `zsh`,
-  `console` fences (embeds `source.shell`).
+  `console` fences (embeds built-in `source.shell`).
 - `PolyMark-Language-Pack-JavaScript` — activates `js`, `javascript`, `node`
-  fences (embeds `source.js`).
+  fences (embeds built-in `source.js`).
+- `PolyMark-Language-Pack-Mermaid` — activates `mermaid`, `mmd` fences (embeds
+  `source.mermaid` from the community
+  [Mermaid](https://packagecontrol.io/packages/Mermaid) package — install it
+  from Package Control).
+- `PolyMark-Language-Pack-Argdown` — activates `argdown`, `argdown-map`, `ad`
+  fences (embeds the bundled `source.argdown` grammar).
 
 Each is a normal package folder next to `PolyMark`; install and restart.
 PolyMark already references their scopes in the `fenced-language-extensions`

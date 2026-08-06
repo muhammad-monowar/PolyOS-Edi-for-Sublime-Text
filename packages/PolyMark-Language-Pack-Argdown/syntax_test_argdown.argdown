@@ -1,0 +1,51 @@
+| SYNTAX TEST "Packages/PolyMark-Language-Pack-Argdown/argdown.sublime-syntax"
+
+# Heading
+| <- markup.heading.argdown markup.heading.marker.argdown
+
+[S]: text
+| <- punctuation.definition.title.begin.argdown
+ | <- entity.name.statement.argdown
+   | <- punctuation.definition.title.end.argdown
+
+<A>: text
+| <- punctuation.definition.title.begin.argdown
+ | <- entity.name.argument.argdown
+   | <- punctuation.definition.title.end.argdown
+
+(1) first premise
+| <- constant.numeric.pcs.argdown
+-----
+| <- keyword.other.inference.argdown
+
+  - <counter>: an attack
+  | <- keyword.control.relation.argdown
+     | <- entity.name.argument.argdown
+
+@[S]
+| <- variable.mention.statement.argdown
+
+// a comment
+| <- comment.line.double-slash.argdown
+
+#tag
+| <- constant.other.tag.argdown
+
+"quoted"
+| <- punctuation.definition.string.begin.argdown
+ | <- string.quoted.double.argdown
+
+`code`
+| <- punctuation.definition.raw.begin.argdown
+ | <- markup.raw.inline.argdown
+
+**bold**
+| <- punctuation.definition.bold.argdown
+  | <- markup.bold.argdown
+
+===
+| <- keyword.other.frontmatter.argdown
+title: my reconstruction
+| <- meta.block.frontmatter.argdown
+===
+| <- keyword.other.frontmatter.argdown

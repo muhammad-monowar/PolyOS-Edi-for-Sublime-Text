@@ -1,0 +1,39 @@
+%YAML 1.2
+---
+# -----------------------------------------------------------------------------
+# PolyMark-Language-Pack-Mermaid -- Fenced Mermaid highlighting for PolyMark
+# -----------------------------------------------------------------------------
+# This hidden syntax is not meant to be selected manually. PolyMark's
+# `fenced-language-extensions` context includes it by scope, so any fenced code
+# block tagged `mermaid` or `mmd` is embedded as `source.mermaid` -- the syntax
+# shipped by the community "Mermaid" package (Package Control).
+#
+# Dependency: this companion embeds the "Mermaid" package's syntax by scope. If
+# that package is not installed, a correctly typed mermaid block still renders
+# as a plain code block (PolyMark's raw fallback).
+#
+# Scopes emitted here are styled by polymark.sublime-color-scheme (E20 shared
+# code-block palette). No PolyMark rules seep into the block and the block's
+# rules do not seep back out.
+#
+# License: MIT (see `LICENSE`).
+# Setup  : See `Instructions.md` in the PolyMark package.
+
+name: PolyMark Fenced Mermaid
+scope: source.embedded.polymark.mermaid
+hidden: true
+
+contexts:
+  main:
+    # A correctly typed opening fence: three backticks, a mermaid language
+    # token and nothing else on the line. The closing fence (three backticks
+    # alone) ends the embed no matter how nested the mermaid content is.
+    - match: '^([ \t]*)(```)[ \t]*(mermaid|mmd)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+        3: constant.other.language-name.polymark
+      embed: scope:source.mermaid
+      embed_scope: markup.raw.block.polymark
+      escape: '^([ \t]*)(```)[ \t]*$'
+      escape_captures:
+        2: punctuation.definition.raw.code-fence.end.polymark

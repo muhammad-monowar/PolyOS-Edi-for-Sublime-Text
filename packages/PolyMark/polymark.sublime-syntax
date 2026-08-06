@@ -576,6 +576,8 @@ contexts:
   fenced-language-extensions:
     - include: "scope:source.embedded.polymark.bash"
     - include: "scope:source.embedded.polymark.js"
+    - include: "scope:source.embedded.polymark.mermaid"
+    - include: "scope:source.embedded.polymark.argdown"
     # - include: "scope:source.embedded.polymark.python"
     # - include: "scope:source.embedded.polymark.rust"
 

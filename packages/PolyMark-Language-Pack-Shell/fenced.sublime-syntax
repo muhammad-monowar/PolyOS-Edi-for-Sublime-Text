@@ -8,9 +8,9 @@
 # block tagged `bash`, `sh`, `shell`, `zsh` or `console` is embedded as
 # `source.shell` (Sublime Text's built-in shell highlighting).
 #
-# Scopes emitted here are styled by polymark.sublime-color-scheme
-# (E20 + "PolyMark Shell ..." rules). No PolyMark rules seep into the block and
-# the block's rules do not seep back out.
+# Scopes emitted here are styled by polymark.sublime-color-scheme (the E20
+# shared code-block palette). No PolyMark rules seep into the block and the
+# block's rules do not seep back out.
 #
 # License: MIT (see `LICENSE`).
 # Setup  : See `Instructions.md` in the PolyMark package.

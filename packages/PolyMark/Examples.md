@@ -249,14 +249,29 @@ const greet = (name) => `Hello, ${name}!`;
 console.log(greet("world"));
 ```
 
+```mermaid
+graph TB
+    A[Start] --> B{Ready?}
+    B -->|Yes| C[Go]
+    B -->|No| D[Wait]
+```
+
+```argdown
+[S]: Argdown maps arguments as you type
+  + <Support>: plain text, clear syntax
+  - <Niche>: small ecosystem
+```
+
 ```unknownlang
 anything -- no companion installed: rendered as a plain code block
 ```
 
-Language-specific colors inside ``` ```bash ``` ``` and ``` ```js ``` ``` come
-from the companion packages `PolyMark-Language-Pack-Shell` and
-`PolyMark-Language-Pack-JavaScript` (see `Instructions.md`). Without a
-companion, a correctly typed block still renders, just without language colors.
+Language-specific colors inside ``` ```bash ``` ```, ``` ```js ``` ```,
+``` ```mermaid ``` ``` and ``` ```argdown ``` ``` come from the companion
+packages `PolyMark-Language-Pack-Shell`, `PolyMark-Language-Pack-JavaScript`,
+`PolyMark-Language-Pack-Mermaid` (requires the community Mermaid package) and
+`PolyMark-Language-Pack-Argdown` (see `Instructions.md`). Without a companion,
+a correctly typed block still renders, just without language colors.
 
 ### A6a. Keywords — extension point (off by default)
 

@@ -1,0 +1,171 @@
+%YAML 1.2
+---
+# -----------------------------------------------------------------------------
+# PolyMark-Language-Pack-Argdown -- Argdown highlighting for PolyMark
+# -----------------------------------------------------------------------------
+# A minimal Argdown grammar (https://argdown.org) covering the core constructs:
+# headings, statement/argument definitions, mentions, relation lists, premise-
+# conclusion structures, frontmatter, tags, comments, strings and emphasis.
+#
+# It is embedded by this package's `fenced.sublime-syntax` for PolyMark code
+# blocks tagged `argdown`, and is also selectable for `.argdown` / `.ad` files.
+#
+# Scopes use standard families (comment, string, keyword, constant, entity.name,
+# markup.*) so polymark.sublime-color-scheme's shared code-block palette colors
+# them inside fenced blocks.
+#
+# License: MIT (see `LICENSE`).
+# Setup  : See `Instructions.md` in the PolyMark package.
+
+name: Argdown
+file_extensions:
+  - argdown
+  - ad
+scope: source.argdown
+
+contexts:
+  main:
+    # Frontmatter (``` === ... === ```).
+    - match: '^[ \t]*={3,}[ \t]*$'
+      scope: keyword.other.frontmatter.argdown
+      push: frontmatter
+
+    # Headings.
+    - match: '^(#{1,6})(?=[ \t])'
+      scope: markup.heading.argdown
+      captures:
+        1: markup.heading.marker.argdown
+
+    # Inference separator of a premise-conclusion structure.
+    - match: '^[ \t]*--+[ \t]*$'
+      scope: keyword.other.inference.argdown
+
+    # Statement definition: [title]: description
+    - match: '^(\[)([^\[\]\n]+)(\]:)'
+      captures:
+        1: punctuation.definition.title.begin.argdown
+        2: entity.name.statement.argdown
+        3: punctuation.definition.title.end.argdown
+
+    # Argument definition: <title>: description
+    - match: '^(<)([^<>\n]+)(>:)'
+      captures:
+        1: punctuation.definition.title.begin.argdown
+        2: entity.name.argument.argdown
+        3: punctuation.definition.title.end.argdown
+
+    # Relation-list bullets: support/attack/undercut/contradiction.
+    - match: '^([ \t]*)(<\+|\+>|\<-|\->|\><|\<_|_\>|\+|-)[ \t]+'
+      captures:
+        2: keyword.control.relation.argdown
+
+    # Premise-conclusion structure indices: (1), (2), ...
+    - match: '^([ \t]*)(\(\d+\))[ \t]+'
+      captures:
+        2: constant.numeric.pcs.argdown
+
+    # Mentions: @[statement] and @<argument>.
+    - match: '@(\[)[^\[\]\n]+(\])'
+      scope: variable.mention.statement.argdown
+      captures:
+        1: punctuation.definition.mention.begin.argdown
+        2: punctuation.definition.mention.end.argdown
+    - match: '@(<)[^<>\n]+(>)'
+      scope: variable.mention.argument.argdown
+      captures:
+        1: punctuation.definition.mention.begin.argdown
+        2: punctuation.definition.mention.end.argdown
+
+    # References: [statement] and <argument>.
+    - match: '(\[)[^\[\]\n]+(\])'
+      scope: entity.name.statement.argdown
+      captures:
+        1: punctuation.definition.title.begin.argdown
+        2: punctuation.definition.title.end.argdown
+    - match: '(<)[^<>\n]+(>)'
+      scope: entity.name.argument.argdown
+      captures:
+        1: punctuation.definition.title.begin.argdown
+        2: punctuation.definition.title.end.argdown
+
+    # Comments.
+    - match: '/\*'
+      scope: punctuation.definition.comment.argdown
+      push: block-comment
+    - match: '//[^\n]*'
+      scope: comment.line.double-slash.argdown
+
+    # Strings.
+    - match: '"'
+      scope: punctuation.definition.string.begin.argdown
+      push: string-double
+    - match: "'"
+      scope: punctuation.definition.string.begin.argdown
+      push: string-single
+
+    # Emphasis: **bold** before *italic*.
+    - match: '\*\*'
+      scope: punctuation.definition.bold.argdown
+      push: bold
+    - match: '\*'
+      scope: punctuation.definition.italic.argdown
+      push: italic
+
+    # Escaped characters.
+    - match: '\\.'
+      scope: constant.character.escape.argdown
+
+    # Hashtags (#tag).
+    - match: '#[a-zA-Z][\w-]*'
+      scope: constant.other.tag.argdown
+
+    # Inline code (`code`).
+    - match: '`'
+      scope: punctuation.definition.raw.begin.argdown
+      push: inline-code
+
+  frontmatter:
+    - meta_scope: meta.block.frontmatter.argdown
+    - match: '^[ \t]*={3,}[ \t]*$'
+      scope: keyword.other.frontmatter.argdown
+      pop: true
+
+  block-comment:
+    - meta_scope: comment.block.argdown
+    - match: '\*/'
+      scope: punctuation.definition.comment.argdown
+      pop: true
+
+  string-double:
+    - meta_scope: string.quoted.double.argdown
+    - match: '\\\\.'
+      scope: constant.character.escape.argdown
+    - match: '"'
+      scope: punctuation.definition.string.end.argdown
+      pop: true
+
+  string-single:
+    - meta_scope: string.quoted.single.argdown
+    - match: '\\\\.'
+      scope: constant.character.escape.argdown
+    - match: "'"
+      scope: punctuation.definition.string.end.argdown
+      pop: true
+
+  bold:
+    - meta_scope: markup.bold.argdown
+    - match: '\*\*'
+      scope: punctuation.definition.bold.argdown
+      pop: true
+
+  italic:
+    - meta_scope: markup.italic.argdown
+    - match: '\*'
+      scope: punctuation.definition.italic.argdown
+      pop: true
+
+  inline-code:
+    - meta_scope: markup.raw.inline.argdown
+    - match: '`'
+      scope: punctuation.definition.raw.end.argdown
+      pop: true

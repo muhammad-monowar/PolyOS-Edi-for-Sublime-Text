@@ -865,6 +865,24 @@
             "foreground": "#FFB86C", // Color: Orangish
             "font_style": ""
         },
+        {
+            "name": "Code Block Name",
+            "scope": "markup.raw.block.polymark entity.name",
+            "foreground": "#FFB86C", // Color: Orangish
+            "font_style": ""
+        },
+        {
+            "name": "Code Block Bold",
+            "scope": "markup.raw.block.polymark markup.bold",
+            "foreground": "#FF79C6", // Color: Pinkish
+            "font_style": "bold"
+        },
+        {
+            "name": "Code Block Italic",
+            "scope": "markup.raw.block.polymark markup.italic",
+            "foreground": "#FF79C6", // Color: Pinkish
+            "font_style": "italic"
+        },
         // End of E20
 
         // A6a. Keywords extension point -- styles the scope used by the syntax's
