@@ -1,0 +1,514 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+
+# -----------------------------------------------------------------------------
+# PolyMark -- Literate Syntax Definition
+# -----------------------------------------------------------------------------
+# Author : Muhammad Mustafa Monowar
+# Updated: 2026-08-05
+# Target : Sublime-Text
+# Version: v.3.0.2
+# -----------------------------------------------------------------------------
+#
+# PolyMark is a Color Scheme and Syntax Highlighting rule set for Sublime Text,
+# part of the PolyOS ecosystem.
+# For more information visit: https://thepolymodframework.carrd.co/
+#
+# This syntax file only CLASSIFIES text into scopes; the colors come from the
+# companion `polymark.sublime-color-scheme`. Rules are labelled A#/E# to match
+# `Examples.md`, the feature-by-feature verification document.
+#
+# License: MIT (see `LICENSE`).
+# Setup  : See `Instructions.md` and the package `README.md`.
+
+# -----
+# 1. PARAMETERS (customization guide)
+# -----
+# The regexes below are the parts most likely to need customizing. Every change
+# is local to this file.
+#
+# file_extensions : extensions that auto-select PolyMark (.md, .txt, .pm).
+#                   Remove the "txt" line if you do not want PolyMark to be
+#                   the default syntax for plain-text files.
+#
+# Custom tag E12  : the tag-name charset is `[a-z]+`. To allow digits/uppercase,
+#                   update BOTH E12 rules ('<[a-z]+>' and '(</)([a-z]+)(>)').
+#
+# Date/numbering  : E13 timestamp   `\b\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}\b`
+#                   A8 date header  `\b\d{4}-\d{2}-\d{2}\b`
+#                   A9 duration     `\b\d{2}-\d{2}-\d{2}\s*->\s*\d{2}-\d{2}-\d{2}\b`
+#                   Keep E13 before A8 (see main) so timestamps are not split.
+#
+# Email E14       : TLD length `\w{2,}`; local/domain charset `[\w\.\-]+`.
+#
+# Filename E18    : extension length `[a-zA-Z]{2,5}` -- widen/narrow the brace
+#                   range to change which `.ext` suffixes are detected.
+#
+# Markers A7      : leading list characters `[\-+]` (hyphen and plus).
+#
+# Colors          : this file emits scopes only. All colors live in
+#                   `polymark.sublime-color-scheme` (mapping below).
+
+# -----
+# 2. SCOPE -> COLOR SCHEME MAPPING
+# -----
+# "Rule" = an entry in `polymark.sublime-color-scheme`. Every scope emitted by
+# this file has a rule entry; entries marked "UNASSIGNED" carry empty color
+# values and fall back to the scheme's global foreground until assigned.
+#
+# Syntax             Scope                                     Color-scheme rule
+# ------------------- ----------------------------------------- ---------------------------------
+# A7 Markers         punctuation.definition.marker.polymark     "Polymark List/Marker Punctuation"
+#                    string.unquoted.marker-content.polymark    "Polymark Marker Content"
+#                    meta.marker-definition.polymark            "Polymark Marker Line Meta"
+# A8 Date header     entity.name.section.header.date            "Date Header"
+# A9 Duration        meta.date-range.time.span.custom           "Custom Date/Time Range Highlight"
+# E1 Area/Project    entity.name.tag.area.polymark              "Area Tag Symbol"
+#                    entity.name.area.polymark                  "Area Name"
+#                    punctuation.separator.polymark             "Area/Project Separator"
+#                    entity.name.tag.project.polymark           "Project Tag Symbol"
+#                    entity.name.project.polymark               "Project Name"
+# E2 Headings        markup.heading.markdown                    "General Markdown Heading Line"
+#                    punctuation.definition.heading.markdown    "Markdown Heading Punctuation"
+# E3/E4 To-do        markup.list.task.incomplete.markdown       "Task Incomplete Box (Dark)"
+#                    markup.list.task.complete.markdown         "Task Complete Box (Dark)"
+#                    punctuation.definition.list.begin.markdown "Task Bullet (Dark)"
+# E5 Metadata        meta.tag-definition.custom                 "Metadata Definition Line Background"
+#                    string.unquoted.tag-name.custom            "Metadata InnerString (Key)"
+#                    punctuation.definition.tag.begin.custom,  "Metadata Punctuation Separators"
+#                    punctuation.separator.key-value.custom
+# E6 Horizontal      meta.separator.document.custom             "Document Separator (---)"
+# E7 Blockquote      markup.quote.markdown                      "General Markdown Blockquote"
+# E9 Comments        punctuation.definition.comment.polymark    "Polymark Comment Punctuation (//)"
+#                    comment.line.double-slash.content.polymark "Polymark Comment Content"
+# E10 Bold           markup.bold.content.polymark               "Polymark Bold Content"
+# E11 Italic         markup.italic.content.polymark             "Polymark Italic Content"
+# E12 Custom tag     entity.name.tag.polymark                   "Custom Tag Name"
+#                    punctuation.definition.tag.begin.polymark, "Custom Tag Punctuation"
+#                    punctuation.definition.tag.end.polymark
+#                    meta.custom-tag.content.polymark           "Custom Tag Content (Meta Scope)"
+# E13 Timestamp      constant.numeric.timestamp.polymark        "Date-time-stamp (YYYY-MM-DD-HH-MM-SS)"
+# E14 Email          constant.character.user-name.polymark      "Polymark Email - User Name"
+#                    constant.character.domain.polymark         "Polymark Email - Domain Name"
+#                    punctuation.definition.email.at.polymark   "Polymark Email - At Symbol"
+# E15 Inline status  markup.status.ind-question.polymark        "Status Marker [?]"
+#                    markup.status.ind-alert.polymark           "Status Marker [!]"
+# E16 Code markers   punctuation.definition.dollar.polymark     "Code Marker Dollar Symbol"
+#                    punctuation.separator.dollar.polymark      "Polymark Dollar Separator (Space)"
+#                    string.unquoted.dollar-line.polymark       "Code Marker String Content"
+# E17 Task status    markup.status.in-progress.polymark         "Status Marker [/]"
+#                    markup.status.alert.polymark               "Status Marker [!]"
+#                    markup.status.question.polymark            "Status Marker [?]"
+#                    markup.status.abandoned.polymark           "Status Marker [-]"
+#                    markup.status.abandoned.content.polymark   "Status Marker [-] Abandoned Content"
+# E18 Filename       entity.name.filename.polymark              "Filename"
+#                    entity.name.extension.polymark             "File Extension"
+# A2a Arrow          keyword.operator.arrow.polymark            "Arrow Ligature (A2a)" (unassigned)
+#
+# Every scope emitted by this file now has a rule entry in the color scheme.
+# Entries marked "UNASSIGNED" keep empty foreground/background/font_style as
+# placeholders -- fill in a hex color to style the scope. The dynamic heading
+# scope is covered by "Heading Text per Depth (E2)" via a `*` wildcard.
+
+# -----
+# BODY
+# -----
+
+# Beginning of File Extensions
+file_extensions:
+  - md  # .md, .txt or .pm enables PolyMark
+  - txt
+  - pm
+scope: text.polymark
+
+# Beginning of Contexts
+contexts:
+
+  # The prototype context is prepended to all contexts except those setting
+  # meta_include_prototype: false (see `inside_string`). This is why comments
+  # (E9) are recognized inside almost every construct.
+  prototype:
+    - include: comments
+
+  # ---------------------------------------------------------------------------
+  # A. Main [Rule] -- the priority pipeline
+  # ---------------------------------------------------------------------------
+  # The include order is significant. Sublime matches, at each position, the
+  # first rule that applies; a match further LEFT on the line always beats a
+  # match further right. Each entry documents the invariant it depends on.
+  main:
+
+    # E13. Date-time-stamp (YYYY-MM-DD-HH-MM-SS)
+    # MUST precede Date Header (A8): A8's pattern is a substring of a full
+    # timestamp, so A8 would swallow its first 10 characters if it ran first.
+    - include: date-time-stamp
+
+    # E14. Email Address Pattern (name@provider.com)
+    # MUST precede Filename (E18): E18 would otherwise absorb the whole address
+    # as a "filename" (e.g. hasan@gmail.com).
+    - include: email
+
+    # E17. Project-management task statuses (- [/], - [!], - [?], - [-])
+    # MUST precede the generic Markers rule (A7), which would otherwise render
+    # these lines as plain list items.
+    - include: task-status
+
+    # E3 + E4. To-do list items (- [ ], - [x])
+    # MUST precede the generic Markers rule (A7), for the same reason as E17.
+    - include: task-todo
+
+    # E15. Inline status markers ([?], [!])
+    # MUST precede Metadata (E5): on input like "[?]:" both match at the same
+    # position and the inline marker is the intended reading.
+    - include: status-marker
+
+    # E5. Metadata Definition ([Key]:)
+    - include: metadata
+
+    # E1. Area/Project hierarchy (@Area/@Project)
+    - include: area-slash-project
+
+    # E2. Markdown-style headings (H1 through H6)
+    - include: heading
+
+    # E6. Horizontal rule / document separator (---)
+    # MUST precede the generic Markers rule (A7): on "---" both match at
+    # position 0 and the separator is the intended reading.
+    - include: horizontal-rule
+
+    # E7. Blockquote (> String)
+    - include: blockquote
+
+    # E16. Single-line code markers ($ String)
+    - include: code-marker
+
+    # A2a. Arrow ligature (->)
+    - include: arrow
+
+    # E10. Bold (**content**)
+    # MUST precede Italic (E11): "**" also begins with "*" and bold must win.
+    - include: bold
+
+    # E11. Italic (*content*)
+    - include: italic
+
+    # E12. Custom Tagging (<tag> content </tag>)
+    - include: custom-tag
+
+    # A6a. General Includes (KEYWORDS, STRINGS, etc.)
+    - include: keywords
+    - include: strings
+
+    # E18. Filename with Extension (filename.ext)
+    # MUST precede Date Header (A8) so "2025-12-18.pdf" stays a filename.
+    - include: filename-extension
+
+    # A7. Generic markers (+, -) followed by text.
+    # Intentional position: the last line-start list rule, so the specific
+    # rules above (E3/E4/E6/E17) always take priority.
+    - include: markers
+
+    # A8. Date Header (####-##-##)
+    # MUST follow Timestamp (E13) and Filename (E18).
+    - include: date-header
+
+    # A9. Duration Range (##-##-## -> ##-##-##)
+    - include: duration-range
+
+  # End of A. Main [Rule]
+
+  # ---------------------------------------------------------------------------
+  # Section A rules (helpers referenced by main)
+  # ---------------------------------------------------------------------------
+
+  # A2a. Arrow ligature [Rule] (->)
+  arrow:
+    - match: '->'
+      scope: keyword.operator.arrow.polymark
+  # End of A2a
+
+  # A7. Markers [Rule] (+, -) followed by text
+  # Generic line-start list markers. Deliberately late in the pipeline.
+  markers:
+    - match: '^([\t ]*)([\-+])(\s*)(.+)$'
+      captures:
+        2: punctuation.definition.marker.polymark
+        4: string.unquoted.marker-content.polymark
+      scope: meta.marker-definition.polymark
+  # End of A7
+
+  # A8. Date Header [Rule] (####-##-##)
+  date-header:
+    - match: \b\d{4}-\d{2}-\d{2}\b
+      scope: entity.name.section.header.date
+  # End of A8
+
+  # A9. Duration Range [Rule] (##-##-## -> ##-##-##)
+  duration-range:
+    - match: \b\d{2}-\d{2}-\d{2}\s*->\s*\d{2}-\d{2}-\d{2}\b
+      scope: meta.date-range.time.span.custom
+  # End of A9
+
+  # ---------------------------------------------------------------------------
+  # Section E rules (extensions, labelled to match Examples.md)
+  # ---------------------------------------------------------------------------
+
+  # E1. Area/Project [Rule] (@Area/@Project)
+  # Matches "@Area/@Project", nested sub-paths (@Area/@Sub/@Project) and names
+  # containing parentheses. Styled by the E1 rules in the color scheme.
+  area-slash-project:
+    - match: '(@)([^/\n\r]+)(/)(@)([^/\n\r]+(?:/[^/\n\r]+)*)'
+      name: meta.area-project-hierarchy.polymark
+      captures:
+        1: entity.name.tag.area.polymark        # The '@' before Area
+        2: entity.name.area.polymark            # The top-level Area
+        3: punctuation.separator.polymark       # The '/' separator
+        4: entity.name.tag.project.polymark     # The '@' before Project
+        5: entity.name.project.polymark         # The Project/Sub-Areas
+  # End of E1
+
+  # E2. Markdown-style headings [Rule] (H1 through H6)
+  # Capture 3 uses $1 so the heading text is scoped per depth
+  # (entity.name.section.heading.$1.markdown).
+  heading:
+    - match: ^\s*(#+)(\s+)(.+)$
+      captures:
+        1: punctuation.definition.heading.markdown  # The '#' symbols
+        2: meta.separator.heading.markdown          # The space after the hashes
+        3: entity.name.section.heading.$1.markdown  # Text; $1 = number of hashes
+      scope: markup.heading.markdown
+  # End of E2
+
+  # E3 + E4. To-do list items [Rule] (e.g., "- [ ] Task", "- [x] Task")
+  task-todo:
+    # E3. Incomplete to-do list items (e.g., "- [ ] Task")
+    - match: ^([\t ]*)(-)(\s+)(\[ \])(\s+)
+      captures:
+        1: punctuation.whitespace.leading.list.markdown # Indentation tabs/spaces
+        2: punctuation.definition.list.begin.markdown  # The hyphen/bullet
+        3: meta.separator.list.markdown                # Space after the hyphen
+        4: markup.list.task.incomplete.markdown        # The "[ ]" box
+        5: meta.separator.list.markdown                # Space before the task text
+      scope: markup.list.unnumbered.task.markdown
+
+    # E4. Completed to-do list items (e.g., "- [x] Task")
+    - match: ^([\t ]*)(-)(\s+)(\[x\])(\s+)
+      captures:
+        1: punctuation.whitespace.leading.list.markdown
+        2: punctuation.definition.list.begin.markdown
+        3: meta.separator.list.markdown
+        4: markup.list.task.complete.markdown         # "complete" vs "incomplete"
+        5: meta.separator.list.markdown
+      scope: markup.list.unnumbered.task.markdown
+  # End of E3 + E4
+
+  # E5. Metadata Definition [Rule] ([InnerString]:)
+  metadata:
+    - match: '(\[)([^\]]+)(\]:)'
+      scope: meta.tag-definition.custom
+      captures:
+        1: punctuation.definition.tag.begin.custom  # [
+        2: string.unquoted.tag-name.custom          # InnerString (the key)
+        3: punctuation.separator.key-value.custom   # ]:
+  # End of E5
+
+  # E6. Horizontal rule / document separator [Rule] (---)
+  horizontal-rule:
+    - match: ^---$
+      scope: meta.separator.document.custom
+  # End of E6
+
+  # E7. Blockquote [Rule] (> String)
+  blockquote:
+    - match: ^\s*(>+)(\s*)(.+)$
+      captures:
+        1: punctuation.definition.blockquote.begin.markdown # The '>' symbol
+        2: meta.separator.blockquote.markdown               # The space after '>'
+        3: markup.quote.content.markdown                    # The quoted content
+      scope: markup.quote.markdown
+  # End of E7
+
+  # E8. Strings [Rule]
+  strings:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character.
+    - match: '"'
+      scope: punctuation.definition.string.begin.polymark
+      push: inside_string
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.polymark
+    - match: '\\.'
+      scope: constant.character.escape.polymark
+    - match: '"'
+      scope: punctuation.definition.string.end.polymark
+      pop: true
+  # End of E8
+
+  # E9. Comments [Rule] (/// Comment)
+  comments:
+    - match: '///'
+      scope: punctuation.definition.comment.polymark # The '///' characters
+      push:
+        - meta_scope: comment.line.double-slash.polymark # Scope for the whole line
+        - match: '.*' # Match any characters (incl. spaces) to end of line
+          scope: comment.line.double-slash.content.polymark # The 'String' content
+
+        # After the content is matched, look for the end of the line
+        - match: $\n?
+          pop: true
+  # End of E9
+
+  # E10. Bold [Rule] (**Bold Item**)
+  bold:
+    - match: \*\*
+      scope: punctuation.definition.bold.begin.polymark
+      push: bold-content
+
+  bold-content:
+    - meta_scope: markup.bold.polymark
+
+    # E10.1. Check for the closing delimiter first
+    - match: \*\*
+      scope: punctuation.definition.bold.end.polymark
+      pop: true
+
+    # E10.2. Match everything else character-by-character
+    # (safer and more performant than (.*?))
+    - match: .
+      scope: markup.bold.content.polymark
+  # End of E10
+
+  # E11. Italics [Rule] (*Italicized Item*)
+  italic:
+    - match: \*
+      scope: punctuation.definition.italic.begin.polymark
+      push: italic-content
+
+  italic-content:
+    - meta_scope: markup.italic.polymark
+
+    # E11.1. Check for the closing delimiter first
+    - match: \*
+      scope: punctuation.definition.italic.end.polymark
+      pop: true
+
+    # E11.2. Match everything else character-by-character
+    - match: .
+      scope: markup.italic.content.polymark
+  # End of E11
+
+  # E12. Custom Tagging [Rule] (<tag> Content </tag>)
+  custom-tag:
+    - match: '<[a-z]+>'
+      scope: entity.name.tag.polymark
+      push: custom-tag-content
+
+  custom-tag-content:
+    # This meta_scope applies to the entire block of content inside the tags.
+    - meta_scope: meta.custom-tag.content.polymark
+
+    # E12.1. Closing Tag (crucial for exiting the context)
+    # Must come first to take precedence over the included rules.
+    - match: '(</)([a-z]+)(>)'
+      captures:
+        1: punctuation.definition.tag.end.polymark  # </ uses 'end' punctuation
+        2: entity.name.tag.polymark
+        3: punctuation.definition.tag.end.polymark
+      pop: true
+
+    # E12.2. Include Main Context
+    # Re-applies all main Polymark rules (headers, lists, bold, etc.) inside
+    # the tag, enabling multiline content and nested syntax.
+    - include: main
+  # End of E12
+
+  # E13. Date-time-stamp [Rule] (YYYY-MM-DD-HH-MM-SS)
+  date-time-stamp:
+    - match: '\b\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}\b'
+      scope: constant.numeric.timestamp.polymark
+  # End of E13
+
+  # E14. Email Address Pattern [Rule] (name@provider.com)
+  email:
+    - match: '(\b[\w\.\-]+)(@)([\w\.\-]+\.\w{2,})'
+      name: string.quoted.email.polymark
+      captures:
+        1: constant.character.user-name.polymark  # username (before @)
+        2: punctuation.definition.email.at.polymark  # the @ symbol
+        3: constant.character.domain.polymark     # domain (after @)
+  # End of E14
+
+  # E15. Inline Status Markers [Rule] ([?], [!])
+  status-marker:
+    - match: '\[\?\]'
+      scope: markup.status.ind-question.polymark
+    - match: '\[!\]'
+      scope: markup.status.ind-alert.polymark
+  # End of E15
+
+  # E16. Code Markers [Rule] ($ String)
+  code-marker:
+    - match: '^([\t ]*)(\$)(\s*)(.+)$'
+      captures:
+        2: punctuation.definition.dollar.polymark
+        3: punctuation.separator.dollar.polymark
+        4: string.unquoted.dollar-line.polymark
+      scope: meta.dollar-line.polymark
+  # End of E16
+
+  # E17. Project-management task statuses [Rule] (- [/], - [!], - [?], - [-])
+  task-status:
+    - match: '^([\t ]*)(-)(\s+)(\[\/\])(\s+)'
+      captures:
+        2: punctuation.definition.marker.polymark
+        4: markup.status.in-progress.polymark
+        5: meta.separator.list.markdown
+      scope: markup.list.unnumbered.task.markdown
+
+    - match: '^([\t ]*)(-)(\s+)(\[!\])(\s+)'
+      captures:
+        2: punctuation.definition.marker.polymark
+        4: markup.status.alert.polymark
+        5: meta.separator.list.markdown
+      scope: markup.list.unnumbered.task.markdown
+
+    - match: '^([\t ]*)(-)(\s+)(\[\?\])(\s+)'
+      captures:
+        2: punctuation.definition.marker.polymark
+        4: markup.status.question.polymark
+        5: meta.separator.list.markdown
+      scope: markup.list.unnumbered.task.markdown
+
+    - match: '^([\t ]*)(-)(\s+)(\[\-\])(\s+)(.+)$'
+      captures:
+        2: punctuation.definition.marker.polymark
+        4: markup.status.abandoned.polymark
+        5: meta.separator.list.markdown
+        6: markup.status.abandoned.content.polymark
+      scope: markup.list.unnumbered.task.markdown
+  # End of E17
+
+  # E18. Filename with Extension [Rule] (filename.ext)
+  filename-extension:
+    - match: '([\w][\w\-\.]*)(\.[a-zA-Z]{2,5})(?=\s|$|[^\w])'
+      captures:
+        1: entity.name.filename.polymark
+        2: entity.name.extension.polymark
+      scope: meta.filename.polymark
+  # End of E18
+
+  # A6a. Keywords (reserved extension point)
+  # Referenced by main but intentionally empty. Add keyword rules here to
+  # extend PolyMark. Example (uncomment to use):
+  #   keywords:
+  #     - match: '\b(TODO|FIXME|NOTE)\b'
+  #       scope: keyword.other.polymark
+  # Styled by: "Keyword Extension Point (A6a)" in polymark.sublime-color-scheme
+  # (unassigned placeholder -- fill in a color to style new keyword scopes).
+  keywords: []
+
+  # End of Script
+  # ---

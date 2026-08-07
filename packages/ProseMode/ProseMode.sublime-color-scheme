@@ -1,0 +1,76 @@
+{
+  "name": "ProseMode",
+  "globals": {
+    "background": "#000000",
+    "foreground": "#E0E0E0",
+
+    // Caret & Block Caret (high-contrast monochrome)
+    "caret": "#FFFFFF",
+    "block_caret": "color(#FFFFFF alpha(0.20))",
+    "block_caret_border": "color(#FFFFFF alpha(0.20))",
+
+    // Selection (brutalist grayscale)
+    "selection": "#262626",
+    "selection_border": "#4D4D4D",
+
+    // Line highlight, guides & gutter
+    "line_highlight": "#111111",
+    "guide": "#1A1A1A",
+    "active_guide": "#333333",
+    "gutter": "#111111",
+    "gutter_foreground": "#4D4D4D",
+
+    // Search / find highlights
+    "find_highlight": "color(#FFFFFF alpha(0.20))",
+    "find_highlight_foreground": "#FFFFFF",
+    "highlight": "color(#FFFFFF alpha(0.20))",
+    "highlight_foreground": "#FFFFFF",
+
+    // Brackets
+    "brackets": "#808080",
+    "brackets_foreground": "#808080",
+    "brackets_background": "color(#FFFFFF alpha(0.10))",
+    "brackets_options": "underline",
+
+    "minimap_border": "#4D4D4D",
+
+    // PolyOS Editor Dark compatibility hooks — monochrome so the UI
+    // chrome re-tints to grayscale instead of accent colors
+    "accent": "#FFFFFF",
+    "redish": "#FFFFFF",
+    "orangish": "#FFFFFF",
+    "yellowish": "#FFFFFF",
+    "greenish": "#FFFFFF",
+    "cyanish": "#FFFFFF",
+    "bluish": "#FFFFFF",
+    "purplish": "#FFFFFF",
+    "pinkish": "#FFFFFF",
+
+    // Faint monochrome underline for spell check (non-distracting HUD indicator)
+    "misspelling": "rgba(255, 255, 255, 0.25)"
+  },
+  "rules": [
+    {
+      "name": "Primary Text Base",
+      "scope": "text, source",
+      "foreground": "#E0E0E0"
+    },
+    {
+      "name": "Headings & Strong Emphasis",
+      "scope": "markup.heading, entity.name.section, markup.bold",
+      "foreground": "#FFFFFF",
+      "font_style": "bold"
+    },
+    {
+      "name": "Muted Text & Secondary Details",
+      "scope": "comment, markup.italic, punctuation",
+      "foreground": "#808080"
+    },
+    {
+      "name": "Misspelled Words",
+      "scope": "markup.italic.spell_check, invalid.illegal",
+      "foreground": "#A0A0A0",
+      "font_style": "no-italics"
+    }
+  ]
+}

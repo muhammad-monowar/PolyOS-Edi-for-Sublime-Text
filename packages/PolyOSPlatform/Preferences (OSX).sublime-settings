@@ -1,0 +1,11 @@
+{
+  // macOS-only preferences (loaded only on OSX).
+  // Loaded after Packages/PolyOSPlatform/Preferences.sublime-settings and
+  // before Packages/User/Preferences.sublime-settings. Keys defined here must
+  // NOT be redefined in the shared Packages/User/Preferences.sublime-settings,
+  // otherwise the User value would win.
+  //
+  // macOS currently needs no overrides: JetBrains Mono + ["dlig", "calt"]
+  // come from the shared Preferences. Add macOS-specific keys here as they
+  // diverge; keep the shared file strictly cross-platform.
+}

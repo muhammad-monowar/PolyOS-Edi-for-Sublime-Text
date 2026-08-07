@@ -9,7 +9,8 @@ Syncs the Sublime Text `Packages` folder across all devices (Windows and macOS).
 │   ├── User/               <- personal settings + keymaps (must stay FLAT)
 │   ├── PolyMark/           <- custom package: PolyMark syntax + color scheme
 │   ├── ProseMode/          <- custom package: prose writing color scheme
-│   └── PolyOSEditorDark/   <- custom package: PolyOS Editor Dark UI theme
+│   ├── PolyOSEditorDark/   <- custom package: PolyOS Editor Dark UI theme
+│   └── PolyOSPlatform/     <- per-platform preferences (Preferences (OSX|Windows).sublime-settings)
 ├── scripts/    <- sync.ps1 (Windows), sync.sh (macOS)
 └── archive/    <- old exports, not synced
 ```
@@ -43,8 +44,8 @@ packages:
 1. Install Sublime Text + Package Control.
 2. Clone this repo.
 3. Run the sync script (see below). It creates `Packages/User`,
-   `Packages/PolyMark`, `Packages/ProseMode` and `Packages/PolyOSEditorDark` and
-   fills them with the config.
+   `Packages/PolyMark`, `Packages/ProseMode`, `Packages/PolyOSEditorDark` and
+   `Packages/PolyOSPlatform` and fills them with the config.
 4. Restart Sublime Text. Package Control auto-installs the packages listed in
    `packages/User/Package Control.sublime-settings` (LSP, Git, Transparency).
 5. Set the theme to `PolyOS Editor Dark` and the color scheme to `polymark` if
@@ -89,6 +90,24 @@ Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
 - `Default (OSX).sublime-keymap` loads on macOS only.
 - `Preferences.sublime-settings` is shared. Keep it to settings that work on
   both platforms.
+- Platform-only preferences live in `packages/PolyOSPlatform/`:
+  `Preferences (OSX).sublime-settings` and
+  `Preferences (Windows).sublime-settings`. Sublime loads only the file for
+  the host platform. A key defined in one of these must NOT also be defined in
+  the shared `User/Preferences.sublime-settings` (User is consulted last and
+  would win). Currently Windows adds `directwrite`/`subpixel_antialias` font
+  flags and `hardware_acceleration: "opengl"`; macOS needs no overrides.
+
+This split isolates failure points: a malformed Windows-only file is never
+parsed on macOS (and vice versa), and the shared files stay cross-platform.
+
+### `.txt` ownership
+
+`.txt` is claimed by PolyMark (`md`, `txt`, `pm`), matching the PolyMark
+README ("because PolyMark auto-selects for `.txt`..."). ProseMode is a color
+scheme only and ships no syntax file, so the two packages never fight over the
+extension. If you want PolyMark to leave plain-text files alone, delete the
+`txt` line from `packages/PolyMark/polymark.sublime-syntax`.
 
 ## Key bindings
 

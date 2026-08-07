@@ -1,0 +1,11 @@
+# Local-only User files — never synced, never committed
+.DS_Store
+sublime_snippets/
+Package Control.user-ca-bundle
+Package Control.last-run
+Package Control.cache
+*.sublime-workspace
+*.sublime-project
+Session.sublime_session*
+Workspace.sublime_workspace
+*.cache
