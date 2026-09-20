@@ -1,0 +1,337 @@
+| SYNTAX TEST "Packages/PolyMark/polymark.sublime-syntax"
+
+# Section A (core) -- markers, date header, duration, arrows
++ item
+| <- meta.marker-definition.polymark punctuation.definition.marker.polymark
+  | <- meta.marker-definition.polymark string.unquoted.marker-content.polymark
+
+- item
+| <- meta.marker-definition.polymark punctuation.definition.marker.polymark
+
+* bullet
+| <- meta.marker-definition.polymark punctuation.definition.marker.asterisk.polymark
+
+2025-12-18
+| <- entity.name.section.header.date
+
+18-20-25 -> 19-01-25
+| <- meta.date-range.time.span.custom
+
+left -> right
+     | <- keyword.operator.arrow.polymark
+
+<-- ok
+| <- keyword.operator.arrow.polymark
+
+step v
+     | <- keyword.operator.arrow.polymark
+
+x^2 and v1
+ | <- - keyword.operator.arrow.polymark
+        | <- - keyword.operator.arrow.polymark
+
+# Section E1-E9 -- area, headings, tasks, metadata, quote, comment
+@Area/@Project
+| <- meta.area-project-hierarchy.polymark entity.name.tag.area.polymark
+     | <- punctuation.separator.polymark
+      | <- entity.name.tag.project.polymark
+       | <- entity.name.project.polymark
+
+# Title
+| <- markup.heading.markdown punctuation.definition.heading.markdown
+
+#### Chapter
+| <- markup.heading.markdown punctuation.definition.heading.markdown
+     | <- entity.name.section.heading.4.markdown
+
+- [ ] pending task
+| <- punctuation.definition.list.begin.markdown
+  | <- markup.list.task.incomplete.markdown
+
+- [x] done task
+| <- punctuation.definition.list.begin.markdown
+  | <- markup.list.task.complete.markdown
+
+- [x] # Goal
+  | <- markup.list.task.complete.markdown
+      | <- punctuation.definition.heading.markdown
+        | <- entity.name.section.heading.1.markdown
+
+[Label]:
+| <- meta.tag-definition.custom punctuation.definition.tag.begin.custom
+ | <- string.unquoted.tag-name.custom
+       | <- punctuation.separator.key-value.custom
+
+---
+| <- meta.separator.document.custom
+
+> quoted text
+| <- markup.quote.markdown punctuation.definition.blockquote.begin.markdown
+
+# Section E10-E13 -- bold, italic, comments(pop), tags, timestamp
+/// note
+| <- punctuation.definition.comment.polymark
+   | <- comment.line.double-slash.content.polymark
+
+**bold**
+| <- punctuation.definition.bold.begin.polymark
+ | <- punctuation.definition.bold.begin.polymark
+  | <- markup.bold.content.polymark
+      | <- punctuation.definition.bold.end.polymark
+
+**unclosed
+| <- punctuation.definition.bold.begin.polymark
+
+plain rest
+| <- - markup.bold.polymark
+
+*italic*
+| <- punctuation.definition.italic.begin.polymark
+ | <- markup.italic.content.polymark
+       | <- punctuation.definition.italic.end.polymark
+
+* not italic, but a marker bullet
+| <- punctuation.definition.marker.asterisk.polymark
+  | <- string.unquoted.marker-content.polymark
+
+<note>content</note>
+| <- punctuation.definition.tag.begin.polymark
+ | <- entity.name.tag.polymark
+     | <- punctuation.definition.tag.begin.polymark
+     | <- - punctuation.definition.tag.end.polymark
+      | <- meta.custom-tag.depth1.polymark
+             | <- punctuation.definition.tag.end.polymark
+               | <- entity.name.tag.polymark
+
+2025-12-18-14-30-45
+| <- constant.numeric.timestamp.polymark
+
+2025-12-18 14:30:00
+| <- constant.numeric.datetime.polymark
+
+18-12-2025
+| <- constant.numeric.date.polymark
+
+2025/12/18
+| <- constant.numeric.date.polymark
+
+18/12/2025
+| <- constant.numeric.date.polymark
+
+14:30:00
+| <- constant.numeric.time.polymark
+
+# Section E30-E32 -- dates, times, semver
+14:30:00
+| <- constant.numeric.time.polymark
+
+09:30
+| <- constant.numeric.time.polymark
+
+12-30-45
+| <- constant.numeric.time.polymark
+
+release v1.4.5 now
+| <- - constant.other.semver.polymark
+        | <- constant.other.semver.polymark
+
+contact hasan@gmail.com
+        | <- string.quoted.email.polymark constant.character.user-name.polymark
+             | <- punctuation.definition.email.at.polymark
+              | <- constant.character.domain.polymark
+
+visit https://example.com/page
+| <- - punctuation.definition.url.scheme.polymark
+      | <- markup.underline.link.polymark punctuation.definition.url.scheme.polymark
+              | <- markup.underline.link.polymark string.unquoted.url.polymark
+
+# Section E14/E28/E29 -- email, urls, links, images
+[install](setup.sh)
+| <- markup.link.polymark punctuation.definition.link.begin.polymark
+ | <- markup.underline.link.label.polymark
+        | <- punctuation.definition.link.end.polymark
+         | <- punctuation.definition.link.end.polymark
+          | <- markup.link.polymark markup.underline.link.polymark
+                  | <- markup.link.polymark punctuation.definition.link.close.polymark
+
+![logo](img.png)
+| <- markup.image.polymark punctuation.definition.image.exclamation.polymark
+ | <- punctuation.definition.link.begin.polymark
+      | <- punctuation.definition.link.end.polymark
+       | <- punctuation.definition.link.end.polymark
+        | <- markup.image.polymark markup.underline.link.polymark
+               | <- markup.image.polymark punctuation.definition.link.close.polymark
+
+save file.pdf
+     | <- entity.name.filename.polymark
+         | <- entity.name.extension.polymark
+
+open /usr/bin/env
+| <- - string.unquoted.path.posix.polymark
+     | <- string.unquoted.path.posix.polymark
+
+cd ~/repo/file.txt
+   | <- string.unquoted.path.posix.polymark
+
+Open C:\data\logs\out.txt
+     | <- string.unquoted.path.windows.polymark
+
+see ./src/main.py
+    | <- string.unquoted.path.posix.polymark
+
+$ echo hi
+| <- punctuation.definition.dollar.polymark
+  | <- string.unquoted.dollar-line.polymark
+
+- [/] doing
+| <- punctuation.definition.marker.polymark
+  | <- markup.status.in-progress.polymark
+
+- [!] alert
+| <- punctuation.definition.marker.polymark
+  | <- markup.status.alert.polymark
+
+- [?] question
+| <- punctuation.definition.marker.polymark
+  | <- markup.status.question.polymark
+
+# Section E16/E27/E17/E15 -- code markers, paths, task statuses
+- [-] abandoned text
+| <- punctuation.definition.marker.polymark
+  | <- markup.status.abandoned.polymark
+      | <- markup.status.abandoned.content.polymark
+
+done [?]
+     | <- markup.status.ind-question.polymark
+
+alert [!]
+     | <- markup.status.ind-alert.polymark
+
+say 'hello world'
+    | <- punctuation.definition.string.begin.single.polymark
+     | <- string.quoted.single.polymark
+                | <- punctuation.definition.string.end.single.polymark
+
+player's ball
+      | <- - punctuation.definition.string.begin.single.polymark
+
+(sum) then [result] then {set}
+| <- meta.enclosed.group.polymark punctuation.definition.group.begin.polymark
+ | <- meta.enclosed.group.polymark meta.enclosed.group.input.polymark
+    | <- meta.enclosed.group.polymark punctuation.definition.group.end.polymark
+           | <- meta.enclosed.group.polymark punctuation.definition.group.begin.polymark
+                  | <- meta.enclosed.group.polymark punctuation.definition.group.end.polymark
+                         | <- meta.enclosed.group.polymark punctuation.definition.group.begin.polymark
+                             | <- meta.enclosed.group.polymark punctuation.definition.group.end.polymark
+
+- Task:
+| <- meta.marker-definition.polymark punctuation.definition.marker.polymark
+  | <- meta.marker-definition.polymark entity.name.key.bullet.polymark
+      | <- punctuation.separator.colon.polymark
+
+1. first
+| <- meta.list.numeric.polymark constant.numeric.list.polymark
+   | <- meta.list.numeric.polymark string.unquoted.marker-content.polymark
+
+# Section E22/E23/E24/E25/E26 -- quotes, groups, bullets
+a. first
+| <- meta.list.alpha.polymark constant.numeric.outline.polymark
+
+a1. second
+| <- meta.list.alnum.polymark constant.numeric.outline.alnum.polymark
+
++---+
+| <- punctuation.definition.box.connector.polymark
+
+use |--| join
+    | <- punctuation.definition.box.connector.polymark
+
+use | join
+    | <- - punctuation.definition.box.connector.polymark
+
+├── branch
+| <- punctuation.definition.tree.branch.polymark
+
+# Section E37/E38 -- connectors and tree nodes
+│ guide
+| <- punctuation.definition.tree.guide.polymark
+
+# Section E20 -- fenced code blocks (polymark, raw, bare)
+```txt
+| <- punctuation.definition.raw.code-fence.begin.polymark
+   | <- constant.other.language-name.polymark
+
+# Heading inside polymark block
+| <- markup.raw.block.polymark markup.heading.markdown
+
+```
+| <- punctuation.definition.raw.code-fence.end.polymark
+
+below the fence: plain
+| <- - markup.raw.block.polymark
+
+```python
+| <- punctuation.definition.raw.code-fence.begin.polymark
+   | <- constant.other.language-name.polymark
+
+print("x")
+| <- markup.raw.block.polymark markup.raw.block.content.polymark
+
+```
+| <- punctuation.definition.raw.code-fence.end.polymark
+
+```
+| <- punctuation.definition.raw.code-fence.begin.polymark
+
+- item
+| <- markup.raw.block.polymark meta.marker-definition.polymark punctuation.definition.marker.polymark
+
+```
+| <- punctuation.definition.raw.code-fence.end.polymark
+
+# Section E19 -- inline code
+run `npm i` now
+    | <- punctuation.definition.raw.begin.polymark
+     | <- markup.raw.inline.polymark markup.raw.inline.content.polymark
+          | <- punctuation.definition.raw.end.polymark
+
+# Section E21 -- markdown tables
+| Rule | Feature |
+| <- markup.table.header.polymark punctuation.definition.table.cell.polymark
+  | <- markup.table.header.polymark
+       | <- markup.table.header.polymark - punctuation.definition.table.cell.polymark
+                 | <- punctuation.definition.table.cell.polymark
+
+| ---- | ------- |
+| <- markup.table.separator.polymark punctuation.definition.table.cell.polymark
+       | <- markup.table.separator.polymark - punctuation.definition.table.cell.polymark
+
+| A7   | markers |
+| <- markup.table.row.polymark punctuation.definition.table.cell.polymark
+  | <- markup.table.row.content.polymark
+       | <- markup.table.row.content.polymark - punctuation.definition.table.cell.polymark
+                 | <- punctuation.definition.table.cell.polymark
+
+	| indent | row |
+| <- markup.table.row.polymark markup.table.indent.polymark
+ | <- punctuation.definition.table.cell.polymark
+
+plain text | not a table
+| <- - markup.table.row.polymark
+
+| just a row |
+| <- markup.table.row.polymark - markup.table.header.polymark
+
+# Section E33/E34 -- front matter (buffer-start only) + ellipsis
+---
+| <- meta.separator.document.custom
+
+...
+| <- meta.separator.ellipsis.polymark
+
+# Section E35 -- chevron variables (placed after the last </...>)
+use <var_name> here
+| <- - punctuation.definition.tag.begin.polymark
+    | <- punctuation.definition.tag.begin.chevron.polymark
+     | <- entity.name.variable.chevron.polymark
+             | <- punctuation.definition.tag.end.chevron.polymark
