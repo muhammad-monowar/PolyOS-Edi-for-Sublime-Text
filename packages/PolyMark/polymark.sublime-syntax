@@ -6,9 +6,9 @@
 # PolyMark -- Literate Syntax Definition
 # -----------------------------------------------------------------------------
 # Author : Muhammad Mustafa Monowar
-# Updated: 2026-08-05
+# Updated: 2026-09-20
 # Target : Sublime-Text
-# Version: v.3.0.2
+# Version: v.3.4.0
 # -----------------------------------------------------------------------------
 #
 # PolyMark is a Color Scheme and Syntax Highlighting rule set for Sublime Text,
@@ -17,7 +17,17 @@
 #
 # This syntax file only CLASSIFIES text into scopes; the colors come from the
 # companion `polymark.sublime-color-scheme`. Rules are labelled A#/E# to match
-# `Examples.md`, the feature-by-feature verification document.
+# the feature-by-feature mapping in section 2 below.
+#
+# This version implements the "Polymark Syntax Specification" in
+# `Polymark Syntax Specification.txt`:
+#   1.1 Placement independence - every token is recognized inside HTML tags,
+#       indented code, unlabelled/txt/pm/polymark codeblocks, and after
+#       bullet/task prefixes like `- [x]`.
+#   1.2 Inline formatting (*bold*, **emphasis**, quotes) is strictly
+#       single-line: an unclosed delimiter pops at the end of the line.
+#   1.3 Codeblocks without a language id (```) or labeled txt/pm/polymark are
+#       parsed with the PolyMark engine (their content includes `main`).
 #
 # License: MIT (see `LICENSE`).
 # Setup  : See `Instructions.md` and the package `README.md`.
@@ -32,20 +42,50 @@
 #                   Remove the "txt" line if you do not want PolyMark to be
 #                   the default syntax for plain-text files.
 #
-# Custom tag E12  : the tag-name charset is `[a-z]+`. To allow digits/uppercase,
-#                   update BOTH E12 rules ('<[a-z]+>' and '(</)([a-z]+)(>)').
+# Custom tag E12  : the tag-name charset is `[A-Za-z][A-Za-z0-9_\-]*`. When a
+#                   `<name>` is followed (within `E12_RANGE` characters) by a
+#                   matching `</name>` it is parsed as an HTML/XML element;
+#                   otherwise it is a standalone chevron variable (E35).
+#                   `E12_RANGE` bounds the lookahead so huge files stay fast.
 #
 # Date/numbering  : E13 timestamp   `\b\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}\b`
 #                   A8 date header  `\b\d{4}-\d{2}-\d{2}\b`
 #                   A9 duration     `\b\d{2}-\d{2}-\d{2}\s*->\s*\d{2}-\d{2}-\d{2}\b`
+#                   E30 dates       `\b\d{2}-\d{2}-\d{4}\b` (DD-MM-YYYY),
+#                                   `\b\d{4}/\d{2}/\d{2}\b` (YYYY/MM/DD),
+#                                   `\b\d{2}/\d{2}/\d{4}\b` (DD/MM/YYYY)
+#                   E31 times       `\b\d{2}:\d{2}(?::\d{2})?\b`,
+#                                   `\b\d{2}-\d{2}-\d{2}\b` (hh-mm-ss)
+#                   E30 datetime    `\b\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2})?\b`
+#                   E32 semver      `\bv\d+\.\d+\.\d+(?:[-+][\w.]+)?\b`
 #                   Keep E13 before A8 (see main) so timestamps are not split.
+#                   Keep A9 (duration) before E31 (hh-mm-ss) so ranges win.
 #
 # Email E14       : TLD length `\w{2,}`; local/domain charset `[\w\.\-]+`.
 #
 # Filename E18    : extension length `[a-zA-Z]{2,5}` -- widen/narrow the brace
 #                   range to change which `.ext` suffixes are detected.
 #
-# Markers A7      : leading list characters `[\-+]` (hyphen and plus).
+# Paths E27       : POSIX segments use `[\w.@%+~-]+`; a relative path needs
+#                   `./`, `../`, or a dotted segment so prose like "and/or"
+#                   is not colored. Windows path charset `[ \w.@%+~-]+`.
+#
+# URLs E28        : href charset `[\w\-._~:/?#\[\]@!$&,*;=%+]+` (RFC-ish,
+#                   excludes quotes/spaces; round parens left for grouping).
+#
+# Arrows E36      : `->` `<-` `-->` `<--` always; standalone `^`/`v` only when
+#                   not adjacent to word characters (context-aware).
+#
+# Box drawing     : ASCII connectors (E37) are colored only as runs of 2+
+#                   `[+\-|]` chars or whole connector-only lines, so ordinary
+#                   bullets and tables stay untouched. Tree nodes (E38) are the
+#                   unambiguous unicode glyphs `├ └ │ ┌ ┐ └ ┘ ┃ ━ ┏ ┓ ┗ ┛
+#                   ┣ ┫ ┳ ┻ ╋`.
+#
+# String quotes   : E22 single quotes use `(?<![\w])`/`(?![\w])` boundaries so
+#                   possessives ("player's") are not treated as strings.
+#
+# Markers A7      : leading list characters `[\-+]` plus a dedicated `*` rule.
 #
 # Colors          : this file emits scopes only. All colors live in
 #                   `polymark.sublime-color-scheme` (mapping below).
@@ -60,10 +100,12 @@
 # Syntax             Scope                                     Color-scheme rule
 # ------------------- ----------------------------------------- ---------------------------------
 # A7 Markers         punctuation.definition.marker.polymark     "Polymark List/Marker Punctuation"
+#                    punctuation.definition.marker.asterisk.polymark "Polymark Asterisk Bullet"
 #                    string.unquoted.marker-content.polymark    "Polymark Marker Content"
 #                    meta.marker-definition.polymark            "Polymark Marker Line Meta"
 # A8 Date header     entity.name.section.header.date            "Date Header"
 # A9 Duration        meta.date-range.time.span.custom           "Custom Date/Time Range Highlight"
+# A2a Arrow          keyword.operator.arrow.polymark            "Arrow Ligature (A2a)"
 # E1 Area/Project    entity.name.tag.area.polymark              "Area Tag Symbol"
 #                    entity.name.area.polymark                  "Area Name"
 #                    punctuation.separator.polymark             "Area/Project Separator"
@@ -87,7 +129,7 @@
 # E12 Custom tag     entity.name.tag.polymark                   "Custom Tag Name"
 #                    punctuation.definition.tag.begin.polymark, "Custom Tag Punctuation"
 #                    punctuation.definition.tag.end.polymark
-#                    meta.custom-tag.content.polymark           "Custom Tag Content (Meta Scope)"
+#                    meta.custom-tag.depth1..5.polymark         "Custom Tag Depth 1..5 (cycling)"
 # E13 Timestamp      constant.numeric.timestamp.polymark        "Date-time-stamp (YYYY-MM-DD-HH-MM-SS)"
 # E14 Email          constant.character.user-name.polymark      "Polymark Email - User Name"
 #                    constant.character.domain.polymark         "Polymark Email - Domain Name"
@@ -104,7 +146,64 @@
 #                    markup.status.abandoned.content.polymark   "Status Marker [-] Abandoned Content"
 # E18 Filename       entity.name.filename.polymark              "Filename"
 #                    entity.name.extension.polymark             "File Extension"
-# A2a Arrow          keyword.operator.arrow.polymark            "Arrow Ligature (A2a)" (unassigned)
+# E19 Inline code    punctuation.definition.raw.begin.polymark  "Inline Code Backtick (E19)"
+#                    markup.raw.inline.polymark                 "Inline Code Content (E19)"
+#                    punctuation.definition.raw.end.polymark    "Inline Code Backtick (E19)"
+# E20 Fenced block   punctuation.definition.raw.code-fence.begin.polymark,
+#                    punctuation.definition.raw.code-fence.end.polymark
+#                                                               "Code Block Fence (E20)"
+#                    constant.other.language-name.polymark      "Code Block Language Token (E20)"
+#                    markup.raw.block.polymark                  "Code Block Base (E20)"
+#                    markup.raw.block.content.polymark          "Code Block Content (E20)"
+# E21 Markdown table punctuation.definition.table.cell.polymark "Table Cell Pipe (E21)"
+#                    markup.table.header.polymark               "Table Header Row (E21)"
+#                    markup.table.separator.polymark            "Table Separator Row (E21)"
+#                    markup.table.row.polymark                  "Table Row Base (E21)"
+#                    markup.table.row.content.polymark          "Table Row Content (E21)"
+#                    markup.table.indent.polymark               "Table Indent (E21)"
+# E22 Single quotes  punctuation.definition.string.begin.single.polymark "Single-quote String Punctuation (E22)"
+#                    punctuation.definition.string.end.single.polymark   "Single-quote String Punctuation (E22)"
+#                    string.quoted.single.polymark             "Single-quoted String Content (E22)"
+# E23 Enclosed group punctuation.definition.group.begin.polymark,
+#                    punctuation.definition.group.end.polymark  "Enclosed Group Punctuation (E23)"
+#                    meta.enclosed.group.polymark               "Enclosed Group Meta (E23)"
+#                    meta.enclosed.group.input.polymark         "Enclosed Group Input (E23)"
+# E24 Key-bullet     entity.name.key.bullet.polymark            "Key-Value Bullet Header (E24)"
+#                    punctuation.separator.colon.polymark       "Key-Value Bullet Colon (E24)"
+# E25 Numeric list   constant.numeric.list.polymark             "Numeric List Index (E25)"
+# E26 Outlines       constant.numeric.outline.polymark          "Alpha Outline Index (E26)"
+#                    constant.numeric.outline.alnum.polymark    "Alphanumeric Outline Index (E26)"
+# E27 Paths          string.unquoted.path.posix.polymark        "File Path POSIX (E27)"
+#                    string.unquoted.path.windows.polymark      "File Path Windows (E27)"
+# E28 Web URL        punctuation.definition.url.scheme.polymark "URL Scheme (E28)"
+#                    string.unquoted.url.polymark,              "URL Body (E28)"
+#                    markup.underline.link.polymark
+# E29 MD link/img    punctuation.definition.link.begin.polymark "Markdown Link Brackets (E29)"
+#                    punctuation.definition.link.end.polymark
+#                    punctuation.definition.link.close.polymark
+#                    punctuation.definition.image.exclamation.polymark "Markdown Image Bang (E29)"
+#                    markup.underline.link.label.polymark       "Markdown Link Label (E29)"
+#                    markup.underline.link.polymark             "Markdown Link Target (E29)"
+#                    markup.link.polymark                       "Markdown Link Meta (E29)"
+# E30 Dates/datetime constant.numeric.date.polymark             "Date Variant (E30)"
+#                    constant.numeric.datetime.polymark         "Datetime Composite (E30)"
+# E31 Times          constant.numeric.time.polymark             "Time Token (E31)"
+# E32 Semver         constant.other.semver.polymark             "Semantic Version (E32)"
+# E33 Front matter   meta.front-matter.polymark                 "Front Matter Block (E33)"
+#                    meta.separator.front-matter.polymark       "Front Matter Boundary (E33)"
+#                    entity.name.key.frontmatter.polymark       "Front Matter Key (E33)"
+#                    punctuation.separator.key-value.frontmatter.polymark "Front Matter Colon (E33)"
+#                    string.unquoted.frontmatter.polymark       "Front Matter Value (E33)"
+# E34 Ellipsis       meta.separator.ellipsis.polymark           "Document Ellipsis Separator (E34)"
+# E35 Chevron        entity.name.variable.chevron.polymark      "Chevron Variable Name (E35)"
+#                    punctuation.definition.tag.begin.chevron.polymark,
+#                    punctuation.definition.tag.end.chevron.polymark "Chevron Punctuation (E35)"
+# E37 Connectors     punctuation.definition.box.connector.polymark "Box-Drawing Connector (E37)"
+# E38 Tree nodes     punctuation.definition.tree.branch.polymark "Tree Branch (E38)"
+#                    punctuation.definition.tree.guide.polymark  "Tree Guide (E38)"
+#                    punctuation.definition.tree.corner.polymark "Tree Corner (E38)"
+# E39 Tab columns    punctuation.separator.tab.polymark         "Tab Column Separator (E39)"
+#                    markup.table.column.1..3.polymark          "Tab Column 1..3 (E39)"
 #
 # Every scope emitted by this file now has a rule entry in the color scheme.
 # Entries marked "UNASSIGNED" keep empty foreground/background/font_style as
@@ -144,10 +243,42 @@ contexts:
     # timestamp, so A8 would swallow its first 10 characters if it ran first.
     - include: date-time-stamp
 
+    # E30. Datetime composite (YYYY-MM-DD hh:mm:ss)
+    # MUST precede A8 and E31 so the whole composite is one token.
+    - include: datetime
+
+    # A9. Duration Range (##-##-## -> ##-##-##)
+    # MUST precede E31's hh-mm-ss form (see the tail of main) so ranges win.
+    - include: duration-range
+
+    # E30. Date variants (DD-MM-YYYY, YYYY/MM/DD, DD/MM/YYYY)
+    # MUST precede E27 paths so slash-dates are not read as file paths.
+    - include: date-variant
+
+    # E32. Semantic versions (v1.0.0)
+    # MUST precede E18 so "v1.4.5" is not partially read as a filename.
+    - include: semantic-version
+
     # E14. Email Address Pattern (name@provider.com)
     # MUST precede Filename (E18): E18 would otherwise absorb the whole address
     # as a "filename" (e.g. hasan@gmail.com).
     - include: email
+
+    # E28. Web URLs (http://, https://)
+    # MUST precede Filename (E18): E18 would otherwise absorb ".com"/".png".
+    - include: url
+
+    # E29. Markdown links & images ([label](path), ![label](url))
+    # MUST precede E23 groupings so "[label]" / "(url)" are not split.
+    - include: markdown-link
+
+    # E27. File paths (POSIX, home, relative, Windows)
+    # MUST precede Filename (E18) so a full path wins over trailing filename.
+    - include: file-path
+
+    # Compound headers (- [x] # Header, + ## Section, * ## Section)
+    # MUST precede E17/E3/E4: a task prefix followed by '#' is a heading.
+    - include: heading-compound
 
     # E17. Project-management task statuses (- [/], - [!], - [?], - [-])
     # MUST precede the generic Markers rule (A7), which would otherwise render
@@ -158,12 +289,18 @@ contexts:
     # MUST precede the generic Markers rule (A7), for the same reason as E17.
     - include: task-todo
 
+    # E33. Front matter (--- at the very start of the buffer)
+    # MUST precede E6: on a document-leading '---' both match at position 0 and
+    # the front-matter reading wins. The \A anchor is safe anywhere -- it only
+    # ever matches on line 1 of the buffer.
+    - include: front-matter
+
     # E15. Inline status markers ([?], [!])
     # MUST precede Metadata (E5): on input like "[?]:" both match at the same
     # position and the inline marker is the intended reading.
     - include: status-marker
 
-    # E5. Metadata Definition ([Key]:)
+    # E5. Metadata Definition ([Key]:) -- also covers bracktags with a colon.
     - include: metadata
 
     # E1. Area/Project hierarchy (@Area/@Project)
@@ -175,15 +312,27 @@ contexts:
     # E6. Horizontal rule / document separator (---)
     # MUST precede the generic Markers rule (A7): on "---" both match at
     # position 0 and the separator is the intended reading.
+    # (Front matter E33 runs first, so only non-buffer-leading '---' gets here.)
     - include: horizontal-rule
+
+    # E34. Standalone ellipsis separator ('...' line)
+    - include: ellipsis-separator
 
     # E7. Blockquote (> String)
     - include: blockquote
 
+    # E21. Markdown tables (| a | b |) -- leading-pipe only.
+    # table-header first so a header row followed by a separator row is
+    # recognized; table-separator before table-row so separator rows are not
+    # swallowed by the generic row rule.
+    - include: table-header
+    - include: table-separator
+    - include: table-row
+
     # E16. Single-line code markers ($ String)
     - include: code-marker
 
-    # A2a. Arrow ligature (->)
+    # A2a/E36. Arrow ligatures (->, <-, -->, <--) and standalone ^ v
     - include: arrow
 
     # E10. Bold (**content**)
@@ -196,25 +345,67 @@ contexts:
     # E12. Custom Tagging (<tag> content </tag>)
     - include: custom-tag
 
+    # E35. Standalone chevrons / variables (<variable_name>)
+    # Runs after E12 so only unclosed chevrons reach it.
+    - include: chevron-variable
+
+    # E24. Key-value bullet headers (- Label:, + Label (x):)
+    - include: key-value-bullet
+
+    # E25. Numeric lists (1., 2., 3.)
+    - include: numeric-list
+
+    # E26. Alpha (A., a.) and alphanumeric (a1., a2c1.) outlines
+    - include: outline-alpha
+    - include: outline-alnum
+
+    # E20. Fenced Code Blocks (```lang ... ```)
+    # MUST precede Inline Code (E19): a fence line begins with a backtick and
+    # the block rule must own the whole opening line.
+    - include: fenced-code-block
+
+    # E19. Inline Code (`code`)
+    - include: inline-code
+
     # A6a. General Includes (KEYWORDS, STRINGS, etc.)
     - include: keywords
     - include: strings
+
+    # E22. Single-quoted strings ('text')
+    - include: single-quoted-string
+
+    # A2a/E36 helpers are above; keywords/strings are reserved extension points.
 
     # E18. Filename with Extension (filename.ext)
     # MUST precede Date Header (A8) so "2025-12-18.pdf" stays a filename.
     - include: filename-extension
 
+    # E23. Enclosed groupings ((...), [...], {...})
+    # Runs after links/metadata/tasks so brackets inside those win.
+    - include: enclosed-grouping
+
+    # E39. Tab-delimited columns (multi-column tab lines)
+    - include: tab-delimited-columns
+
+    # E37/E38. ASCII graphics -- connector runs and tree nodes.
+    # MUST precede the generic Markers rule (A7) so "+----+" is a border,
+    # and place after tables so existing table pipes are untouched.
+    - include: box-connector
+    - include: tree-node
+
     # A7. Generic markers (+, -) followed by text.
     # Intentional position: the last line-start list rule, so the specific
-    # rules above (E3/E4/E6/E17) always take priority.
+    # rules above always take priority.
     - include: markers
 
     # A8. Date Header (####-##-##)
-    # MUST follow Timestamp (E13) and Filename (E18).
+    # MUST follow Timestamp (E13), Datetime (E30) and Filename (E18).
     - include: date-header
 
-    # A9. Duration Range (##-##-## -> ##-##-##)
-    - include: duration-range
+    # E31. Time tokens (hh:mm:ss, hh-mm-ss, hh:mm)
+    # Runs last so {4-digit dates} are claimed by A8/E30/E13 first and time
+    # patterns can never split a "YYYY-MM-DD" into "YY-MM-DD" + leftover.
+    - include: time
 
   # End of A. Main [Rule]
 
@@ -222,18 +413,29 @@ contexts:
   # Section A rules (helpers referenced by main)
   # ---------------------------------------------------------------------------
 
-  # A2a. Arrow ligature [Rule] (->)
+  # A2a + E36. Directional arrows / ligatures [Rule]
+  # Explicit arrow ligatures always apply. Standalone `^` and `v` are colored
+  # as arrows only when NOT adjacent to word characters, so "x^2" and "view"
+  # are left alone (context-aware per spec 1.1 customization).
   arrow:
-    - match: '->'
+    - match: '(-->|<--|->|<-)'
       scope: keyword.operator.arrow.polymark
-  # End of A2a
+    - match: '(?<![A-Za-z0-9_])[v^](?![A-Za-z0-9_])'
+      scope: keyword.operator.arrow.polymark
+  # End of E36
 
   # A7. Markers [Rule] (+, -) followed by text
-  # Generic line-start list markers. Deliberately late in the pipeline.
+  # Generic line-start list markers. Deliberately late in the pipeline. A
+  # separate `*` rule uses its own punctuation scope for custom coloring.
   markers:
     - match: '^([\t ]*)([\-+])(\s*)(.+)$'
       captures:
         2: punctuation.definition.marker.polymark
+        4: string.unquoted.marker-content.polymark
+      scope: meta.marker-definition.polymark
+    - match: '^([\t ]*)(\*)(\s+)(.+)$'
+      captures:
+        2: punctuation.definition.marker.asterisk.polymark
         4: string.unquoted.marker-content.polymark
       scope: meta.marker-definition.polymark
   # End of A7
@@ -251,7 +453,7 @@ contexts:
   # End of A9
 
   # ---------------------------------------------------------------------------
-  # Section E rules (extensions, labelled to match Examples.md)
+  # Section E rules (extensions, labelled per spec section)
   # ---------------------------------------------------------------------------
 
   # E1. Area/Project [Rule] (@Area/@Project)
@@ -280,6 +482,43 @@ contexts:
       scope: markup.heading.markdown
   # End of E2
 
+  # Compound Headers [Rule] (- [x] # Header, + ## Section, * ### Section)
+  # Spec 1.1/2.1: headers prefixed by task checkboxes or plain bullets.
+  # The prefix keeps its list/task scopes; the trailing '#' keeps heading
+  # scopes, so the whole line is both a list item and a heading.
+  heading-compound:
+    # With a task checkbox (incomplete [ ]).
+    - match: '^([\t ]*)([-+*])(\s+)(\[ \])(\s+)(#+)(\s+)(.+)$'
+      captures:
+        2: punctuation.definition.list.begin.markdown  # bullet
+        4: markup.list.task.incomplete.markdown        # [ ]
+        5: meta.separator.list.markdown
+        6: punctuation.definition.heading.markdown     # #
+        7: meta.separator.heading.markdown
+        8: entity.name.section.heading.$6.markdown
+      scope: markup.heading.markdown
+
+    # With a task checkbox (complete [x]).
+    - match: '^([\t ]*)([-+*])(\s+)(\[x\])(\s+)(#+)(\s+)(.+)$'
+      captures:
+        2: punctuation.definition.list.begin.markdown
+        4: markup.list.task.complete.markdown          # [x]
+        5: meta.separator.list.markdown
+        6: punctuation.definition.heading.markdown
+        7: meta.separator.heading.markdown
+        8: entity.name.section.heading.$6.markdown
+      scope: markup.heading.markdown
+
+    # With a plain bullet/task prefix (no checkbox).
+    - match: '^([\t ]*)([-+*])(\s+)(#+)(\s+)(.+)$'
+      captures:
+        2: punctuation.definition.marker.polymark       # bullet
+        4: punctuation.definition.heading.markdown      # #
+        5: meta.separator.heading.markdown
+        6: entity.name.section.heading.$4.markdown
+      scope: markup.heading.markdown
+  # End of Compound Headers
+
   # E3 + E4. To-do list items [Rule] (e.g., "- [ ] Task", "- [x] Task")
   task-todo:
     # E3. Incomplete to-do list items (e.g., "- [ ] Task")
@@ -304,6 +543,7 @@ contexts:
   # End of E3 + E4
 
   # E5. Metadata Definition [Rule] ([InnerString]:)
+  # Also satisfies the "bracktag with colon suffix" token (2.2).
   metadata:
     - match: '(\[)([^\]]+)(\]:)'
       scope: meta.tag-definition.custom
@@ -329,7 +569,7 @@ contexts:
       scope: markup.quote.markdown
   # End of E7
 
-  # E8. Strings [Rule]
+  # E8. Strings [Rule] (double-quoted)
   strings:
     # Strings begin and end with quotes, and use backslashes as an escape
     # character.
@@ -344,6 +584,9 @@ contexts:
       scope: constant.character.escape.polymark
     - match: '"'
       scope: punctuation.definition.string.end.polymark
+      pop: true
+    # E8.1. Single-line scope (spec 1.2): an unclosed quote ends at the line.
+    - match: $\n?
       pop: true
   # End of E8
 
@@ -375,7 +618,11 @@ contexts:
       scope: punctuation.definition.bold.end.polymark
       pop: true
 
-    # E10.2. Match everything else character-by-character
+    # E10.2. Inline formatting is strictly single-line (spec 1.2).
+    - match: $\n?
+      pop: true
+
+    # E10.3. Match everything else character-by-character
     # (safer and more performant than (.*?))
     - match: .
       scope: markup.bold.content.polymark
@@ -383,7 +630,9 @@ contexts:
 
   # E11. Italics [Rule] (*Italicized Item*)
   italic:
-    - match: \*
+    # Opener must not be followed by a space or another '*'; that keeps
+    # "* bullet" lines (A7) and "**" (E10) from entering italic.
+    - match: '\*(?=[^*\s])'
       scope: punctuation.definition.italic.begin.polymark
       push: italic-content
 
@@ -395,35 +644,107 @@ contexts:
       scope: punctuation.definition.italic.end.polymark
       pop: true
 
-    # E11.2. Match everything else character-by-character
+    # E11.2. Inline formatting is strictly single-line (spec 1.2).
+    - match: $\n?
+      pop: true
+
+    # E11.3. Match everything else character-by-character
     - match: .
       scope: markup.italic.content.polymark
   # End of E11
 
   # E12. Custom Tagging [Rule] (<tag> Content </tag>)
+  # A `name` is treated as an HTML/XML element only when a matching `</name>`
+  # is found ahead (bounded lookahead). Otherwise it is a chevron variable
+  # handled by E35. Nesting cycles through five depth scopes (spec 2.6).
   custom-tag:
-    - match: '<[a-z]+>'
-      scope: entity.name.tag.polymark
-      push: custom-tag-content
+    - match: '(?=[\s\S]{0,500}</[A-Za-z][A-Za-z0-9_\-]*>)(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.polymark  # '<'
+        2: entity.name.tag.polymark                   # tag name
+        3: punctuation.definition.tag.begin.polymark  # '>'
+      push: custom-tag-content-1
 
-  custom-tag-content:
-    # This meta_scope applies to the entire block of content inside the tags.
-    - meta_scope: meta.custom-tag.content.polymark
+  custom-tag-content-1:
+    - meta_scope: meta.custom-tag.depth1.polymark
+    - match: '(?=[\s\S]{0,500}</[A-Za-z][A-Za-z0-9_\-]*>)(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.polymark
+        2: entity.name.tag.polymark
+        3: punctuation.definition.tag.begin.polymark
+      push: custom-tag-content-2
+    - include: custom-tag-content-common
 
+  custom-tag-content-2:
+    - meta_scope: meta.custom-tag.depth2.polymark
+    - match: '(?=[\s\S]{0,500}</[A-Za-z][A-Za-z0-9_\-]*>)(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.polymark
+        2: entity.name.tag.polymark
+        3: punctuation.definition.tag.begin.polymark
+      push: custom-tag-content-3
+    - include: custom-tag-content-common
+
+  custom-tag-content-3:
+    - meta_scope: meta.custom-tag.depth3.polymark
+    - match: '(?=[\s\S]{0,500}</[A-Za-z][A-Za-z0-9_\-]*>)(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.polymark
+        2: entity.name.tag.polymark
+        3: punctuation.definition.tag.begin.polymark
+      push: custom-tag-content-4
+    - include: custom-tag-content-common
+
+  custom-tag-content-4:
+    - meta_scope: meta.custom-tag.depth4.polymark
+    - match: '(?=[\s\S]{0,500}</[A-Za-z][A-Za-z0-9_\-]*>)(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.polymark
+        2: entity.name.tag.polymark
+        3: punctuation.definition.tag.begin.polymark
+      push: custom-tag-content-5
+    - include: custom-tag-content-common
+
+  custom-tag-content-5:
+    - meta_scope: meta.custom-tag.depth5.polymark
+    - match: '(?=[\s\S]{0,500}</[A-Za-z][A-Za-z0-9_\-]*>)(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.polymark
+        2: entity.name.tag.polymark
+        3: punctuation.definition.tag.begin.polymark
+      push: custom-tag-content-1
+    - include: custom-tag-content-common
+
+  # Shared body for every tag depth (closing tag + the PolyMark rule set).
+  custom-tag-content-common:
     # E12.1. Closing Tag (crucial for exiting the context)
     # Must come first to take precedence over the included rules.
-    - match: '(</)([a-z]+)(>)'
+    - match: '(</)([A-Za-z][A-Za-z0-9_\-]*)(>)'
       captures:
         1: punctuation.definition.tag.end.polymark  # </ uses 'end' punctuation
         2: entity.name.tag.polymark
         3: punctuation.definition.tag.end.polymark
       pop: true
 
-    # E12.2. Include Main Context
-    # Re-applies all main Polymark rules (headers, lists, bold, etc.) inside
-    # the tag, enabling multiline content and nested syntax.
-    - include: main
+    # E12.2. Include every PolyMark rule except tag/chevron rules inside.
+    - include: main-no-tags
   # End of E12
+
+  # E35. Standalone Chevrons / Variables [Rule] (<variable_name>)
+  # Unclosed single chevrons are element tokens, NOT HTML tags (spec 2.6).
+  chevron-variable:
+    - match: '(<)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.begin.chevron.polymark
+        2: entity.name.variable.chevron.polymark
+        3: punctuation.definition.tag.end.chevron.polymark
+    # A lone closing chevron outside a tag element (rare, defensive).
+    - match: '(</)([A-Za-z][A-Za-z0-9_\-]*)(>)'
+      captures:
+        1: punctuation.definition.tag.end.chevron.polymark
+        2: entity.name.variable.chevron.polymark
+        3: punctuation.definition.tag.end.chevron.polymark
+  # End of E35
 
   # E13. Date-time-stamp [Rule] (YYYY-MM-DD-HH-MM-SS)
   date-time-stamp:
@@ -500,6 +821,377 @@ contexts:
       scope: meta.filename.polymark
   # End of E18
 
+  # E19. Inline Code [Rule] (`code`)
+  # A single backtick pair. Inline code cannot span lines: an unclosed backtick
+  # pops at the newline, so only a correctly typed `...` pair gets highlighted.
+  inline-code:
+    - match: '`'
+      scope: punctuation.definition.raw.begin.polymark
+      push: inline-code-content
+
+  inline-code-content:
+    # E19.1. Disable the prototype so PolyMark rules (comments, etc.) do not
+    # seep into inline code.
+    - meta_include_prototype: false
+    - meta_scope: markup.raw.inline.polymark
+
+    # E19.2. Closing backtick (checked first).
+    - match: '`'
+      scope: punctuation.definition.raw.end.polymark
+      pop: true
+
+    # E19.3. Inline code ends at the line boundary (not "correctly typed").
+    - match: '\n'
+      pop: true
+
+    # E19.4. Match everything else character-by-character.
+    - match: .
+      scope: markup.raw.inline.content.polymark
+  # End of E19
+
+  # E20. Fenced Code Block [Rule] (```lang ... ```)
+  # Spec 1.3: a fence with no language id, or labeled `txt`, `pm` or
+  # `polymark`, is parsed with the PolyMark engine (content includes `main`).
+  # Any other language falls through to the raw fallback (or, when installed,
+  # the companion language packs loaded via fenced-language-extensions).
+  fenced-code-block:
+    - include: fenced-language-extensions
+    - include: fenced-polymark
+    - include: fenced-raw
+
+  # E20. Extension point -- companion language packages.
+  # Each line references the hidden syntax of a companion package by its scope
+  # (`source.embedded.polymark.<lang>`). Uninstalled companions are ignored, so
+  # these lines are safe to keep wired. To add a language, install a companion
+  # package and add its scope here.
+  fenced-language-extensions:
+    - include: "scope:source.embedded.polymark.bash"
+    - include: "scope:source.embedded.polymark.js"
+    - include: "scope:source.embedded.polymark.mermaid"
+    - include: "scope:source.embedded.polymark.argdown"
+    # - include: "scope:source.embedded.polymark.python"
+    # - include: "scope:source.embedded.polymark.rust"
+
+  # E20. PolyMark-fallback fence (```, ```txt, ```pm, ```polymark). Content is
+  # parsed by the PolyMark engine, so heading/list/tag rules all apply.
+  fenced-polymark:
+    - match: '^([ \t]*)(```)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+      push: fenced-polymark-content
+    - match: '^([ \t]*)(```)(txt|pm|polymark)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+        3: constant.other.language-name.polymark
+      push: fenced-polymark-content
+
+  fenced-polymark-content:
+    - meta_scope: markup.raw.block.polymark
+
+    # E20.1. Closing fence (checked first).
+    - match: '^([ \t]*)(```)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.end.polymark
+      pop: true
+
+    # E20.2. Parse the interior with the PolyMark engine (spec 1.3).
+    - include: main
+
+  # E20. Raw fallback -- any other correctly typed fence renders as a code
+  # block in plain text when no companion handles the language.
+  fenced-raw:
+    - match: '^([ \t]*)(```)([A-Za-z0-9_\-]*)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.begin.polymark
+        3: constant.other.language-name.polymark
+      push: fenced-raw-content
+
+  fenced-raw-content:
+    - meta_include_prototype: false
+    - meta_scope: markup.raw.block.polymark
+
+    # E20.1. Closing fence (checked first).
+    - match: '^([ \t]*)(```)[ \t]*$'
+      captures:
+        2: punctuation.definition.raw.code-fence.end.polymark
+      pop: true
+
+    # E20.2. Content lines (no language highlighting).
+    - match: '.+'
+      scope: markup.raw.block.content.polymark
+  # End of E20
+
+  # E21. Markdown Table [Rule] (| a | b |) -- leading-pipe only. A table row
+  # must begin with a pipe on the same line; content between the outer pipes
+  # is matched as a single block, so inline rules (bold, email, ...) do not
+  # fire inside cells (same behavior as blockquotes).
+  table-header:
+    - match: '^([ \t]*)(\|)([^\n]*)(\|)[ \t]*$(?=\n[ \t]*\|[ \t]*:?-+:?[ \t]*(?:\|[ \t]*:?-+:?[ \t]*)*\|?[ \t]*$)'
+      captures:
+        1: markup.table.indent.polymark              # Leading indentation
+        2: punctuation.definition.table.cell.polymark # Leading pipe
+        3: markup.table.header.polymark               # Header cell text
+        4: punctuation.definition.table.cell.polymark # Trailing pipe
+      scope: markup.table.header.polymark
+  # End of E21 header
+
+  # E21. Separator row (| --- | :---: | --- |). Also covers a separator that
+  # follows no header (invalid but "correctly typed").
+  table-separator:
+    - match: '^([ \t]*)(\|)[ \t]*:?-+:?[ \t]*(?:\|[ \t]*:?-+:?[ \t]*)*\|?[ \t]*$'
+      captures:
+        1: markup.table.indent.polymark              # Leading indentation
+        2: punctuation.definition.table.cell.polymark # Leading pipe
+      scope: markup.table.separator.polymark
+  # End of E21 separator
+
+  # E21. Data row (| a | b |) -- any other well-formed leading-pipe row.
+  table-row:
+    - match: '^([ \t]*)(\|)([^\n]*)(\|)[ \t]*$'
+      captures:
+        1: markup.table.indent.polymark              # Leading indentation
+        2: punctuation.definition.table.cell.polymark # Leading pipe
+        3: markup.table.row.content.polymark          # Cell text
+        4: punctuation.definition.table.cell.polymark # Trailing pipe
+      scope: markup.table.row.polymark
+  # End of E21 row
+
+  # E22. Single-quoted Strings [Rule] ('text')
+  # Word-boundary lookarounds keep possessives ("player's") untagged.
+  single-quoted-string:
+    - match: "(?<![\\w])(')([^'\\n]+)(')(?![\\w])"
+      captures:
+        1: punctuation.definition.string.begin.single.polymark
+        2: string.quoted.single.polymark
+        3: punctuation.definition.string.end.single.polymark
+  # End of E22
+
+  # E23. Enclosed Groupings [Rule] ((...), [...], {...})
+  # Rendered as punctuation + content. Angle brackets are owned by E12/E35.
+  enclosed-grouping:
+    - match: '(?<![A-Za-z0-9_])(\()([^()\r\n]*)(\))(?![A-Za-z0-9_])'
+      captures:
+        1: punctuation.definition.group.begin.polymark
+        2: meta.enclosed.group.input.polymark
+        3: punctuation.definition.group.end.polymark
+      scope: meta.enclosed.group.polymark
+
+    - match: '(?<![A-Za-z0-9_])(\[)([^\[\]\r\n]*)(\])(?![A-Za-z0-9_])'
+      captures:
+        1: punctuation.definition.group.begin.polymark
+        2: meta.enclosed.group.input.polymark
+        3: punctuation.definition.group.end.polymark
+      scope: meta.enclosed.group.polymark
+
+    - match: '(?<![A-Za-z0-9_])(\{)([^{}\r\n]*)(\})(?![A-Za-z0-9_])'
+      captures:
+        1: punctuation.definition.group.begin.polymark
+        2: meta.enclosed.group.input.polymark
+        3: punctuation.definition.group.end.polymark
+      scope: meta.enclosed.group.polymark
+  # End of E23
+
+  # E24. Key-Value Bullet Headers [Rule] (- Label:, + Label (x):)
+  # Line starting with a bullet and ending with a colon (spec 2.3).
+  key-value-bullet:
+    - match: '^([\t ]*)([-+*])(\s+)(.+?)(:)[ \t]*$'
+      captures:
+        2: punctuation.definition.marker.polymark     # bullet
+        4: entity.name.key.bullet.polymark            # header label
+        5: punctuation.separator.colon.polymark       # trailing ':'
+      scope: meta.marker-definition.polymark
+  # End of E24
+
+  # E25. Numeric Lists [Rule] (1., 2., 3.)
+  numeric-list:
+    - match: '^([\t ]*)(\d+)\.([ \t]+)(.+)$'
+      captures:
+        2: constant.numeric.list.polymark
+        4: string.unquoted.marker-content.polymark
+      scope: meta.list.numeric.polymark
+  # End of E25
+
+  # E26. Outlines [Rule] -- alpha (A., a., B.) and alphanumeric (a1., a2c1.)
+  outline-alpha:
+    - match: '^([\t ]*)([A-Za-z])\.([ \t]+)(.+)$'
+      captures:
+        2: constant.numeric.outline.polymark
+        4: string.unquoted.marker-content.polymark
+      scope: meta.list.alpha.polymark
+  # End of E26 alpha
+
+  # E26. Alphanumeric outlines (a1., a2., a1b., a2c1., a2c2.)
+  outline-alnum:
+    - match: '^([\t ]*)([A-Za-z]\d+(?:[A-Za-z]\d+)*)\.([ \t]+)(.+)$'
+      captures:
+        2: constant.numeric.outline.alnum.polymark
+        4: string.unquoted.marker-content.polymark
+      scope: meta.list.alnum.polymark
+  # End of E26 alnum
+
+  # E27. File Paths [Rule] (POSIX, home, relative, Windows)
+  file-path:
+    # POSIX absolute: two or more /-segments (e.g. /usr/bin/)
+    - match: '(?<![A-Za-z0-9_])(/(?:[\w.@%+~-]+/)+[\w.@%+~-]+)'
+      captures:
+        1: string.unquoted.path.posix.polymark
+
+    # Home paths (e.g. ~/repo/file.txt)
+    - match: '(?<![A-Za-z0-9_])(~/(?:[\w.@%+~-]+/)*[\w.@%+~-]+)'
+      captures:
+        1: string.unquoted.path.posix.polymark
+
+    # Relative paths: ./x, ../x, or 2+ segments where a segment carries a dot
+    # (so prose like "and/or" and dates are left alone).
+    - match: '(?<![A-Za-z0-9_\.])((?:\.{1,2}/)?(?:[\w.@%+~-]+/){2,}[\w.@%+~-]+/?|(?:\.{1,2}/)?[\w.@%+~-]+/[\w.@%+~-]+\.[A-Za-z0-9]{1,6})'
+      captures:
+        1: string.unquoted.path.posix.polymark
+
+    # Windows paths (e.g. C:\path\to\file)
+    - match: '\b([A-Za-z]:\\)(?:[ \w.@%+~-]+\\)+[ \w.@%+~-]+'
+      captures:
+        1: string.unquoted.path.windows.polymark
+      scope: string.unquoted.path.windows.polymark
+  # End of E27
+
+  # E28. Web URLs [Rule] (http://, https://)
+  url:
+    - match: '(\bhttps?://)([\w\-._~:/?#\[\]@!$&,*;=%+]*)'
+      captures:
+        1: punctuation.definition.url.scheme.polymark
+        2: string.unquoted.url.polymark
+      scope: markup.underline.link.polymark
+  # End of E28
+
+  # E29. Markdown Links & Images [Rule] ([label](path_or_url))
+  markdown-link:
+    # Images: ![label](path)
+    - match: '(!)(\[)([^\]\n]+)(\]\()([^\s\)\n][^\)\n]*)(\))'
+      captures:
+        1: punctuation.definition.image.exclamation.polymark
+        2: punctuation.definition.link.begin.polymark
+        3: markup.underline.link.label.polymark
+        4: punctuation.definition.link.end.polymark
+        5: markup.underline.link.polymark
+        6: punctuation.definition.link.close.polymark
+      scope: markup.image.polymark
+
+    # Links: [label](path)
+    - match: '(\[)([^\]\n]+)(\]\()([^\s\)\n][^\)\n]*)(\))'
+      captures:
+        1: punctuation.definition.link.begin.polymark
+        2: markup.underline.link.label.polymark
+        3: punctuation.definition.link.end.polymark
+        4: markup.underline.link.polymark
+        5: punctuation.definition.link.close.polymark
+      scope: markup.link.polymark
+  # End of E29
+
+  # E30. Datetime Composite [Rule] (YYYY-MM-DD hh:mm:ss)
+  datetime:
+    - match: '\b\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2})?\b'
+      scope: constant.numeric.datetime.polymark
+  # End of E30
+
+  # E30. Date Variants [Rule] (DD-MM-YYYY, YYYY/MM/DD, DD/MM/YYYY)
+  date-variant:
+    - match: '\b\d{2}-\d{2}-\d{4}\b'
+      scope: constant.numeric.date.polymark
+    - match: '\b\d{4}/\d{2}/\d{2}\b'
+      scope: constant.numeric.date.polymark
+    - match: '\b\d{2}/\d{2}/\d{4}\b'
+      scope: constant.numeric.date.polymark
+  # End of E30
+
+  # E31. Times [Rule] (hh:mm:ss, hh-mm-ss, hh:mm)
+  time:
+    - match: '\b\d{2}:\d{2}:\d{2}\b'
+      scope: constant.numeric.time.polymark
+    - match: '\b\d{2}-\d{2}-\d{2}\b'
+      scope: constant.numeric.time.polymark
+    - match: '\b\d{2}:\d{2}\b'
+      scope: constant.numeric.time.polymark
+  # End of E31
+
+  # E32. Semantic Version [Rule] (v1.0.0)
+  semantic-version:
+    - match: '\bv\d+\.\d+\.\d+(?:[-+][\w.]+)?\b'
+      scope: constant.other.semver.polymark
+  # End of E32
+
+  # E33. Front Matter [Rule] (document-leading --- blocks)
+  # The opener is anchored to the very start of the buffer (`\A`), so mid-file
+  # '---' lines remain E6 horizontal rules and standalone '...' lines remain
+  # E34 ellipsis separators. The closing boundary may be `---` or `...`.
+  front-matter:
+    - match: '^\A---[ \t]*$'
+      scope: meta.separator.front-matter.polymark
+      push: front-matter-content
+
+  front-matter-content:
+    - meta_scope: meta.front-matter.polymark
+
+    # E33.1. Closing boundary (--- or ... on its own line).
+    - match: '^[ \t]*(---|\.\.\.)[ \t]*$'
+      scope: meta.separator.front-matter.polymark
+      pop: true
+
+    # E33.2. YAML `key: value` lines.
+    - match: '^([ \t]*)([A-Za-z_][A-Za-z0-9_\- .]*?)([ \t]*:)([ \t]*)(.+)$'
+      captures:
+        2: entity.name.key.frontmatter.polymark
+        3: punctuation.separator.key-value.frontmatter.polymark
+        5: string.unquoted.frontmatter.polymark
+
+    # E33.3. Spec 1.1 -- other PolyMark tokens still work inside a front-matter
+    # block (headings, bold, lists, ...). Tag/chevron rules excluded.
+    - include: main-no-tags
+  # End of E33
+
+  # E34. Standalone Ellipsis Separator [Rule] ('...' line)
+  ellipsis-separator:
+    - match: '^[ \t]*\.\.\.[ \t]*$'
+      scope: meta.separator.ellipsis.polymark
+  # End of E34
+
+  # E37. Box-Drawing Connectors [Rule] (context-aware)
+  # Only runs of 2+ ASCII connector chars, or whole lines of connectors, are
+  # colored; single bullets and table pipes are left to their own rules.
+  box-connector:
+    # A whole line made only of connectors (borders like `+ - - - - +`).
+    - match: '^[ \t]*[+\-|](?:[+\-| ][+\-|])*[ \t]*$'
+      scope: punctuation.definition.box.connector.polymark
+
+    # Runs of 2+ adjacent connector chars.
+    - match: '(?<![A-Za-z0-9_])([+\-|]{2,})(?![A-Za-z0-9_])'
+      scope: punctuation.definition.box.connector.polymark
+  # End of E37
+
+  # E38. Tree Outline Nodes [Rule] (├──, └──, │)
+  tree-node:
+    - match: '[├└](─+)'
+      scope: punctuation.definition.tree.branch.polymark
+    - match: '[│┃]'
+      scope: punctuation.definition.tree.guide.polymark
+    - match: '[┌┐└┘┏┓┗┛┣┫┳┻╋]'
+      scope: punctuation.definition.tree.corner.polymark
+  # End of E38
+
+  # E39. Tab-Delimited Columns [Rule] (lines with 2+ tabs)
+  # The tab characters are separators; the first three column cells get
+  # alternating scopes so aligned data reads as columns.
+  tab-delimited-columns:
+    - match: '^([ \t]*)([^\t\n]+)(\t)([^\t\n]+)(\t)([^\t\n]+)(\t)'
+      captures:
+        2: markup.table.column.1.polymark
+        3: punctuation.separator.tab.polymark
+        4: markup.table.column.2.polymark
+        5: punctuation.separator.tab.polymark
+        6: markup.table.column.3.polymark
+        7: punctuation.separator.tab.polymark
+      scope: markup.table.row.polymark
+  # End of E39
+
   # A6a. Keywords (reserved extension point)
   # Referenced by main but intentionally empty. Add keyword rules here to
   # extend PolyMark. Example (uncomment to use):
@@ -509,6 +1201,57 @@ contexts:
   # Styled by: "Keyword Extension Point (A6a)" in polymark.sublime-color-scheme
   # (unassigned placeholder -- fill in a color to style new keyword scopes).
   keywords: []
+
+  # ---------------------------------------------------------------------------
+  # Embedded main (headerless helpers)
+  # ---------------------------------------------------------------------------
+  # `main-no-tags` is `main` minus the E12/E35 tag rules. It is used inside tag
+  # content so nested elements advance the depth cycle instead of resetting it.
+  main-no-tags:
+    - include: date-time-stamp
+    - include: datetime
+    - include: duration-range
+    - include: date-variant
+    - include: semantic-version
+    - include: email
+    - include: url
+    - include: markdown-link
+    - include: file-path
+    - include: heading-compound
+    - include: front-matter
+    - include: task-status
+    - include: task-todo
+    - include: status-marker
+    - include: metadata
+    - include: area-slash-project
+    - include: heading
+    - include: horizontal-rule
+    - include: ellipsis-separator
+    - include: blockquote
+    - include: table-header
+    - include: table-separator
+    - include: table-row
+    - include: code-marker
+    - include: arrow
+    - include: bold
+    - include: italic
+    - include: key-value-bullet
+    - include: numeric-list
+    - include: outline-alpha
+    - include: outline-alnum
+    - include: fenced-code-block
+    - include: inline-code
+    - include: keywords
+    - include: strings
+    - include: single-quoted-string
+    - include: filename-extension
+    - include: enclosed-grouping
+    - include: tab-delimited-columns
+    - include: box-connector
+    - include: tree-node
+    - include: markers
+    - include: date-header
+    - include: time
 
   # End of Script
   # ---
