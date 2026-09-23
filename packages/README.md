@@ -34,6 +34,11 @@ Rules that keep one platform's bug from breaking the other:
   `polymark.sublime-syntax` / `polymark.sublime-color-scheme`, in
   `PolyMark/`. Never copy these (or any resource) into `User/` — a stale
   copy there shadows the package copy and "breaks" the install.
+- **Polymark theme variations live in `PolyMark/themes/`** (user-extensible;
+  the base scheme is never duplicated). Variations typically `extends`
+  `Packages/PolyMark/polymark.sublime-color-scheme`. The sync scripts copy
+  `themes/` recursively, alongside `assets/`, and now also copy
+  `*.sublime-commands`.
 
 ## Per-platform settings hierarchy (Sublime)
 

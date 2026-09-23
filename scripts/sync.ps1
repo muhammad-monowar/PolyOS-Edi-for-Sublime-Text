@@ -7,12 +7,16 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $src = Join-Path $repoRoot 'packages'
 $target = Join-Path $env:APPDATA 'Sublime Text\Packages'
+<# Linux (PowerShell Core): Sublime Text packages live under ~/.config/sublime-text #>
+if ($IsLinux) {
+    $target = Join-Path $HOME '.config/sublime-text/Packages'
+}
 
 if (-not (Test-Path -LiteralPath $src)) {
     Write-Error "Source folder not found: $src"
 }
 
-$extensions = @('.sublime-settings', '.sublime-keymap', '.sublime-syntax', '.sublime-color-scheme', '.sublime-theme', '.py')
+$extensions = @('.sublime-settings', '.sublime-keymap', '.sublime-syntax', '.sublime-color-scheme', '.sublime-theme', '.sublime-commands', '.py')
 
 $dry = if ($DryRun) { ' [DRY RUN]' } else { '' }
 Write-Host "Syncing packages to: $target$dry"
@@ -45,6 +49,16 @@ foreach ($pkgDir in Get-ChildItem -LiteralPath $src -Directory) {
             $destAssets = Join-Path $pkgTarget 'assets'
             New-Item -ItemType Directory -Path $destAssets -Force | Out-Null
             Get-ChildItem -LiteralPath $assetsDir | Copy-Item -Destination $destAssets -Recurse -Force
+        }
+    }
+
+    $themesDir = Join-Path $pkgDir.FullName 'themes'
+    if (Test-Path -LiteralPath $themesDir) {
+        Write-Host "    themes/"
+        if (-not $DryRun) {
+            $destThemes = Join-Path $pkgTarget 'themes'
+            New-Item -ItemType Directory -Path $destThemes -Force | Out-Null
+            Get-ChildItem -LiteralPath $themesDir | Copy-Item -Destination $destThemes -Recurse -Force
         }
     }
 }
