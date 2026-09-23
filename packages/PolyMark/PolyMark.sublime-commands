@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "PolyMark: Select Color Scheme...",
+        "command": "select_polymark_color_scheme"
+    }
+]

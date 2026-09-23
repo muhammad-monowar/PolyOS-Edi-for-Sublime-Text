@@ -76,13 +76,15 @@ Run the script after every `git pull`, or after editing files in `packages/`:
 
 The scripts mirror each folder under `packages/` into the platform's
 `Packages/` directory, copying only `*.sublime-settings`, `*.sublime-keymap`,
-`*.sublime-syntax`, `*.sublime-color-scheme`, `*.sublime-theme` and `*.py`.
-Theme asset folders (`assets/`) are copied recursively. The scripts are
+`*.sublime-syntax`, `*.sublime-color-scheme`, `*.sublime-theme`,
+`*.sublime-commands` and `*.py`.
+Subfolders `assets/` and `themes/` are copied recursively. The scripts are
 non-destructive: existing packages (and local-only files in `Packages/User`)
 are left alone.
 
 Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
-`~/Library/Application Support/Sublime Text/Packages/` on macOS.
+`~/Library/Application Support/Sublime Text/Packages/` on macOS, and
+`~/.config/sublime-text/Packages/` on Linux.
 
 ## Platform-specific files
 
@@ -115,7 +117,22 @@ Both platform keymaps define the same prose-mode controls:
 
 - `F5` — toggle distraction-free mode (hides the menu bar; restores its previous visibility on exit)
 - `F6` — toggle spell check, word/character count, the status bar, and the menu bar
-- `F7` — cycle between the PolyMark and ProseMode color schemes
+- `F7` — cycle through the PolyMark color scheme variations and ProseMode
+
+## PolyMark color scheme variations
+
+All PolyMark theme variations live in `packages/PolyMark/themes/`. The
+canonical base scheme (`polymark.sublime-color-scheme`) is never duplicated.
+
+- **Add your own:** drop a `<name>.sublime-color-scheme` into
+  `packages/PolyMark/themes/`, then run the sync script. Recommended pattern:
+  `"extends": "Packages/PolyMark/polymark.sublime-color-scheme"` plus a
+  `globals` block overriding `accent`, the kind hooks, `background`,
+  `foreground`, etc. — the base rules inherit automatically and the UI re-tints.
+- **Select a variation:** command palette → `PolyMark: Select Color Scheme...`
+  (applies to the active view) or `F7` to cycle through base → variations →
+  ProseMode.
+- See `packages/PolyMark/themes/README.md` for details.
 
 ## Notes
 

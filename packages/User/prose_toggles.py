@@ -37,17 +37,3 @@ class ToggleDistractionFreePolymarkCommand(sublime_plugin.WindowCommand):
     def _is_distraction_free(self, window):
         view = window.active_view()
         return view is not None and view.settings().get("draw_centered", False)
-
-
-class CycleColorSchemeCommand(sublime_plugin.TextCommand):
-    """Cycles between ProseMode and PolyMark color schemes."""
-    def run(self, edit):
-        prose_scheme = "Packages/ProseMode/ProseMode.sublime-color-scheme"
-        polymark_scheme = "Packages/PolyMark/polymark.sublime-color-scheme"
-        
-        current_scheme = self.view.settings().get("color_scheme")
-        
-        if current_scheme == prose_scheme:
-            self.view.settings().set("color_scheme", polymark_scheme)
-        else:
-            self.view.settings().set("color_scheme", prose_scheme)

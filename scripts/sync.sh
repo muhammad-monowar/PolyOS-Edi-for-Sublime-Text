@@ -13,7 +13,11 @@ else
 fi
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 SRC="$REPO_ROOT/packages"
-TARGET="$HOME/Library/Application Support/Sublime Text/Packages"
+case "$(uname -s)" in
+    Linux*)   TARGET="$HOME/.config/sublime-text/Packages" ;;
+    Darwin*)  TARGET="$HOME/Library/Application Support/Sublime Text/Packages" ;;
+    *)        TARGET="$HOME/Library/Application Support/Sublime Text/Packages" ;;
+esac
 
 if [[ ! -d "$SRC" ]]; then
     echo "Source folder not found: $SRC" >&2
@@ -41,6 +45,7 @@ for pkg_dir in "$SRC"/*/; do
         -name '*.sublime-syntax' -o \
         -name '*.sublime-color-scheme' -o \
         -name '*.sublime-theme' -o \
+        -name '*.sublime-commands' -o \
         -name '*.py' \
         \) -print)
 
@@ -60,6 +65,14 @@ for pkg_dir in "$SRC"/*/; do
         if ! $DRY_RUN; then
             mkdir -p "$pkg_target/assets"
             cp -Rf "$pkg_dir/assets/." "$pkg_target/assets/"
+        fi
+    fi
+
+    if [[ -d "$pkg_dir/themes" ]]; then
+        echo "    themes/"
+        if ! $DRY_RUN; then
+            mkdir -p "$pkg_target/themes"
+            cp -Rf "$pkg_dir/themes/." "$pkg_target/themes/"
         fi
     fi
 done

@@ -1,0 +1,1081 @@
+// -----------------------------------------------------------------------------
+// Polymark Neon -- a PolyMark color scheme variation
+// -----------------------------------------------------------------------------
+// Author : Muhammad Mustafa Monowar
+// Updated: 2026-09-23
+// Target : Sublime-Text
+// Base   : Polymark v.3.4.0 (packages/PolyMark/polymark.sublime-color-scheme)
+// License: MIT (see `LICENSE`).
+// -----------------------------------------------------------------------------
+//
+// This variation OVERRIDES the base scheme; it is not a standalone copy.
+// - `extends` pulls in every base rule, so any scope WITHOUT a rule below
+//   keeps the base styling and inherits future base updates automatically.
+// - `globals` (accent + the eight kind hooks) feed the PolyOS Editor Dark UI
+//   chrome: change them to re-tint the whole system to the neon palette.
+// - The rules below are the neon restyles, labeled by the A#/E# identifiers
+//   used in the base scheme's RULE INDEX.
+//
+// Add a new feature color in one place: if the base gains a scope you want
+// to restyle, add its rule here; otherwise it just inherits.
+
+{
+    "extends": "Packages/PolyMark/polymark.sublime-color-scheme",
+    "name": "Polymark Neon",
+    "globals":
+    {
+        // Theme hooks (consumed by themes that read these keys).
+        "background": "#000101",
+        "foreground": "#edecee",
+        "caret": "rgba(255, 255, 255, 0.2)",
+        "block_caret": "rgba(255, 255, 255, 0.2)",
+        "block_caret_border": "rgba(255, 255, 255, 0.2)",
+
+        // Accent + kind hooks aligned to the neon palette.
+        "accent": "#47ffc2",
+        "redish": "#f22222",     // Racing Red (neon alerts)
+        "orangish": "#ffb86c",
+        "yellowish": "#ffe733",  // Bright Lemon (neon statuses)
+        "greenish": "#47ffc2",
+        "cyanish": "#75faf8",
+        "bluish": "#47d4ff",
+        "purplish": "#9d70ff",
+        "pinkish": "#ff79c6",
+        "line_highlight": "#a394f033",
+        "selection": "#a394f033",
+        "selection_border": "#af8aff7f",
+        "find_highlight": "#3ea7847f",
+        "find_highlight_foreground": "#edecee",
+
+        // These ensure UI popups (like quickmenus) are styled
+        "popdown_background": "#000101",
+        "popup_background": "#000101",
+        "sheet_background": "#000101",
+
+        // Style brackets
+        "brackets_foreground": "#a394f033",
+        "brackets_options": "normal",
+        "bracket_contents_foreground": "#a394f033",
+        "bracket_contents_options": "normal",
+
+        // Style tags
+        "tags_options": "stippled_normal"
+    },
+    "rules":
+    [
+
+        // ---------------------------------------------------------------------
+        // Section A (core)
+        // ---------------------------------------------------------------------
+        {
+            "name": "Arrow Ligature (A2a)",
+            "scope": "keyword.operator.arrow.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "background": "",
+            "font_style": "bold"
+        },
+
+
+        // Capture 2 -- the leading '-' or '+'.
+        {
+            "name": "Polymark List/Marker Punctuation",
+            "scope": "punctuation.definition.marker.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+        // End of A7
+        {
+            "name": "Date Header",
+            "scope": "entity.name.section.header.date",
+            "foreground": "#ffafff", // color="Mauve"
+            //"background": "#ff4081", // color="Wild Strawberry"
+            "font_style": "bold"      // Optional: make it bold
+        },
+
+        // End of A8
+        {
+            "name": "Custom Date/Time Range Highlight",
+            "scope": "meta.date-range.time.span.custom",
+            "foreground": "#ffafff", // color="Mauve"
+            "background": "",
+            "font_style": ""     // Optional: "bold", "italic", or ""
+        },
+
+        // End of A9
+
+        // End of Section A
+        // ---
+
+        // ---------------------------------------------------------------------
+        // Section E (extensions)
+        // ---------------------------------------------------------------------
+
+        // E1. Capture 1 -- '@' before Area.
+        {
+            "name": "Area Tag Symbol",
+            "scope": "entity.name.tag.area.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            // "background": "#021012", // Color: Rich Black Background
+            "font_style": "italic"
+        },
+
+
+        // E1. Capture 2 -- Area name.
+        {
+            "name": "Area Name",
+            "scope": "entity.name.area.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            // "background": "#021012", // Color: Rich Black Background
+            "font_style": "italic"
+        },
+
+
+        // E1. Capture 3 -- '/' separator.
+        {
+            "name": "Area/Project Separator",
+            "scope": "punctuation.separator.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            // "background": "#021012", // Color: Rich Black Background
+            "font_style": "italic"
+        },
+
+
+        // E1. Capture 4 -- '@' before Project.
+        {
+            "name": "Project Tag Symbol",
+            "scope": "entity.name.tag.project.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            // "background": "#021012", // Color: Rich Black Background
+            "font_style": "italic"
+        },
+
+
+        // E1. Capture 5 -- Project name.
+        {
+            "name": "Project Name",
+            "scope": "entity.name.project.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            // "background": "#021012", // Color: Rich Black Background
+            "font_style": "italic"
+        },
+
+
+        // Encompassing scope for the whole heading line.
+        {
+            "name": "General Markdown Heading Line",
+            "scope": "markup.heading.markdown",
+            "foreground": "#9d70ff", // color="Soft Periwinkle"
+            "background": "",
+            "font_style": "bold"
+        },
+
+
+        // E2. Capture 1 -- the '#' symbols.
+        {
+            "name": "Markdown Heading Punctuation",
+            "scope": "punctuation.definition.heading.markdown",
+            "foreground": "#9d70ff", // color="Soft Periwinkle"
+            "font_style": "bold"
+        },
+
+        // End of E2
+
+        // E2. Capture 2 -- the space after the hashes. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Heading Separator (E2)",
+            "scope": "meta.separator.heading.markdown",
+            "foreground": "#9d70ff", // color="Soft Periwinkle"
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E3. Capture 2 -- the hyphen/bullet.
+        {
+            "name": "Task Bullet (Dark)",
+            "scope": "punctuation.definition.list.begin.markdown",
+            "foreground": "#75faf8", // color="Electric Aqua" 
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Task Incomplete Box (Dark)",
+            "scope": "markup.list.task.incomplete.markdown",
+            "foreground": "#75faf8", // color="Electric Aqua" 
+            "font_style": "bold"
+        },
+
+        // End of E3
+        {
+            "name": "Task Complete Box (Dark)",
+            "scope": "markup.list.task.complete.markdown",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "font_style": "bold"
+        },
+
+
+        // E5. Capture 2 -- InnerString (the key).
+        {
+            "name": "Metadata InnerString (Key)",
+            "scope": "string.unquoted.tag-name.custom",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Metadata Punctuation Separators",
+            "scope": "punctuation.definition.tag.begin.custom, punctuation.separator.key-value.custom",
+            "foreground": "#75faf8", // color="Electric Aqua"
+             "font_style": "bold"  
+        },
+
+        // End of E6
+        {
+            "name": "General Markdown Blockquote",
+            "scope": "markup.quote.markdown",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "background": "#052529", // name="Jet Black"
+            "font_style": ""   // No specific style; handled by content scope
+        },
+
+
+        // E7. Capture 3 -- the quoted content. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Blockquote Content (E7)",
+            "scope": "markup.quote.content.markdown",
+            "foreground": "",
+            "background": "",
+            "font_style": "italic"
+        },
+
+
+        // E8. The opening '"'. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "String Begin Punctuation (E8)",
+            "scope": "punctuation.definition.string.begin.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E8. The closing '"'. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "String End Punctuation (E8)",
+            "scope": "punctuation.definition.string.end.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            // "background": "#052529", // Color: Gunmetal
+            "font_style": ""
+        },
+
+
+        // E8. The quoted text (meta scope). UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Quoted String Content (E8)",
+            "scope": "string.quoted.double.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "background": "",
+            "font_style": ""
+        },
+
+        // End of E8
+        {
+            "name": "Polymark Comment Punctuation (//)",
+            "scope": "punctuation.definition.comment.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate"
+            "font_style": ""
+        },
+
+        {
+            "name": "Polymark Comment Content",
+            "scope": "comment.line.double-slash.content.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate"
+            "font_style": "italic"
+        },
+
+        // End of E9
+
+        // E9. Whole-line meta scope for the comment. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Comment Line Meta (E9)",
+            "scope": "comment.line.double-slash.polymark",
+            "foreground": "",
+            "background": "#141414", // name="Onyx"
+            "font_style": ""
+        },
+
+        {
+            "name": "Polymark bold Content",
+            "scope": "markup.bold.content.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation" 
+            "font_style": "bold", // The core styling: bold font
+        },
+
+        // End of E10
+
+        // E10. Opening '**' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "bold Begin Punctuation (E10)",
+            "scope": "punctuation.definition.bold.begin.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation" 
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E10. Closing '**' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "bold End Punctuation (E10)",
+            "scope": "punctuation.definition.bold.end.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation" 
+            "background": "",
+            "font_style": ""
+        },
+
+        {
+            "name": "Polymark Italic Content",
+            "scope": "markup.italic.content.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation"  
+            "font_style": "italic", // The core styling: italic font
+        },
+
+        // End of E11
+
+        // E11. Opening '*' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Italic Begin Punctuation (E11)",
+            "scope": "punctuation.definition.italic.begin.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation"  
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E11. Closing '*' delimiter. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Italic End Punctuation (E11)",
+            "scope": "punctuation.definition.italic.end.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation"  
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E12. Capture 1 -- the '<' / '>' / '</' punctuation.
+        {
+            "name": "Custom Tag Punctuation",
+            "scope": "punctuation.definition.tag.begin.polymark, punctuation.definition.tag.end.polymark",
+            "foreground": "#9d70ff", // color="Soft Periwinkle"
+            "font_style": "",
+            "background": "" // Color: Rich black background for highlight
+        },
+
+
+        // E12. Capture 2 -- the tag name.
+        {
+            "name": "Custom Tag Name",
+            "scope": "entity.name.tag.polymark",
+            "foreground": "#9d70ff", // color="Soft Periwinkle"
+            "font_style": "bold",
+            "background": "" // Color: Rich black background for highlight
+        },
+
+
+        // E12. Metascope -- content within the tags.
+        // This meta_scope applies background/font-style to everything inside.
+        // Nested elements cycle through depth1..5 (spec 2.6).
+        {
+            "name": "Custom Tag Content (Meta Scope)",
+            "scope": "meta.custom-tag.content.polymark, meta.custom-tag.depth1.polymark, meta.custom-tag.depth2.polymark, meta.custom-tag.depth3.polymark, meta.custom-tag.depth4.polymark, meta.custom-tag.depth5.polymark",
+            "foreground": "#9d70ff", // color="Soft Periwinkle"
+            "background": "#021012", // Color: Rich black background for highlight
+            "font_style": ""         // Set all content to italic if desired
+        },
+
+        // End of E12
+        {
+            "name": "Date-time-stamp (YYYY-MM-DD-HH-MM-SS)",
+            "scope": "constant.numeric.timestamp.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            // "background": "#021012", // name="Ink Black"
+            "font_style": "bold"
+        },
+
+        // End of E13
+
+        // E14. Capture 1 -- the username (before '@').
+        {
+            "name": "Polymark Email - User Name",
+            "scope": "constant.character.user-name.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": ""
+        },
+
+
+        // E14. Capture 2 -- the domain (after '@').
+        {
+            "name": "Polymark Email - Domain Name",
+            "scope": "constant.character.domain.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": ""
+        },
+
+
+        // E14. Capture 3 -- the '@' symbol.
+        {
+            "name": "Polymark Email - At Symbol",
+            "scope": "punctuation.definition.email.at.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": ""
+        },
+
+        // End of E14
+
+        // E14. Whole-match meta scope for the email. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Email Meta (E14)",
+            "scope": "string.quoted.email.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "background": "",
+            "font_style": ""
+        },
+
+        {
+            "name": "Status Marker [?]",
+            "scope": "markup.status.ind-question.polymark",
+            "foreground": "#ff79c6", // color="Pink Carnation"
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Status Marker [!]",
+            "scope": "markup.status.ind-alert.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "font_style": "bold"
+        },
+
+        // End of E15
+
+        // E16a. The '$' symbol.
+        {
+            "name": "Code Marker Dollar Symbol",
+            "scope": "punctuation.definition.dollar.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx" 
+            "font_style": ""
+        },
+
+
+        // E16b. The separating space.
+        {
+            "name": "Polymark Dollar Separator (Space)",
+            "scope": "punctuation.separator.dollar.polymark",
+            "background": "#141414", // name="Onyx" 
+        },
+
+
+        // E16c. The code string after the space.
+        {
+            "name": "Code Marker String Content",
+            "scope": "string.unquoted.dollar-line.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx" 
+            "font_style": ""
+        },
+
+        // End of E16
+
+        // E16. Whole-line meta scope for the code marker. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Code Marker Line Meta (E16)",
+            "scope": "meta.dollar-line.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx" 
+            "font_style": ""
+        },
+
+        {
+            "name": "Status Marker [/]",
+            "scope": "markup.status.in-progress.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate"
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Status Marker [!]",
+            "scope": "markup.status.alert.polymark",
+            "foreground": "#f22222", // color="Racing Red"
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Status Marker [?]",
+            "scope": "markup.status.question.polymark",
+            "foreground": "#ffe733", // color="Bright Lemon" 
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Status Marker [-] Abandoned Content",
+            "scope": "markup.status.abandoned.content.polymark",
+            "foreground": "#565656", // name="Charcoal"
+            "font_style": "bold"
+        },
+
+        // End of E17
+
+        // E18a. The filename.
+        {
+            "name": "Filename",
+            "scope": "entity.name.filename.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "normal"
+        },
+
+
+        // E18b. The extension.
+        {
+            "name": "File Extension",
+            "scope": "entity.name.extension.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "normal"
+        },
+
+
+        // E18. Whole-match meta scope for the filename. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Filename Meta (E18)",
+            "scope": "meta.filename.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "background": "",
+            "font_style": ""
+        },
+
+        // End of E18
+
+        // A6a. Keywords extension point -- styles the scope used by the syntax's
+        // `keywords` context example. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Keyword Extension Point (A6a)",
+            "scope": "keyword.other.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E19a. Opening backtick. UNASSIGNED: set `foreground` to style.
+        {
+            "name": "Inline Code Backtick (E19)",
+            "scope": "punctuation.definition.raw.begin.polymark, punctuation.definition.raw.end.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx"
+            "font_style": "normal"
+        },
+
+
+        // E19b. The inline code content.
+        {
+            "name": "Inline Code Content (E19)",
+            "scope": "markup.raw.inline.polymark, markup.raw.inline.content.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx"
+            "font_style": "normal"
+        },
+
+        // End of E19
+
+        // E20a. The fence delimiters (```).
+        {
+            "name": "Code Block Fence (E20)",
+            "scope": "punctuation.definition.raw.code-fence.begin.polymark, punctuation.definition.raw.code-fence.end.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx"
+            "font_style": "bold"
+        },
+
+
+        // E20b. The language token after the fence (if any).
+        {
+            "name": "Code Block Language Token (E20)",
+            "scope": "constant.other.language-name.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx"
+            "font_style": "bold italic"
+        },
+
+
+        // E20c. The fenced block base (whole block, incl. content).
+        {
+            "name": "Code Block Base (E20)",
+            "scope": "markup.raw.block.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx"
+        },
+
+
+        // E20d. Raw content lines (non-PolyMark languages).
+        {
+            "name": "Code Block Content (E20)",
+            "scope": "markup.raw.block.content.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "background": "#141414", // name="Onyx"
+        },
+
+        // End of E20
+
+        // E21a. The '|' cell separators.
+        {
+            "name": "Table Cell Pipe (E21)",
+            "scope": "punctuation.definition.table.cell.polymark",
+            "foreground": "#94b3ae", // name="Ash Grey"
+            "background": "",
+            "font_style": "bold"
+        },
+
+
+        // E21b. Header row scope.
+        {
+            "name": "Table Header Row (E21)",
+            "scope": "markup.table.header.polymark",
+            "foreground": "#94b3ae", // name="Ash Grey" 
+            "background": "#052529", // name="Jet Black" 
+            "font_style": "bold"
+        },
+
+
+        // E21c. Separator row scope (| --- | :---: |).
+        {
+            "name": "Table Separator Row (E21)",
+            "scope": "markup.table.separator.polymark",
+            "foreground": "#94b3ae", // name="Ash Grey"
+            "background": "#021012", // name="Ink Black" 
+        },
+
+
+        // E21d. Data row base scope.
+        {
+            "name": "Table Row Base (E21)",
+            "scope": "markup.table.row.polymark",
+            "foreground": "#94b3ae", // name="Ash Grey"
+            "background": "#052529", // name="Jet Black"
+        },
+
+
+        // E21e. Data row cell content.
+        {
+            "name": "Table Row Content (E21)",
+            "scope": "markup.table.row.content.polymark",
+            "foreground": "#94b3ae", // name="Ash Grey"
+            "background": "#052529", // name="Jet Black"
+            "font_style": "normal"
+        },
+
+
+        // E21f. Leading indentation of a table row.
+        {
+            "name": "Table Indent (E21)",
+            "scope": "markup.table.indent.polymark",
+            "foreground": "",
+            "background": "#141414", // name="Onyx"
+            "font_style": ""
+        },
+
+        // End of E21
+
+        // E22a. The enclosing apostrophes.
+        {
+            "name": "Single-quote String Punctuation (E22)",
+            "scope": "punctuation.definition.string.begin.single.polymark, punctuation.definition.string.end.single.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E22b. The quoted text.
+        {
+            "name": "Single-quoted String Content (E22)",
+            "scope": "string.quoted.single.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "background": "",
+            "font_style": ""
+        },
+
+        // End of E22
+
+        // E23a. The opening/closing punctuation.
+        {
+            "name": "Enclosed Group Punctuation (E23)",
+            "scope": "punctuation.definition.group.begin.polymark, punctuation.definition.group.end.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate" 
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E23b. Group meta scope.
+        {
+            "name": "Enclosed Group Meta (E23)",
+            "scope": "meta.enclosed.group.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate"
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E23c. Group content (input).
+        {
+            "name": "Enclosed Group Input (E23)",
+            "scope": "meta.enclosed.group.input.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate" 
+            "background": "",
+            "font_style": ""
+        },
+
+        // End of E23
+
+        // E24a. The label before the colon.
+        {
+            "name": "Key-Value Bullet Header (E24)",
+            "scope": "entity.name.key.bullet.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+
+        // E24b. The trailing ':' separator.
+        {
+            "name": "Key-Value Bullet Colon (E24)",
+            "scope": "punctuation.separator.colon.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+        // End of E24
+        {
+            "name": "Numeric List Index (E25)",
+            "scope": "constant.numeric.list.polymark",
+            "foreground": "#75faf8", // Color: Electric Aqua, same as the marker accent
+            "font_style": "bold"
+        },
+
+        // End of E25
+
+        // E26a. Simple alpha outline indices.
+        {
+            "name": "Alpha Outline Index (E26)",
+            "scope": "constant.numeric.outline.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+
+        // E26b. Alphanumeric outline indices.
+        {
+            "name": "Alphanumeric Outline Index (E26)",
+            "scope": "constant.numeric.outline.alnum.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+        // End of E26
+
+        // E25/E26. Whole-line meta scopes for numeric/alpha/alnum list items
+        // (they cover the trailing '.' and separators between captures).
+        {
+            "name": "Numeric List Item Meta (E25)",
+            "scope": "meta.list.numeric.polymark",
+            "foreground": "#edecee", // Color: Platinum
+            "background": "",
+            "font_style": ""
+        },
+
+        {
+            "name": "Alpha Outline Item Meta (E26)",
+            "scope": "meta.list.alpha.polymark",
+            "foreground": "#edecee", // name="Platinum"
+            "background": "",
+            "font_style": ""
+        },
+
+        {
+            "name": "Alphanumeric Outline Item Meta (E26)",
+            "scope": "meta.list.alnum.polymark",
+            "foreground": "#edecee", // name="Platinum"
+            "background": "",
+            "font_style": ""
+        },
+
+        // End of E25/E26 meta
+
+        // E27a. POSIX-style paths.
+        {
+            "name": "File Path POSIX (E27)",
+            "scope": "string.unquoted.path.posix.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "italic"
+        },
+
+
+        // E27b. Windows-style paths.
+        {
+            "name": "File Path Windows (E27)",
+            "scope": "string.unquoted.path.windows.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "italic"
+        },
+
+        // End of E27
+
+        // E28a. The scheme + '://'.
+        {
+            "name": "URL Scheme (E28)",
+            "scope": "punctuation.definition.url.scheme.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "underline"
+        },
+
+
+        // E28b. The URL body.
+        {
+            "name": "URL Body (E28)",
+            "scope": "string.unquoted.url.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "underline"
+        },
+
+        // End of E28
+
+        // E28/E29. Shared underline scope (used by bare URLs and link targets).
+        {
+            "name": "Link Target Underline (E28/E29)",
+            "scope": "markup.underline.link.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "font_style": "underline"
+        },
+
+
+        // E29a. The '!' for images.
+        {
+            "name": "Markdown Image Bang (E29)",
+            "scope": "punctuation.definition.image.exclamation.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"
+            "font_style": "bold"
+        },
+
+
+        // E29b. The link brackets.
+        {
+            "name": "Markdown Link Brackets (E29)",
+            "scope": "punctuation.definition.link.begin.polymark, punctuation.definition.link.end.polymark, punctuation.definition.link.close.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel"  
+            "font_style": ""
+        },
+
+
+        // E29c. The link label/alt text inside the brackets.
+        {
+            "name": "Markdown Link Label (E29)",
+            "scope": "markup.underline.link.label.polymark",
+            "foreground": "#ffb86c", // color="Light Caramel" 
+            "font_style": ""
+        },
+
+
+        // E29d. Whole-match meta scopes for links and images.
+        {
+            "name": "Markdown Link Meta (E29)",
+            "scope": "markup.link.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "background": "",
+            "font_style": "italic"
+        },
+
+        {
+            "name": "Markdown Image Meta (E29)",
+            "scope": "markup.image.polymark",
+            "foreground": "#47d4ff", // color="Sky Aqua"
+            "background": "",
+            "font_style": "italic"
+        },
+
+        // End of E29
+        {
+            "name": "Datetime Composite (E30)",
+            "scope": "constant.numeric.datetime.polymark",
+            "foreground": "#47ffc2", // Color: Tropical Mint
+            "font_style": "bold"
+        },
+
+        {
+            "name": "Date Variant (E30)",
+            "scope": "constant.numeric.date.polymark",
+            "foreground": "#47ffc2", // Color: Tropical Mint
+            "font_style": "bold"
+        },
+
+        // End of E30
+        {
+            "name": "Time Token (E31)",
+            "scope": "constant.numeric.time.polymark",
+            "foreground": "#47ffc2", // Color: Tropical Mint
+            "font_style": "bold"
+        },
+
+        // End of E31
+        {
+            "name": "Semantic Version (E32)",
+            "scope": "constant.other.semver.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "font_style": "bold"
+        },
+
+        // End of E32
+
+        // E33a. Whole-block scope.
+        {
+            "name": "Front Matter Block (E33)",
+            "scope": "meta.front-matter.polymark",
+            "foreground": "#ffffff", // name="White"
+            "background": "",
+            "font_style": ""
+        },
+
+
+        // E33b. The --- / ... boundaries.
+        {
+            "name": "Front Matter Boundary (E33)",
+            "scope": "meta.separator.front-matter.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            "background": "",
+            "font_style": "bold"
+        },
+
+
+        // E33c. The YAML keys.
+        {
+            "name": "Front Matter Key (E33)",
+            "scope": "entity.name.key.frontmatter.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            "font_style": ""
+        },
+
+
+        // E33d. The ':' separator.
+        {
+            "name": "Front Matter Colon (E33)",
+            "scope": "punctuation.separator.key-value.frontmatter.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            "font_style": ""
+        },
+
+
+        // E33e. The values.
+        {
+            "name": "Front Matter Value (E33)",
+            "scope": "string.unquoted.frontmatter.polymark",
+            "foreground": "#aca9b1", // name="Pale Slate"
+            "font_style": ""
+        },
+
+        // End of E33
+        {
+            "name": "Document Ellipsis Separator (E34)",
+            "scope": "meta.separator.ellipsis.polymark",
+            "foreground": "#ffafff", // color="Mauve"
+            "font_style": "bold"
+        },
+
+        // End of E34
+
+        // E35a. The '<' ... '>' punctuation.
+        {
+            "name": "Chevron Punctuation (E35)",
+            "scope": "punctuation.definition.tag.begin.chevron.polymark, punctuation.definition.tag.end.chevron.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "font_style": ""
+        },
+
+
+        // E35b. The variable name.
+        {
+            "name": "Chevron Variable Name (E35)",
+            "scope": "entity.name.variable.chevron.polymark",
+            "foreground": "#47ffc2", // color="Tropical Mint"
+            "font_style": "bold"
+        },
+
+        // End of E35
+        {
+            "name": "Box-Drawing Connector (E37)",
+            "scope": "punctuation.definition.box.connector.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+        // End of E37
+
+        // E38a. Branches (├──, └──).
+        {
+            "name": "Tree Branch (E38)",
+            "scope": "punctuation.definition.tree.branch.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+
+        // E38b. Vertical guides (│, ┃).
+        {
+            "name": "Tree Guide (E38)",
+            "scope": "punctuation.definition.tree.guide.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "normal"
+        },
+
+
+        // E38c. Corners and junctions (┌ ┐ └ ┘ ┏ ┓ ┗ ┛ ┣ ┫ ┳ ┻ ╋).
+        {
+            "name": "Tree Corner (E38)",
+            "scope": "punctuation.definition.tree.corner.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        },
+
+        // End of E38
+
+        // E39a. The tab separators.
+        {
+            "name": "Tab Column Separator (E39)",
+            "scope": "punctuation.separator.tab.polymark",
+            "foreground": "",
+            "background": "#141414", // name="Onyx"
+            "font_style": ""
+        },
+
+
+        // E39b. The first three column cells (alternating).
+        {
+            "name": "Tab Column 1..3 (E39)",
+            "scope": "markup.table.column.1.polymark, markup.table.column.2.polymark, markup.table.column.3.polymark",
+            "foreground": "#94b3ae", // name="Ash Grey" // Color: Ash gray
+            "background": "#141414", // name="Onyx"
+            "font_style": "normal"
+        },
+
+        // End of E39
+
+        // The bullet uses the marker scope, the checkbox uses the E3/E4 task
+        // scopes and the hashes use the E2 heading scopes -- all already styled
+        // above. This rule covers the asterisk-bullet variant of A7.
+        {
+            "name": "Polymark Asterisk Bullet",
+            "scope": "punctuation.definition.marker.asterisk.polymark",
+            "foreground": "#75faf8", // color="Electric Aqua"
+            "font_style": "bold"
+        }
+
+    ]
+
+}
