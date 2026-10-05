@@ -1,4 +1,4 @@
-| SYNTAX TEST "Packages/PolyMark/polymark.sublime-syntax"
+| SYNTAX TEST "Packages/PolyOS-Edi-for-Sublime-Text/polymark.sublime-syntax"
 
 # Section A (core) -- markers, date header, duration, arrows
 + item
