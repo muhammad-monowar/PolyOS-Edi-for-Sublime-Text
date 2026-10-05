@@ -32,12 +32,18 @@ def _state():
     return sublime.load_settings(STATE_FILE)
 
 
-def _is_declined():
-    return _state().get("polyos_activate") is False
+def _already_decided():
+    """True once the prompt has been answered, either way.
+
+    Both outcomes have to suppress the dialog: False means the user skipped
+    it, True means they applied the profile. Only an absent key means the
+    question has never been put to them.
+    """
+    return _state().has("polyos_activate")
 
 
 def _maybe_prompt():
-    if _is_declined():
+    if _already_decided():
         return
 
     window = sublime.active_window()
