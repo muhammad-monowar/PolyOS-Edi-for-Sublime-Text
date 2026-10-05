@@ -77,7 +77,7 @@
     "globals":
     {
         // These keys are read by themes that hook into the color scheme.
-        "background": "#000101",
+        "background": "#0E1410",
         "foreground": "#edecee",
         "caret": "rgba(255, 255, 255, 0.2)",
         "block_caret": "rgba(255, 255, 255, 0.2)",
@@ -100,9 +100,9 @@
         "find_highlight_foreground": "#edecee",
 
         // These ensure UI popups (like quickmenus) are styled
-        "popdown_background": "#000101",
-        "popup_background": "#000101",
-        "sheet_background": "#000101",
+        "popdown_background": "#0E1410",
+        "popup_background": "#0E1410",
+        "sheet_background": "#0E1410",
 
         // Style brackets
         "brackets_foreground": "#a394f033",

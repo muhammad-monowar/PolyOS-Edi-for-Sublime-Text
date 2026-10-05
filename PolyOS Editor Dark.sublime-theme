@@ -8,11 +8,15 @@
 //   --polyos-background-raised #16201A  hover / raised surfaces
 //   --polyos-foreground        #E8EAE6  primary UI text
 //   --polyos-secondary         #6A7B70  muted green-gray
-//   --polyos-accent            #FFFFFF  white highlight
 //   --polyos-border            #16201A  separators / grid lines
 //
-// var(--accent) follows the active color scheme's globals.accent so that
-// PolyMark and ProseMode both re-tint the UI chrome automatically.
+// --accent is deliberately NOT redefined here. It is read from the active
+// color scheme's globals.accent, so PolyMark and ProseMode re-tint the UI
+// chrome automatically. Declaring it in this block would shadow the color
+// scheme and pin every accent element (quick panel matches, find matches,
+// score labels, expanded folders) to one hardcoded colour, which is what
+// made the chrome disagree with the editor palette.
+// A color scheme that omits globals.accent leaves those elements untinted.
 // See the package README for full customization notes.
 // ============================================================================
 {
@@ -21,9 +25,7 @@
     "--polyos-background-raised": "#16201A",
     "--polyos-foreground": "#E8EAE6",
     "--polyos-secondary": "#6A7B70",
-    "--polyos-accent": "#FFFFFF",
-    "--polyos-border": "#16201A",
-    "--accent": "#FFFFFF"
+    "--polyos-border": "#16201A"
 },
   "rules": [
     // Title bar
@@ -289,13 +291,13 @@
       "tint_index": 1,
       "layer0.inner_margin": [
         2,
-        6
+        2
       ],
       "content_margin": [12, 0, 8, 0],
       "tab_overlap": 0,
       "tab_width": 180,
       "tab_min_width": 64,
-      "tab_height": 54,
+      "tab_height": 34,
       "mouse_wheel_switch": false
     },
     {
@@ -339,9 +341,9 @@
       },
       "content_margin": [
         18,
-        12,
+        9,
         11,
-        4
+        3
       ],
       "max_margin_trim": 0,
       "hit_test_level": 0.4
@@ -2214,7 +2216,7 @@
       "tab_height": 36,
       "content_margin": [
         12,
-        -4,
+        0,
         8,
         0
       ]
