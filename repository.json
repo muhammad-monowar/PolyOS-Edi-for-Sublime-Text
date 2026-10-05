@@ -4,7 +4,7 @@
   "packages": [
     {
       "name": "PolyOS Editor",
-      "details": "https://github.com/mmmonowar/dev-PolyOS-Edi-for-Sublime-Text",
+      "details": "https://github.com/muhammad-monowar/PolyOS-Edi-for-Sublime-Text",
       "labels": ["color scheme", "syntax", "theme", "preferences"],
       "releases": [
         {
