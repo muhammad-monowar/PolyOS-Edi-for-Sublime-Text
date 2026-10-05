@@ -37,11 +37,7 @@
     },
     {
       "class": "sheet_container_control",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0
     },
     // Layout grids
@@ -61,28 +57,20 @@
     },
     {
       "class": "dialog",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0
     },
     {
       "class": "progress_bar_control",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0
     },
     {
       "class": "fold_button_control",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/fold_right.png",
+      "layer0.texture": "assets/commons/fold_right.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/fold_right--hover.png",
+      "layer1.texture": "assets/commons/fold_right--hover.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": 0,
       "content_margin": [
@@ -105,18 +93,13 @@
       "attributes": [
         "expanded"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/fold_down.png",
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/fold_down--hover.png"
+      "layer0.texture": "assets/vim blackboard/fold_down.png",
+      "layer1.texture": "assets/commons/fold_down--hover.png"
     },
     // HTML popup
     {
       "class": "popup_control",
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        255
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0,
       "content_margin": [
         0,
@@ -129,12 +112,7 @@
         12,
         6
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        255
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0
     },
     {
@@ -187,7 +165,7 @@
     // Overlay / quick panel
     {
       "class": "overlay_control",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/overlay-bg.png",
+      "layer0.texture": "assets/vim blackboard/overlay-bg.png",
       "layer0.inner_margin": [
         24,
         4,
@@ -195,7 +173,7 @@
         33
       ],
       "layer0.opacity": 1.0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/quick-panel-background.png",
+      "layer1.texture": "assets/commons/quick-panel-background.png",
       "layer1.inner_margin": [
         16,
         0,
@@ -212,12 +190,7 @@
     },
     {
       "class": "mini_quick_panel_row",
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": [0,0,0,0],
       "layer0.inner_margin": [
         2,
         2,
@@ -233,47 +206,7 @@
       ],
       "layer0.tint": "var(--polyos-secondary)"
     },
-    // Quick panel
-    {
-      "class": "quick_panel",
-      "row_padding": [
-        32,
-        12
-      ],
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
-      "layer0.opacity": 1.0
-    },
-    // Quick panel rows
-    {
-      "class": "quick_panel_row",
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "layer0.opacity": 1.0
-    },
-    // Quick panel rows
-    {
-      "class": "quick_panel_row",
-      "parents": [
-        {
-          "class": "overlay_control"
-        }
-      ],
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "layer0.opacity": 1.0
-    },
+
     // Quick panel
     {
       "class": "quick_panel",
@@ -286,12 +219,7 @@
         32,
         12
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0
     },
     // Quick panel rows
@@ -357,22 +285,13 @@
     {
       "class": "tabset_control",
       "layer0.opacity": 1.0,
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "tint_index": 1,
       "layer0.inner_margin": [
         2,
         6
       ],
-      "content_margin": [
-        12,
-        -10,
-        8,
-        0
-      ],
+      "content_margin": [12, 0, 8, 0],
       "tab_overlap": 0,
       "tab_width": 180,
       "tab_min_width": 64,
@@ -390,18 +309,14 @@
     // Tabs (containers)
     {
       "class": "tab_control",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.inner_margin": [
         24,
         0
       ],
       "layer0.opacity": 1.0,
       "tint_index": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/tab_current.png",
+      "layer1.texture": "assets/vim blackboard/tab_current.png",
       "layer1.inner_margin": [
         0,
         0
@@ -528,18 +443,18 @@
         0,
         0
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/close_icon.png",
+      "layer0.texture": "assets/vim blackboard/close_icon.png",
       "layer0.opacity": 1,
       "layer0.inner_margin": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/close_icon--hover.png",
+      "layer1.texture": "assets/commons/close_icon--hover.png",
       "layer1.opacity": {
         "target": 0.0,
         "speed": 5.0,
         "interpolation": "smoothstep"
       },
-      "layer2.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/dirty_icon.png",
+      "layer2.texture": "assets/vim blackboard/dirty_icon.png",
       "layer2.inner_margin": 0,
-      "layer3.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/dirty_icon--hover.png",
+      "layer3.texture": "assets/commons/dirty_icon--hover.png",
       "layer3.opacity": {
         "target": 0.0,
         "speed": 5.0,
@@ -668,10 +583,10 @@
         14,
         7
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/arrow_left.png",
+      "layer0.texture": "assets/vim blackboard/arrow_left.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/arrow_left--hover.png",
+      "layer1.texture": "assets/commons/arrow_left--hover.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": 0
     },
@@ -688,10 +603,10 @@
         14,
         7
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/arrow_right.png",
+      "layer0.texture": "assets/vim blackboard/arrow_right.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/arrow_right--hover.png",
+      "layer1.texture": "assets/commons/arrow_right--hover.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": 0
     },
@@ -708,10 +623,10 @@
         12,
         12
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/overflow_menu.png",
+      "layer0.texture": "assets/vim blackboard/overflow_menu.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/overflow_menu--hover.png",
+      "layer1.texture": "assets/commons/overflow_menu--hover.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": 0
     },
@@ -724,11 +639,7 @@
     },
     {
       "class": "sidebar_container",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0,
       "layer0.draw_center": false,
       "layer0.inner_margin": [
@@ -753,11 +664,7 @@
       "indent": 16,
       "indent_offset": 0,
       "indent_top_level": false,
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0
     },
     // Sidebar (section headings)
@@ -798,7 +705,7 @@
     // Sidebar (row states)
     {
       "class": "tree_row",
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/tree_highlight.png",
+      "layer1.texture": "assets/vim blackboard/tree_highlight.png",
       "layer1.opacity": {
         "target": 0.0,
         "speed": 5.0,
@@ -1016,17 +923,13 @@
         10,
         8
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/folder.png",
+      "layer1.texture": "assets/vim blackboard/folder.png",
       "layer1.opacity": 1,
-      "layer2.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder--hover.png",
+      "layer2.texture": "assets/commons/folder--hover.png",
       "layer2.opacity": 0.0,
-      "layer3.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover.png",
+      "layer3.texture": "assets/commons/folder_opened--hover.png",
       "layer3.opacity": 0.0
     },
     // Sidebar (folder icons)
@@ -1073,19 +976,19 @@
       ],
       "layer3.texture": {
         "keyframes": [
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-0.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-1.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-2.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-3.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-4.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-5.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-5.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-5.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-6.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-6.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-6.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-6.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover-7.png"
+          "assets/commons/folder_opened--hover-0.png",
+          "assets/commons/folder_opened--hover-1.png",
+          "assets/commons/folder_opened--hover-2.png",
+          "assets/commons/folder_opened--hover-3.png",
+          "assets/commons/folder_opened--hover-4.png",
+          "assets/commons/folder_opened--hover-5.png",
+          "assets/commons/folder_opened--hover-5.png",
+          "assets/commons/folder_opened--hover-5.png",
+          "assets/commons/folder_opened--hover-6.png",
+          "assets/commons/folder_opened--hover-6.png",
+          "assets/commons/folder_opened--hover-6.png",
+          "assets/commons/folder_opened--hover-6.png",
+          "assets/commons/folder_opened--hover-7.png"
         ],
         "loop": false,
         "frame_time": 0.02
@@ -1105,25 +1008,25 @@
           ]
         }
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder--hover.png"
+      "layer1.texture": "assets/commons/folder--hover.png"
     },
     // Sidebar (folder loading spinner)
     {
       "class": "icon_folder_loading",
       "layer1.texture": {
         "keyframes": [
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner11.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner10.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner9.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner8.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner7.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner6.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner5.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner4.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner3.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner2.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner1.png",
-          "PolyOS-Edi-for-Sublime-Text/assets/commons/spinner.png"
+          "assets/commons/spinner11.png",
+          "assets/commons/spinner10.png",
+          "assets/commons/spinner9.png",
+          "assets/commons/spinner8.png",
+          "assets/commons/spinner7.png",
+          "assets/commons/spinner6.png",
+          "assets/commons/spinner5.png",
+          "assets/commons/spinner4.png",
+          "assets/commons/spinner3.png",
+          "assets/commons/spinner2.png",
+          "assets/commons/spinner1.png",
+          "assets/commons/spinner.png"
         ],
         "loop": true,
         "frame_time": 0.075
@@ -1136,7 +1039,7 @@
     },
     {
       "class": "icon_folder_dup",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/folder_dup.png",
+      "layer0.texture": "assets/vim blackboard/folder_dup.png",
       "layer0.opacity": 1.0,
       "content_margin": [
         13,
@@ -1153,7 +1056,7 @@
           ]
         }
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_dup--hover.png"
+      "layer0.texture": "assets/commons/folder_dup--hover.png"
     },
     {
       "class": "icon_folder_dup",
@@ -1165,14 +1068,14 @@
           ]
         }
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_dup--hover.png"
+      "layer0.texture": "assets/commons/folder_dup--hover.png"
     },
     {
       "class": "disclosure_button_control",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/folder.png",
+      "layer0.texture": "assets/vim blackboard/folder.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": 0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder--hover.png",
+      "layer1.texture": "assets/commons/folder--hover.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": 0,
       "content_margin": [
@@ -1200,16 +1103,12 @@
       "attributes": [
         "expanded"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder_opened--hover.png"
+      "layer0.texture": "assets/commons/folder_opened--hover.png"
     },
     // Sidebar (row states)
     {
       "class": "tree_row",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 0.0,
       "layer0.inner_margin": [
         1,
@@ -1230,7 +1129,7 @@
         8,
         8
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/close_icon.png",
+      "layer0.texture": "assets/vim blackboard/close_icon.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 7.0,
@@ -1240,7 +1139,7 @@
         0,
         0
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/close_icon--hover.png",
+      "layer1.texture": "assets/commons/close_icon--hover.png",
       "layer1.opacity": 0,
       "layer1.inner_margin": [
         0,
@@ -1257,7 +1156,7 @@
           ]
         }
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/close_icon.png",
+      "layer0.texture": "assets/vim blackboard/close_icon.png",
       "layer0.opacity": {
         "target": 1.0,
         "speed": 7.0,
@@ -1273,7 +1172,7 @@
       "attributes": [
         "dirty"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/dirty_icon--hover.png",
+      "layer0.texture": "assets/commons/dirty_icon--hover.png",
       "layer0.opacity": 1.0
     },
     {
@@ -1287,7 +1186,7 @@
     // Scrollbars (track)
     {
       "class": "scroll_bar_control",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/normal_bar_vertical.png",
+      "layer0.texture": "assets/vim blackboard/normal_bar_vertical.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         0,
@@ -1303,12 +1202,7 @@
           "class": "overlay_control"
         }
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": [0,0,0,0],
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         0,
@@ -1322,7 +1216,7 @@
       "attributes": [
         "horizontal"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/normal_bar_horizontal.png",
+      "layer0.texture": "assets/vim blackboard/normal_bar_horizontal.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         6,
@@ -1341,12 +1235,7 @@
           "class": "overlay_control"
         }
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": [0,0,0,0],
       "layer0.opacity": 0.0,
       "layer0.inner_margin": [
         0,
@@ -1356,7 +1245,7 @@
     },
     {
       "class": "scroll_corner_control",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/normal_bar_corner.png",
+      "layer0.texture": "assets/vim blackboard/normal_bar_corner.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         1,
@@ -1377,7 +1266,7 @@
         10,
         10
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/thumb_vertical.png",
+      "layer1.texture": "assets/vim blackboard/thumb_vertical.png",
       "layer1.opacity": 1.0,
       "layer1.inner_margin": [
         8,
@@ -1395,7 +1284,7 @@
       "attributes": [
         "horizontal"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/thumb_horizontal.png",
+      "layer0.texture": "assets/vim blackboard/thumb_horizontal.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         10,
@@ -1451,12 +1340,12 @@
       "settings": [
         "overlay_scroll_bars"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/normal_bar_vertical.png",
+      "layer0.texture": "assets/vim blackboard/normal_bar_vertical.png",
       "layer0.inner_margin": [
         0,
         5
       ],
-      "blur": true
+      "blur": false
     },
     // Scrollbars (track)
     {
@@ -1467,28 +1356,24 @@
       "attributes": [
         "horizontal"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/normal_bar_horizontal.png",
+      "layer0.texture": "assets/vim blackboard/normal_bar_horizontal.png",
       "layer0.inner_margin": [
         5,
         0
       ],
       "layer0.opacity": 0.0,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/normal_bar_horizontal.png",
+      "layer1.texture": "assets/vim blackboard/normal_bar_horizontal.png",
       "layer1.inner_margin": [
         5,
         0
       ],
       "layer1.opacity": 0.0,
-      "blur": true
+      "blur": false
     },
     // Scrollbars (thumb / puck)
     {
       "class": "puck_control",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 0.0,
       "layer0.inner_margin": [
         1,
@@ -1496,7 +1381,7 @@
         1,
         8
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/thumb_vertical.png",
+      "layer1.texture": "assets/vim blackboard/thumb_vertical.png",
       "layer1.inner_margin": [
         1,
         8,
@@ -1507,7 +1392,7 @@
         6,
         16
       ],
-      "blur": true
+      "blur": false
     },
     // Scrollbars (thumb / puck)
     {
@@ -1515,11 +1400,7 @@
       "attributes": [
         "horizontal"
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 0.0,
       "layer0.inner_margin": [
         8,
@@ -1527,7 +1408,7 @@
         8,
         1
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/thumb_horizontal.png",
+      "layer1.texture": "assets/vim blackboard/thumb_horizontal.png",
       "layer1.inner_margin": [
         8,
         1,
@@ -1538,7 +1419,7 @@
         16,
         6
       ],
-      "blur": true
+      "blur": false
     },
     // Minimap
     {
@@ -1616,11 +1497,7 @@
     },
     {
       "class": "status_bar",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         2,
@@ -1653,11 +1530,7 @@
     // Status bar (buttons)
     {
       "class": "status_button",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0,
       "layer0.draw_center": false,
       "layer0.inner_margin": [
@@ -1680,11 +1553,7 @@
     // Status bar (buttons)
     {
       "class": "status_button",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 1.0,
       "layer0.draw_center": false,
       "layer0.inner_margin": [
@@ -1719,15 +1588,11 @@
       "attributes": [
         "hover"
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/overflow_menu--hover.png"
+      "layer0.texture": "assets/commons/overflow_menu--hover.png"
     },
     {
       "class": "panel_control",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.inner_margin": [
         2,
         2,
@@ -1756,9 +1621,9 @@
     },
     {
       "class": "panel_close_button",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/close_icon.png",
+      "layer0.texture": "assets/vim blackboard/close_icon.png",
       "layer0.opacity": 0.6,
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/close_icon--hover.png",
+      "layer1.texture": "assets/commons/close_icon--hover.png",
       "layer1.opacity": 0.0,
       "content_margin": [
         0,
@@ -1775,7 +1640,7 @@
     },
     {
       "class": "text_line_control",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/input_field_border.png",
+      "layer0.texture": "assets/vim blackboard/input_field_border.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         20,
@@ -1798,7 +1663,7 @@
           "class": "overlay_control"
         }
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/input_field_border--short.png",
+      "layer0.texture": "assets/vim blackboard/input_field_border--short.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         32,
@@ -1820,13 +1685,13 @@
         12,
         12
       ],
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/overflow_menu.png",
+      "layer0.texture": "assets/vim blackboard/overflow_menu.png",
       "layer0.opacity": 1.0,
       "layer0.inner_margin": [
         0,
         0
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/overflow_menu--hover.png",
+      "layer1.texture": "assets/commons/overflow_menu--hover.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": [
         0,
@@ -1864,23 +1729,19 @@
         75,
         0
       ],
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.opacity": 0.0,
       "layer0.inner_margin": [
         6,
         6
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/full_button_indented.png",
+      "layer1.texture": "assets/commons/full_button_indented.png",
       "layer1.opacity": 0.0,
       "layer1.inner_margin": [
         6,
         6
       ],
-      "layer2.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/blue_highlight.png",
+      "layer2.texture": "assets/vim blackboard/blue_highlight.png",
       "layer2.opacity": {
         "target": 0.0,
         "speed": 5.0,
@@ -1924,11 +1785,7 @@
     // Icon buttons
     {
       "class": "icon_button_control",
-      "layer0.tint": [
-        0,
-        0,
-        0
-      ],
+      "layer0.tint": "var(--polyos-background)",
       "layer0.inner_margin": [
         6,
         6
@@ -1951,13 +1808,13 @@
     },
     {
       "class": "icon_regex",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_regex--hover.png",
+      "layer0.texture": "assets/commons/find_regex--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_regex.png",
+      "layer1.texture": "assets/vim blackboard/find_regex.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -1991,13 +1848,13 @@
     },
     {
       "class": "icon_case",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_case--hover.png",
+      "layer0.texture": "assets/commons/find_case--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_case.png",
+      "layer1.texture": "assets/vim blackboard/find_case.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2031,13 +1888,13 @@
     },
     {
       "class": "icon_whole_word",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_word--hover.png",
+      "layer0.texture": "assets/commons/find_word--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_word.png",
+      "layer1.texture": "assets/vim blackboard/find_word.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2071,13 +1928,13 @@
     },
     {
       "class": "icon_wrap",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_wrap--hover.png",
+      "layer0.texture": "assets/commons/find_wrap--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_wrap.png",
+      "layer1.texture": "assets/vim blackboard/find_wrap.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2111,13 +1968,13 @@
     },
     {
       "class": "icon_in_selection",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_inselection--hover.png",
+      "layer0.texture": "assets/commons/find_inselection--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_inselection.png",
+      "layer1.texture": "assets/vim blackboard/find_inselection.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2151,13 +2008,13 @@
     },
     {
       "class": "icon_highlight",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_highlight--hover.png",
+      "layer0.texture": "assets/commons/find_highlight--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_highlight.png",
+      "layer1.texture": "assets/vim blackboard/find_highlight.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2191,13 +2048,13 @@
     },
     {
       "class": "icon_preserve_case",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/replace_preserve_case--hover.png",
+      "layer0.texture": "assets/commons/replace_preserve_case--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/replace_preserve_case.png",
+      "layer1.texture": "assets/vim blackboard/replace_preserve_case.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2231,13 +2088,13 @@
     },
     {
       "class": "icon_context",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_context--hover.png",
+      "layer0.texture": "assets/commons/find_context--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_context.png",
+      "layer1.texture": "assets/vim blackboard/find_context.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2271,13 +2128,13 @@
     },
     {
       "class": "icon_use_buffer",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/use_buffer--hover.png",
+      "layer0.texture": "assets/commons/use_buffer--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/use_buffer.png",
+      "layer1.texture": "assets/vim blackboard/use_buffer.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2311,13 +2168,13 @@
     },
     {
       "class": "icon_reverse",
-      "layer0.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/find_reverse--hover.png",
+      "layer0.texture": "assets/commons/find_reverse--hover.png",
       "layer0.opacity": {
         "target": 0.0,
         "speed": 6.0,
         "interpolation": "smoothstep"
       },
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/vim blackboard/find_reverse.png",
+      "layer1.texture": "assets/vim blackboard/find_reverse.png",
       "layer1.opacity": {
         "target": 1.0,
         "speed": 6.0,
@@ -2388,7 +2245,7 @@
       "settings": [
         "material_theme_tabs_separator"
       ],
-      "layer3.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/tab_separator.png",
+      "layer3.texture": "assets/commons/tab_separator.png",
       "layer3.inner_margin": [
         1,
         1
@@ -2432,7 +2289,7 @@
       ],
       "layer1.opacity": 0.0,
       "layer2.opacity": 0.0,
-      "layer3.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/folder--hover.png"
+      "layer3.texture": "assets/commons/folder--hover.png"
     },
     {
       "class": "status_container",
@@ -2462,7 +2319,7 @@
       "settings": [
         "material_theme_panel_separator"
       ],
-      "layer1.texture": "PolyOS-Edi-for-Sublime-Text/assets/commons/panel_separator.png",
+      "layer1.texture": "assets/commons/panel_separator.png",
       "layer1.opacity": 0.2,
       "layer1.inner_margin": [
         2,
