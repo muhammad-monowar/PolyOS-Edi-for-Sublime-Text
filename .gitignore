@@ -15,3 +15,11 @@ package-metadata.json
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Windows NTFS alternate-data streams, picked up when files are copied out of
+# Windows. Package Control zips the whole tree, so these would ship.
+*:Zone.Identifier
+
+# Python bytecode from running the plugin locally
+__pycache__/
+*.py[cod]

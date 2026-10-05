@@ -110,8 +110,21 @@ git tag polyos-editor-1.0.0
 git push origin polyos-editor-1.0.0
 ```
 
+`origin` is the public `muhammad-monowar/PolyOS-Edi-for-Sublime-Text`. Tags must
+land there and only there: Package Control fetches `repository.json` and the
+release zip over plain HTTPS with no token, so a tag on the private
+`backup-private` remote resolves for you alone and silently installs nothing for
+anyone else. `backup-private` is a backup, not a release target.
+
 `repository.json` matches that prefix, so any other tag in the repo is invisible
-to the release resolver.
+to the release resolver. Never move a tag that has already been pushed — cut
+`polyos-editor-1.0.1` instead, since Package Control caches by tag.
+
+Run the checks before tagging:
+
+```sh
+python3 -m tests.run
+```
 
 When you add a resource, give it a `Packages/PolyOS-Edi-for-Sublime-Text/…`
 resource path, matching the repo folder name exactly. Theme textures are
