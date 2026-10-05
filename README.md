@@ -9,7 +9,7 @@ UI theme — installed as one Package Control package.
 1. Run `Preferences → Package Control → Add Repository` and paste:
 
    ```
-   https://raw.githubusercontent.com/muhammad-monowar/PolyOS-Edi-for-Sublime-Text/main/repository.json
+   https://raw.githubusercontent.com/mmmonowar/dev-PolyOS-Edi-for-Sublime-Text/main/repository.json
    ```
 
 2. Run `Preferences → Package Control → Install Package` and choose
