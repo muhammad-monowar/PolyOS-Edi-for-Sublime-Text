@@ -1,0 +1,12 @@
+{
+  // Windows-only preferences (parsed only on Windows).
+  //
+  // Sublime merges same-named settings across all packages and consults
+  // Packages/User last, so anything the user has set in their own
+  // Preferences.sublime-settings wins over the values here.
+  //
+  // font_options extends the shared ["dlig", "calt"] with Windows-specific
+  // font rendering flags. hardware_acceleration enables the OpenGL renderer.
+  "font_options": ["dlig", "calt", "directwrite", "subpixel_antialias"],
+  "hardware_acceleration": "opengl"
+}

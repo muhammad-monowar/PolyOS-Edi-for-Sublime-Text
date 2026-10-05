@@ -1,0 +1,36 @@
+[
+	{
+		"caption": "Preferences",
+		"mnemonic": "n",
+		"id": "preferences",
+		"children":
+		[
+			{
+				"caption": "Package Settings",
+				"mnemonic": "P",
+				"id": "package-settings",
+				"children":
+				[
+					{
+						"caption": "PolyOS Editor",
+						"children":
+						[
+							{
+								"caption": "Activate profile",
+								"command": "polyos_editor_activate_profile"
+							},
+							{
+								"caption": "-",
+								"id": "polyos-editor-separator"
+							},
+							{
+								"caption": "Prompt on next start",
+								"command": "polyos_editor_prompt_again"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

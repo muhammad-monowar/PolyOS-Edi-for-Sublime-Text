@@ -13,7 +13,7 @@
   "caret_style": "solid",
 
   // Custom Color Scheme Hook
-  "color_scheme": "Packages/ProseMode/ProseMode.sublime-color-scheme",
+  "color_scheme": "Packages/PolyOS-Edi-for-Sublime-Text/ProseMode.sublime-color-scheme",
 
   // Minimal UI Clean-out
   "line_numbers": false,

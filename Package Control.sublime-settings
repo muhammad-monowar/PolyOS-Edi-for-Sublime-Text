@@ -1,0 +1,17 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	// Package Control merges installed_packages from every installed package
+	// and installs anything missing from this list. Declaring the dependencies
+	// here means installing PolyOS Editor also installs them, without this file
+	// ever being written into Packages/User.
+	"installed_packages":
+	[
+		"Git",
+		"LSP",
+		"Package Control",
+		"Transparency",
+	],
+}

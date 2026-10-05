@@ -1,146 +1,124 @@
-# Sublime Sync
+# PolyOS Editor
 
-Syncs the Sublime Text `Packages` folder across all devices (Windows and macOS).
+A writing environment for Sublime Text: the PolyMark syntax and color scheme,
+PolyMark theme variations, a ProseMode color scheme, and the PolyOS Editor Dark
+UI theme — installed as one Package Control package.
 
-## Layout
+## Install
 
-```
-├── packages/   <- mirrors the Packages/ ROOT (this is what gets synced)
-│   ├── User/               <- personal settings + keymaps (must stay FLAT)
-│   ├── PolyMark/           <- custom package: PolyMark syntax + color scheme
-│   ├── ProseMode/          <- custom package: prose writing color scheme
-│   ├── PolyOSEditorDark/   <- custom package: PolyOS Editor Dark UI theme
-│   └── PolyOSPlatform/     <- per-platform preferences (Preferences (OSX|Windows).sublime-settings)
-├── scripts/    <- sync.ps1 (Windows), sync.sh (macOS)
-└── archive/    <- old exports, not synced
-```
+1. Run `Preferences → Package Control → Add Repository` and paste:
 
-Why this shape:
+   ```
+   https://raw.githubusercontent.com/muhammad-monowar/PolyOS-Edi-for-Sublime-Text/main/repository.json
+   ```
 
-- `Packages/User` only loads `.sublime-settings` files from its **root**, so that
-  folder stays flat. Keymaps and per-syntax settings also live there.
-- Syntaxes, color schemes, and themes belong in their own **custom package
-  folders** under `Packages/` (e.g. `Packages/PolyMark/`). This groups them by
-  product and keeps the shared `User` folder clean.
-- Settings reference packages by resource path, e.g.
-  `Packages/PolyMark/polymark.sublime-color-scheme`.
+2. Run `Preferences → Package Control → Install Package` and choose
+   **PolyOS Editor**.
 
-## Standalone packages
+Package Control installs the theme, every color scheme, the syntax, the
+keybindings and the dependencies (Git, LSP, Transparency), then offers upgrades
+on its own.
 
-`PolyMark`, `ProseMode`, and `PolyOSEditorDark` are standalone Sublime Text
-packages:
+On first start a dialog asks whether to apply the PolyOS profile. Answer yes to
+set the theme, color scheme, default syntax and font size; answer no and nothing
+changes. The prompt does not come back on its own — re-enable it from
+`Preferences → Package Settings → PolyOS Editor → Prompt on next start`, or
+apply the profile later with `Activate profile`.
 
-- Each folder is a valid unmanaged package — drop it into any `Packages/`
-  directory and its resources work with zero other configuration.
-- They never reference `Packages/User`, the profile, or each other. The
-  coupling is one-directional: `Packages/User` (the profile) activates them,
-  but the packages are profile-agnostic. You can swap or replace the profile
-  without touching them.
-- Activation lives only in `packages/User/`; the packages do not ship
-  auto-applying preferences.
+## Your settings are never overwritten
 
-## Per-device setup (one time)
+Sublime merges same-named `.sublime-settings` and `.sublime-keymap` files across
+all packages and reads `Packages/User` last. The settings shipped here are
+therefore defaults: if you have already set `font_face`, `font_options`,
+`caret_style` or any other key in your own preferences, your value wins and this
+package is ignored for that key.
 
-1. Install Sublime Text + Package Control.
-2. Clone this repo.
-3. Run the sync script (see below). It creates `Packages/User`,
-   `Packages/PolyMark`, `Packages/ProseMode`, `Packages/PolyOSEditorDark` and
-   `Packages/PolyOSPlatform` and fills them with the config.
-4. Restart Sublime Text. Package Control auto-installs the packages listed in
-   `packages/User/Package Control.sublime-settings` (LSP, Git, Transparency).
-5. Set the theme to `PolyOS Editor Dark` and the color scheme to `polymark` if
-   they don't apply automatically.
+The four settings that visibly change the editor — `theme`, `color_scheme`,
+`default_syntax`, `font_size` — are deliberately left out of the shipped
+preferences. `activate_profile.py` applies them, and only for keys still holding
+Sublime's stock value. A setting you have already changed is skipped even if you
+click "Apply".
 
-### macOS notes
+Upgrading never touches your settings. The only file this package writes to
+`Packages/User` is `PolyOSEditor.sublime-settings`, which holds the single key
+`polyos_activate` used to remember your answer.
 
-- The color scheme uses `JetBrains Mono` as its font (`font_face` in
-  `Preferences.sublime-settings`). Install JetBrains Mono on the Mac too, or
-  Sublime Text silently falls back to the platform font and the look differs.
-- The F5/F6/F7 shortcuts require holding the `fn` key unless you enable
-  "Use F1, F2, etc. keys as standard function keys" in System Settings →
-  Keyboard → Keyboard shortcuts → Function Keys.
+There is no sync script and no background re-writer: the packaged preferences
+*are* the default layer, which is why nothing needs to copy them into
+`Packages/User` on every launch.
 
-## Syncing after changes
+## What's in the package
 
-Run the script after every `git pull`, or after editing files in `packages/`:
+| File | Purpose |
+| ---- | ------- |
+| `polymark.sublime-syntax` | PolyMark syntax, claims `.md`, `.txt`, `.pm` |
+| `polymark.sublime-color-scheme` | PolyMark colors, the base scheme |
+| `themes/*.sublime-color-scheme` | PolyMark variations, see `themes/README.md` |
+| `color_schemes.py` | F7 cycling and the `PolyMark: Select Color Scheme...` command |
+| `PolyMark.sublime-commands` | palette entry for the scheme picker |
+| `ProseMode.sublime-color-scheme` | monochrome ProseMode colors |
+| `PolyOS Editor Dark.sublime-theme` | UI theme, `assets/` holds its textures |
+| `Preferences.sublime-settings` | cross-platform defaults |
+| `Preferences (OSX).sublime-settings` | macOS-only keys (currently none) |
+| `Preferences (Windows).sublime-settings` | Windows font rendering + OpenGL |
+| `Default (OSX).sublime-keymap` | F5/F6/F7 on macOS |
+| `Default (Windows).sublime-keymap` | F5/F6/F7 on Windows |
+| `Distraction Free.sublime-settings` | F5 typography and layout |
+| `prose_toggles.py` | the F5/F6/F7 commands |
+| `activate_profile.py` | first-run prompt and the profile commands |
+| `syntax_test_polymark.txt` | syntax tests, run from the Build With syntax tests |
 
-- Windows (PowerShell):
-  `.\scripts\sync.ps1`
-  Dry run: `.\scripts\sync.ps1 -DryRun`
-- macOS (Terminal):
-  `./scripts/sync.sh`
-  Dry run: `./scripts/sync.sh --dry-run`
-
-  The script runs under both `bash` and `zsh`. If you get `zsh: permission
-  denied`, run `chmod +x scripts/sync.sh` once (or use `bash scripts/sync.sh`).
-
-The scripts mirror each folder under `packages/` into the platform's
-`Packages/` directory, copying only `*.sublime-settings`, `*.sublime-keymap`,
-`*.sublime-syntax`, `*.sublime-color-scheme`, `*.sublime-theme`,
-`*.sublime-commands` and `*.py`.
-Subfolders `assets/` and `themes/` are copied recursively. The scripts are
-non-destructive: existing packages (and local-only files in `Packages/User`)
-are left alone.
-
-Target paths: `%APPDATA%\Sublime Text\Packages\` on Windows,
-`~/Library/Application Support/Sublime Text/Packages/` on macOS, and
-`~/.config/sublime-text/Packages/` on Linux.
-
-## Platform-specific files
-
-- `Default (Windows).sublime-keymap` loads on Windows only.
-- `Default (OSX).sublime-keymap` loads on macOS only.
-- `Preferences.sublime-settings` is shared. Keep it to settings that work on
-  both platforms.
-- Platform-only preferences live in `packages/PolyOSPlatform/`:
-  `Preferences (OSX).sublime-settings` and
-  `Preferences (Windows).sublime-settings`. Sublime loads only the file for
-  the host platform. A key defined in one of these must NOT also be defined in
-  the shared `User/Preferences.sublime-settings` (User is consulted last and
-  would win). Currently Windows adds `directwrite`/`subpixel_antialias` font
-  flags and `hardware_acceleration: "opengl"`; macOS needs no overrides.
-
-This split isolates failure points: a malformed Windows-only file is never
-parsed on macOS (and vice versa), and the shared files stay cross-platform.
+Platform files use Sublime's native suffix mechanism, so a `Preferences (Windows)`
+file is parsed only on Windows and a malformed value never reaches macOS. A key
+defined in a platform file must not also be defined in the shared
+`Preferences.sublime-settings`, because `Packages/User` is consulted last.
 
 ### `.txt` ownership
 
-`.txt` is claimed by PolyMark (`md`, `txt`, `pm`), matching the PolyMark
-README ("because PolyMark auto-selects for `.txt`..."). ProseMode is a color
-scheme only and ships no syntax file, so the two packages never fight over the
-extension. If you want PolyMark to leave plain-text files alone, delete the
-`txt` line from `packages/PolyMark/polymark.sublime-syntax`.
+`.txt` is claimed by PolyMark (`md`, `txt`, `pm`). ProseMode ships no syntax
+file, only a color scheme, so the two never fight over the extension. To leave
+plain-text files alone, delete the `txt` line from `file_extensions` in
+`polymark.sublime-syntax`.
 
 ## Key bindings
 
-Both platform keymaps define the same prose-mode controls:
+Defined in both platform keymaps:
 
-- `F5` — toggle distraction-free mode (hides the menu bar; restores its previous visibility on exit)
-- `F6` — toggle spell check, word/character count, the status bar, and the menu bar
-- `F7` — cycle through the PolyMark color scheme variations and ProseMode
+- `F5` — toggle distraction-free mode (hides the menu bar, restores it on exit)
+- `F6` — toggle spell check, word/character count, the status bar, and the menu
+- `F7` — cycle through the PolyMark schemes and ProseMode
+- `Tab` — accept an autocomplete suggestion after `@`
 
-## PolyMark color scheme variations
+On macOS the F-keys may require holding `fn` unless "Use F1, F2, etc. keys as
+standard function keys" is enabled in System Settings → Keyboard.
 
-All PolyMark theme variations live in `packages/PolyMark/themes/`. The
-canonical base scheme (`polymark.sublime-color-scheme`) is never duplicated.
+Centering in distraction-free mode uses Sublime's native `draw_centered`.
 
-- **Add your own:** drop a `<name>.sublime-color-scheme` into
-  `packages/PolyMark/themes/`, then run the sync script. Recommended pattern:
-  `"extends": "Packages/PolyMark/polymark.sublime-color-scheme"` plus a
-  `globals` block overriding `accent`, the kind hooks, `background`,
-  `foreground`, etc. — the base rules inherit automatically and the UI re-tints.
-- **Select a variation:** command palette → `PolyMark: Select Color Scheme...`
-  (applies to the active view) or `F7` to cycle through base → variations →
-  ProseMode.
-- See `packages/PolyMark/themes/README.md` for details.
+## Dependencies
 
-## Notes
+`font_face` is `JetBrains Mono`. Without it installed, Sublime silently falls
+back to the platform font and the look differs.
 
-- After installing/removing packages on any device, commit the updated
-  `packages/User/Package Control.sublime-settings` so other devices pick up the
-  change.
-- If you add a new custom theme/syntax, give it its own folder under
-  `packages/`, add its assets under that folder's `assets/` subdirectory, and
-  point settings at `Packages/<Folder>/<file>`.
-- Local-only files (session, workspaces, caches) are excluded via `.gitignore`
-  and are never synced.
+## Development
+
+The repository root is the package, which is what Package Control's tag-based
+GitHub hosting requires — the root of the package must be the root of the repo.
+Releases are tags prefixed `polyos-editor-`:
+
+```sh
+git tag polyos-editor-1.0.0
+git push origin polyos-editor-1.0.0
+```
+
+`repository.json` matches that prefix, so any other tag in the repo is invisible
+to the release resolver.
+
+When you add a resource, give it a `Packages/PolyOS-Edi-for-Sublime-Text/…`
+resource path, matching the repo folder name exactly. Theme textures are
+referenced as `PolyOS-Edi-for-Sublime-Text/assets/…` — no `Packages/` prefix,
+which Sublime rejects for `layer0.texture`.
+
+## License
+
+MIT. See `LICENSE`. PolyOS Editor Dark is derived from Material Theme, MIT
+licensed.

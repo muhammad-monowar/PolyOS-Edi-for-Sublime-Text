@@ -1,9 +1,9 @@
 import sublime
 import sublime_plugin
 
-BASE_SCHEME = "Packages/PolyMark/polymark.sublime-color-scheme"
-THEMES_PREFIX = "Packages/PolyMark/themes/"
-PROSE_SCHEME = "Packages/ProseMode/ProseMode.sublime-color-scheme"
+BASE_SCHEME = "Packages/PolyOS-Edi-for-Sublime-Text/polymark.sublime-color-scheme"
+THEMES_PREFIX = "Packages/PolyOS-Edi-for-Sublime-Text/themes/"
+PROSE_SCHEME = "Packages/PolyOS-Edi-for-Sublime-Text/ProseMode.sublime-color-scheme"
 
 
 def polymark_scheme_resources():

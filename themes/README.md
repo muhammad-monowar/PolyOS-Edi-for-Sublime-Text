@@ -2,7 +2,7 @@
 
 Every Polymark color scheme variation lives in this folder as a
 `.sublime-color-scheme` file. The canonical base scheme stays one level up
-(`packages/PolyMark/polymark.sublime-color-scheme`); it is never duplicated
+(`polymark.sublime-color-scheme in the repository root`); it is never duplicated
 here.
 
 ## Adding your own variation
@@ -12,7 +12,7 @@ here.
 
    ```json
    {
-     "extends": "Packages/PolyMark/polymark.sublime-color-scheme",
+     "extends": "Packages/PolyOS-Edi-for-Sublime-Text/polymark.sublime-color-scheme",
      "name": "My Polymark",
      "globals": {
        // Re-tints the whole system (PolyOS Editor Dark reads these):
@@ -45,6 +45,8 @@ here.
 Conventions: lowercase hex throughout, and match the base scheme's rule
 labels (`"name": "Feature (A#/E#)"`) so a theme stays greppable against the
 base's RULE INDEX.
-3. Run the sync script so the file reaches your live `Packages/PolyMark/`.
+3. Tag a release so it reaches users:
+   `git tag polyos-editor-1.0.1 && git push origin polyos-editor-1.0.1`.
+   Package Control picks up the new tag and installs it.
 4. Pick it from the command palette (`PolyMark: Select Color Scheme...`) or
    cycle through all Polymark themes with `F7`.

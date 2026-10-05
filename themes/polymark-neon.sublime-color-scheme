@@ -20,7 +20,7 @@
 // to restyle, add its rule here; otherwise it just inherits.
 
 {
-    "extends": "Packages/PolyMark/polymark.sublime-color-scheme",
+    "extends": "Packages/PolyOS-Edi-for-Sublime-Text/polymark.sublime-color-scheme",
     "name": "Polymark Neon",
     "globals":
     {

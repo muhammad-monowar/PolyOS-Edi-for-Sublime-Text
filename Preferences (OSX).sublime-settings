@@ -1,0 +1,11 @@
+{
+  // macOS-only preferences (parsed only on macOS).
+  //
+  // Sublime merges same-named settings across all packages and consults
+  // Packages/User last, so anything the user has set in their own
+  // Preferences.sublime-settings wins over the values here.
+  //
+  // macOS currently needs no overrides. Add macOS-specific keys as the
+  // platform diverges; keep the shared Preferences.sublime-settings strictly
+  // cross-platform so a malformed value never reaches the other OS.
+}

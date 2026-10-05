@@ -2,25 +2,31 @@
   /* 
     ---
     Author: Muhammad Mustafa Monowar
-    Updated: 2026-08-04
+    Updated: 2026-10-05
     Target: Sublime Text
-    Version: v3.0.2
+    Version: v1.0.0
     ---
-    PolyMark System Preferences
+    PolyOS Editor — shared preferences.
+
+    Sublime merges same-named settings across all packages and consults
+    Packages/User last. Every value below is therefore a DEFAULT: if the user
+    has already set the same key in their own Preferences.sublime-settings,
+    their value wins and this file is ignored for that key. Nothing here can
+    override a user setting.
+
+    Keys that visibly change someone's editor are deliberately NOT set here.
+    theme, color_scheme, default_syntax and font_size are applied by
+    activate_profile.py, which asks first and skips any key the user has
+    already changed away from Sublime's stock value.
   */
 
-  "font_size": 16,
   "font_face": "JetBrains Mono",
   // Cross-platform font options. Windows adds `directwrite` and
-  // `subpixel_antialias` via Packages/PolyOSPlatform/Preferences (Windows).sublime-settings.
+  // `subpixel_antialias` via Preferences (Windows).sublime-settings.
   "font_options": [
     "dlig",
     "calt"
   ],
-
-  "theme": "PolyOS Editor Dark.sublime-theme",
-  "color_scheme": "Packages/PolyMark/polymark.sublime-color-scheme",
-  "default_syntax": "Packages/PolyMark/polymark.sublime-syntax",
 
   "ignored_packages": [
     "Vintage"

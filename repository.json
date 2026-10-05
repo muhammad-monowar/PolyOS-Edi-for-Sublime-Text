@@ -1,0 +1,17 @@
+{
+  "$schema": "sublime://packagecontrol.io/schemas/repository",
+  "schema_version": "3.0.0",
+  "packages": [
+    {
+      "name": "PolyOS Editor",
+      "details": "https://github.com/muhammad-monowar/PolyOS-Edi-for-Sublime-Text",
+      "labels": ["color scheme", "syntax", "theme", "preferences"],
+      "releases": [
+        {
+          "sublime_text": "*",
+          "tags": "polyos-editor-"
+        }
+      ]
+    }
+  ]
+}
