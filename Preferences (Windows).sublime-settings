@@ -6,7 +6,25 @@
   // Preferences.sublime-settings wins over the values here.
   //
   // font_options extends the shared ["dlig", "calt"] with Windows-specific
-  // font rendering flags. hardware_acceleration enables the OpenGL renderer.
+  // font rendering flags.
+  //
+  // hardware_acceleration is pinned to "none" (software rendering) on purpose.
+  // Sublime Text already defaults Windows to software rendering, and its docs
+  // warn that "some graphics card drivers may produce incorrect results" under
+  // the OpenGL renderer. Forcing "opengl" here opted every Windows install into
+  // that path, where this theme's layer textures, per-frame keyframe
+  // animations and opacity tweens can trigger driver-level rendering
+  // corruption (chromatic stripes, stale/unrefreshed regions). See
+  // sublimehq/sublime_text#4200 for the same theme-dependent artefact class.
+  //
+  // Valid values are "none" and "opengl". Removing this key also yields "none"
+  // on Windows, but pinning it makes the intent explicit and stops another
+  // package from re-enabling the OpenGL path.
+  //
+  // Note: Sublime ignores Packages/User/Preferences (Windows).sublime-settings,
+  // so users cannot override this via the platform-specific file. To opt back
+  // into OpenGL they must set "hardware_acceleration" in the non-platform
+  // Packages/User/Preferences.sublime-settings.
   "font_options": ["dlig", "calt", "directwrite", "subpixel_antialias"],
-  "hardware_acceleration": "opengl"
+  "hardware_acceleration": "none"
 }
