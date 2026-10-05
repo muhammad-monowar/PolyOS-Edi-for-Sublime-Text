@@ -126,10 +126,25 @@ Run the checks before tagging:
 python3 -m tests.run
 ```
 
-When you add a resource, give it a `Packages/PolyOS-Edi-for-Sublime-Text/…`
-resource path, matching the repo folder name exactly. Theme textures are
-referenced as `PolyOS-Edi-for-Sublime-Text/assets/…` — no `Packages/` prefix,
-which Sublime rejects for `layer0.texture`.
+`layer#.texture` paths are resource paths resolved by Sublime **relative to the
+`Packages/` folder**, and must therefore begin with the package's own name. A
+Package Control install lands as `Installed Packages/PolyOS Editor.sublime-package`,
+so theme textures are referenced as `PolyOS Editor/assets/…` — no `Packages/`
+prefix, which Sublime rejects for `layer0.texture`.
+
+Two prefixes that look plausible are in fact broken, because neither directory
+exists at install time:
+
+- `PolyOS-Edi-for-Sublime-Text/assets/…` — the repo folder name. The repo root
+  is the package, so there is never a nested `PolyOS-Edi-for-Sublime-Text/`
+  directory (CI enforces its absence).
+- `assets/…` — resolves to `Packages/assets/…`, above every package.
+
+ST's shipped themes use the same convention, e.g. `Theme - Default/common/
+open_file_close.png` in `Adaptive.sublime-theme`.
+
+If you clone the repo into `Packages/` for local development, name the folder
+`PolyOS Editor` so the paths resolve there too.
 
 ## License
 
