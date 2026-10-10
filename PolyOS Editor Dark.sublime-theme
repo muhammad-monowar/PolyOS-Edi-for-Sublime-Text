@@ -4,7 +4,7 @@
 // Derived from Material Theme (https://github.com/equinusocio/material-theme),
 // MIT license. Recolored to the PolyOS "Matrix Terminal" palette:
 //
-//   --polyos-background        #0E1410  deep charcoal green
+//   --polyos-background        #000101  black
 //   --polyos-background-raised #16201A  hover / raised surfaces
 //   --polyos-foreground        #E8EAE6  primary UI text
 //   --polyos-secondary         #6A7B70  muted green-gray
@@ -21,7 +21,7 @@
 // ============================================================================
 {
   "variables": {
-    "--polyos-background": "#0E1410",
+    "--polyos-background": "#000101",
     "--polyos-background-raised": "#16201A",
     "--polyos-foreground": "#E8EAE6",
     "--polyos-secondary": "#6A7B70",
@@ -297,7 +297,7 @@
       "tab_overlap": 0,
       "tab_width": 180,
       "tab_min_width": 64,
-      "tab_height": 34,
+      "tab_height": 44,
       "mouse_wheel_switch": false
     },
     {
@@ -321,7 +321,9 @@
       "layer1.texture": "PolyOS Editor/assets/vim blackboard/tab_current.png",
       "layer1.inner_margin": [
         0,
-        0
+        0,
+        0,
+        1
       ],
       "layer1.opacity": 0.0,
       "layer2.tint": [

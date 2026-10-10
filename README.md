@@ -146,6 +146,20 @@ open_file_close.png` in `Adaptive.sublime-theme`.
 If you clone the repo into `Packages/` for local development, name the folder
 `PolyOS Editor` so the paths resolve there too.
 
+### Texture authoring
+
+Theme textures must stay renderer-neutral, because Sublime's OpenGL renderer
+and its software fallback interpret embedded colour management differently.
+Export accents as raw sRGB: strip Photoshop ICC profiles and any `cHRM`,
+`gAMA`, `pHYs` or text chunks, keeping only `IHDR`/`IDAT`/`IEND`. A profile on
+the `assets/vim blackboard` files once shifted the light-teal accents toward
+orange/red on some drivers. `tests` enforces this and also checks that every
+`inner_margin` stays inside its texture — a margin wider than the image
+stretches phantom edge pixels into banding. Keep full-frame tab/scrollbar
+textures small and power-of-two, and make the fixed parts (e.g. the active
+tab's accent line) wide enough to survive their own `inner_margin`, rather
+than relying on the renderer to downscale a large bitmap onto a short control.
+
 ## License
 
 MIT. See `LICENSE`. PolyOS Editor Dark is derived from Material Theme, MIT

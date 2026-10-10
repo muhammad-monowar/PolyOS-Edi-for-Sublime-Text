@@ -8,11 +8,17 @@ never create, or a JSON file that does not parse.
 import json
 import os
 import re
+import struct
 
 from tests.helpers import REPO_ROOT, Checker
 
 PACKAGE_NAME = "PolyOS-Edi-for-Sublime-Text"
 PACKAGE_PREFIX = "Packages/" + PACKAGE_NAME + "/"
+
+# layer#.texture paths are resolved relative to Packages/ by the package's own
+# installed name, which repository.json sets to "PolyOS Editor" (see README:
+# the repo folder name would resolve to a directory that never exists).
+TEXTURE_PREFIX = "PolyOS Editor/"
 
 # Sublime ships these, so a reference to them is correct even though they are
 # not part of this package.
@@ -145,16 +151,148 @@ def test_theme_textures_resolve(c):
     print("theme textures resolve")
     theme = read("PolyOS Editor Dark.sublime-theme")
     # No Packages/ prefix here: Sublime rejects it for layer0.texture.
-    textures = set(re.findall(r'"' + PACKAGE_NAME + r'/assets/[^"]+"', theme))
+    textures = set(re.findall(r'"' + TEXTURE_PREFIX + r'assets/[^"]+"', theme))
     # The reference already carries the package name; the path is relative to
     # the repo root, so drop it before joining.
     missing = [t.strip('"') for t in textures
-               if not os.path.exists(os.path.join(REPO_ROOT, t.strip('"')[len(PACKAGE_NAME) + 1:]))]
-    c.check("%d unique textures referenced" % len(textures), True)
+               if not os.path.exists(os.path.join(REPO_ROOT, t.strip('"')[len(TEXTURE_PREFIX):]))]
+    c.check("%d unique textures referenced" % len(textures), len(textures) > 0)
     for ref in missing:
         c.check("texture exists: %s" % ref, False)
     if not missing:
         c.check("every texture exists", True)
+
+
+def png_chunks(path):
+    """Return the ordered list of chunk type codes in a PNG file."""
+    with open(path, "rb") as handle:
+        data = handle.read()
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("%s: not a PNG" % path)
+    types = []
+    pos = 8
+    while pos + 8 <= len(data):
+        length = struct.unpack(">I", data[pos:pos + 4])[0]
+        types.append(data[pos + 4:pos + 8].decode("latin1"))
+        pos += 12 + length
+    return types
+
+
+def png_size(path):
+    with open(path, "rb") as handle:
+        header = handle.read(24)
+    if header[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("%s: not a PNG" % path)
+    # signature (8) + length (4) + "IHDR" (4), then width, height.
+    return struct.unpack(">II", header[16:24])
+
+
+def test_pngs_are_plain_srgb(c):
+    print("textures are plain sRGB PNGs")
+    # Colour-management chunks (iCCP profiles, chromaticity, gamma, pHYs,
+    # text) are interpreted differently by Sublime's OpenGL path and the
+    # software renderer, so they shift hues between drivers: the green
+    # indicators in this theme read as yellow/orange/red on affected
+    # machines. Ship only IHDR/PLTE/IDAT/IEND so raw sRGB is assumed
+    # everywhere.
+    allowed = {"IHDR", "PLTE", "IDAT", "IEND"}
+    found = 0
+    problems = []
+    for dirpath, dirnames, filenames in os.walk(os.path.join(REPO_ROOT, "assets")):
+        dirnames[:] = [d for d in dirnames if d not in NON_PACKAGE_DIRS]
+        for filename in sorted(filenames):
+            if not filename.endswith(".png"):
+                continue
+            found += 1
+            path = os.path.join(dirpath, filename)
+            try:
+                extra = [t for t in png_chunks(path) if t not in allowed]
+            except ValueError as exc:
+                problems.append(str(exc))
+                continue
+            if extra:
+                problems.append("%s: %s" % (
+                    os.path.relpath(path, REPO_ROOT), ", ".join(sorted(set(extra)))))
+    c.check("%d texture files found" % found, found > 0)
+    for problem in problems:
+        c.check("plain sRGB: %s" % problem, False)
+    if not problems:
+        c.check("every texture is a plain IHDR/IDAT/IEND PNG", True)
+
+
+def test_texture_inner_margins_fit(c):
+    print("texture inner margins fit their images")
+    # An inner_margin wider than the image makes Sublime stretch edge pixels
+    # that do not exist, producing stray bands down the sides of tabs,
+    # scrollbars and sidebar rows.
+    problems = []
+    checked = 0
+    for dirpath, dirnames, filenames in os.walk(REPO_ROOT):
+        dirnames[:] = [d for d in dirnames if d not in NON_PACKAGE_DIRS]
+        for filename in sorted(filenames):
+            if not filename.endswith(".sublime-theme") or filename.endswith(":Zone.Identifier"):
+                continue
+            path = os.path.join(dirpath, filename)
+            try:
+                rules = json.loads(strip_jsonc(open(path, encoding="utf-8").read()))
+            except json.JSONDecodeError as exc:
+                problems.append("%s: %s" % (filename, exc))
+                continue
+            for rule in walk_dicts(rules):
+                for key, value in rule.items():
+                    if not key.endswith(".texture") or not isinstance(value, str):
+                        continue
+                    if not value.startswith(TEXTURE_PREFIX):
+                        continue
+                    rel = value[len(TEXTURE_PREFIX):]
+                    texture = os.path.join(REPO_ROOT, rel)
+                    margin = rule.get(key[:key.index(".")] + ".inner_margin", 0)
+                    checked += 1
+                    try:
+                        width, height = png_size(texture)
+                    except (OSError, ValueError) as exc:
+                        problems.append("%s: %s" % (value, exc))
+                        continue
+                    bad = margin_too_wide(margin, width, height)
+                    if bad:
+                        problems.append("%s: margin %s exceeds %dx%d %s"
+                                        % (value, margin, width, height, bad))
+    c.check("%d texture/margin pairs checked" % checked, checked > 0)
+    for problem in problems:
+        c.check("fits: %s" % problem, False)
+    if not problems:
+        c.check("every inner_margin fits inside its texture", True)
+
+
+def walk_dicts(node):
+    """Yield every dict nested inside a decoded theme."""
+    if isinstance(node, dict):
+        yield node
+        for value in node.values():
+            for found in walk_dicts(value):
+                yield found
+    elif isinstance(node, list):
+        for value in node:
+            for found in walk_dicts(value):
+                yield found
+
+
+def margin_too_wide(margin, width, height):
+    """Return a description if margin eats more pixels than the image has."""
+    if not isinstance(margin, list):
+        return ""  # scalar 0 (or a percentage) is never geometrically wrong
+    if len(margin) == 2:
+        h, v = margin
+        left, top, right, bottom = h, v, h, v
+    elif len(margin) == 4:
+        left, top, right, bottom = margin
+    else:
+        return "has %d entries" % len(margin)
+    if left + right > width:
+        return "(horizontal %d > %d)" % (left + right, width)
+    if top + bottom > height:
+        return "(vertical %d > %d)" % (top + bottom, height)
+    return ""
 
 
 def test_json_parses(c):
@@ -295,6 +433,8 @@ def main():
         test_package_name_matches_repo,
         test_resource_paths_resolve,
         test_theme_textures_resolve,
+        test_pngs_are_plain_srgb,
+        test_texture_inner_margins_fit,
         test_json_parses,
         test_settings_parses,
         test_theme_colours_parse,
