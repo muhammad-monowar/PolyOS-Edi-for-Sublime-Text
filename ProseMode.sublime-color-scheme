@@ -17,7 +17,7 @@
     "line_highlight": "#111111",
     "guide": "#1A1A1A",
     "active_guide": "#333333",
-    "gutter": "#111111",
+    "gutter": "#000101",
     "gutter_foreground": "#4D4D4D",
 
     // Search / find highlights

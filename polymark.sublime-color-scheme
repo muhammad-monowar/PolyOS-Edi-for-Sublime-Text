@@ -77,7 +77,7 @@
     "globals":
     {
         // These keys are read by themes that hook into the color scheme.
-        "background": "#0E1410",
+        "background": "#000101",
         "foreground": "#edecee",
         "caret": "rgba(255, 255, 255, 0.2)",
         "block_caret": "rgba(255, 255, 255, 0.2)",
@@ -1082,7 +1082,7 @@
             "name": "Front Matter Block (E33)",
             "scope": "meta.front-matter.polymark",
             "foreground": "",
-            "background": "#021012", // Color: Rich black background
+            "background": "#000101", // Color: Rich black background
             "font_style": ""
         },
 
